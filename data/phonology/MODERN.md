@@ -1,0 +1,17 @@
+# Modern lexical readings and passage annotation
+
+The Unicode Consortium's Unihan 17.0.0 release supplies Mandarin pinyin and Cantonese Jyutping (粵拼). `modern.py` acquires the versioned archive, validates its ZIP members and data version, and uses the readings and dictionary-like properties described in UAX #38. The archive is distributed under the Unicode License V3. The raw archive and its SHA-256 are recorded in the project scratch build. Unicode, Inc. holds copyright. Retain its copyright and permission notice with any redistributed derivative. [Unihan 17.0.0 archive](https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip) · [UAX #38, revision 39](https://www.unicode.org/reports/tr38/tr38-39.html) · [Unicode License V3](https://www.unicode.org/license.txt)
+
+Mandarin candidates combine `kMandarin` with readings from `kHanyuPinyin`. The Cantonese tier combines `kCantonese` with Jyutping alternatives found in `kCheungBauer`. Sources in Unihan vary in coverage. A single dictionary candidate records lookup coverage and carries no attestation of a speaker's reading. Lexical pinyin retains dictionary tone marks and Jyutping retains lexical tone digits. The audio tier will record actual pronunciation separately. [Mandarin data fields](https://www.unicode.org/reports/tr38/tr38-39.html#kHanyuPinyin) · [Cantonese data fields](https://www.unicode.org/reports/tr38/tr38-39.html#kCantonese)
+
+`annotate.py` reads the pilot passage JSONL and adds Han slots with zero-based code point offsets into the exact `text` field and punctuation-derived clause indices. Non-Han marks after each slot are preserved. Commas and enumeration commas are minor boundaries. Sentence stops and semicolons are major boundaries. A newline is a paragraph boundary when present in the supplied excerpt. Source-marked pair spans are kept independently in passage metadata. These clauses are provisional editorial segmentation. Classical lexical segmentation and parts of speech remain open annotation fields.
+
+Guangyun, Pingshui, Mandarin, and Cantonese are four separate lookup tiers. With no exact glyph hit, `kTraditionalVariant` can supply every mapped traditional form with data. The output records the original character and each lookup form. No type-level reading is silently assigned to a token. The tier reports `missing`, `ambiguous`, `single_candidate`, `single_variant_candidate`, or `context_reviewed` and carries every retrieved candidate. Candidate IDs are scoped to the character and tier. The lookup inventory can miss characters and alternate readings.
+
+A contextual review is an anchored passage-level decision. Supply a JSON array through `--overrides`; each record includes `passage_id`, a unique `anchor`, the zero-based `offset` of the Han character within it, `tier`, a `match` object identifying exactly one dictionary candidate, and `source` and `reason` for the decision. Guards reject unknown or stale anchors and selectors. A reviewed choice is recorded alongside the inventory. Unresolved cases are available for sensitivity analysis. For the pilot, choices require textual context or an attested annotation, independent of the tone pattern under evaluation.
+
+```bash
+python3 data/phonology/annotate.py --root "$SHUNKOU_ROOT"
+```
+
+`--offline` reuses downloaded lexicons. The build writes `data/pilot/annotated.jsonl` and `data/pilot/annotation-summary.json` under the external root. The summary records counts by reading status and checksums of the cached inputs.

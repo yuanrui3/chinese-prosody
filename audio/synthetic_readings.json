@@ -1,0 +1,62 @@
+{
+  "SD01": {
+    "text_sha256": "a96e71fac6a41147cd0a59888dfff5d26241f1ec846b9e94790d509fab8a539b",
+    "clauses": ["ri4 mu4 / tu2 yuan3", "ren2 jian1 / he2 shi4", "jiang1 jun1 / yi1 qu4", "da4 shu4 / piao1 ling2", "zhuang4 shi4 / bu4 huan2", "han2 feng1 / xiao1 se4"]
+  },
+  "SD02": {
+    "text_sha256": "d9579b303fcead33571f4442ee3e7d2250e570b52b215fa203d3a317f56afd83",
+    "clauses": ["zhi4 / xiao4 chang1 / er4 nian2 zhong1", "da4 feng1 / fa1 wu1 / ba2 shu4", "cha4 shang4 / bao3 ping2", "sui2 feng1 / er2 luo4", "ru4 di4 / zhang4 yu2"]
+  },
+  "SD03": {
+    "text_sha256": "f14d237efd0d251b15c065b3703bfdddce19302c47e10768cb2dcc69da1e5b91",
+    "clauses": ["jing1 bi4 / ni4 zhu4", "shou4 lian2 cheng2 / er2 jian4 qi1", "zai4 shu1 / heng2 jie1", "peng3 zhu1 pan2 / er2 bu4 ding4"]
+  },
+  "SD04": {
+    "text_sha256": "fd81fe4e179c623a22d45587dc62951c06af3ca228022bf518f113350109a916",
+    "clauses": ["hou4 xian2 / zai3 xiang4", "sui4 jiao3 zhao4 / zhan3 zhi1", "you4 ju4 / you3 jiu4", "nai3 le4 / hui1 xia4 / jun1 shi4", "fang2 shou3 / dian4 men2"]
+  },
+  "SD05": {
+    "text_sha256": "60dfcccb24449e3b5edf2dab20a4e347d3819788e6b356df1ebe202425afb316",
+    "clauses": ["zhou1 wang2 / bi4 tai2 / zhi1 shang4", "han4 di4 / jin1 wu1 / zhi1 zhong1", "yu4 shu4 / yi3 shan1 hu2 / zuo4 zhi1", "zhu1 lian2 / yi3 dai4 mao4 / wei2 xia2"]
+  },
+  "SD06": {
+    "text_sha256": "60ba1b4317f29da6c15156b3362ed70625a74217c58d09f7d29a163acc80e892",
+    "clauses": ["si4 yuan4 qiang2 / jie1 shi1 / duan3 chuan2", "yi3 wa3 / fu4 zhi1", "ruo4 / jin1 gong1 qiang2 ye3", "si4 mian4 / ge4 kai1 / yi1 men2"]
+  },
+  "ET01": {
+    "text_sha256": "2c21c3343108399ebd7754f1a1d6e3cdbf15c47a64363eec273a0172d7eea927",
+    "clauses": ["lao3 shui3 jin4 / er2 han2 tan2 qing1", "yan1 guang1 ning2 / er2 mu4 shan1 zi3", "yan3 can1 fei1 / yu2 shang4 lu4", "fang3 feng1 jing3 / yu2 chong2 e1"]
+  },
+  "ET02": {
+    "text_sha256": "e977a3ffe9caaa9e3e53fd3be049aeed753e6f728bfe5d89cfcd313ff0ef829a",
+    "clauses": ["guo2 da4 du1 cheng2 / zhou1 liu4 qi1 li3", "si4 mian4 / ju4 shan1", "dao4 xian3 / yi4 shou3", "quan2 liu2 / jiao1 dai4", "yin3 shui3 / wei2 tian2"]
+  },
+  "ET03": {
+    "text_sha256": "43269ac5b84d845ca1fca5231a9a0b94fb12a5b6fed73aa21cccf8e93c816638",
+    "clauses": ["jin4 xia2 / xie2 pi4", "can2 hai4 / zhong1 liang2", "sha1 zi3 / tu2 xiong1", "shi4 jun1 / zhen4 mu3", "ren2 shen2 / zhi1 suo3 tong2 ji2", "tian1 di4 / zhi1 suo3 bu4 rong2"]
+  },
+  "ET04": {
+    "text_sha256": "84904e3085be5d643648521b7e0115ce180c45799f538237207a3220b65198d8",
+    "clauses": ["wang2 zhi1 huan2 ye3 / guo3 you3 / gou4 huo4 zhe3 yue1", "wang2 ling4 / jian1 guo2 / yin2 luan4 / zhong1 gong1", "wang2 wen2 / zhen4 nu4 / yu4 zhi4 / yan2 xing2"]
+  },
+  "ET05": {
+    "text_sha256": "1d5372b42e9d429a8b8623e010187ffcb4829ea1d412d7f7b6674738ab8d1994",
+    "clauses": ["tian1 gao1 di4 jiong3", "jue2 yu3 zhou4 / zhi1 wu2 qiong2", "xing4 jin4 bei1 lai2", "shi2 ying2 xu1 / zhi1 you3 shu4"]
+  },
+  "ET06": {
+    "text_sha256": "4809fe9821969ddfd01851c7cb5e14aedcd09f33d07f246d9a77906f7612dea5",
+    "clauses": ["zi4 han4 yi3 jiang4", "ji1 jiang1 / qian1 zai3", "zuo4 zhe3 / xiang1 ji4", "fei1 fu4 / yi1 jia1", "qiu2 qi2 / shan4 zhe3", "gai4 yi4 / ji3 yi3"]
+  },
+  "NS01": {
+    "text_sha256": "58e5cabfb94cfdbec373778e517943753e5a33c084e10eb4c7fa2f94852509f4",
+    "clauses": ["yuan2 kai3 / ming2 gong1 yu2 er4 shi2", "yi1 zhi4 / zi1 shan1", "yi1 tou2 / han4 shui3", "shi4 zhi1 / ling2 gu3 / you3 bian4", "er2 bu4 zhi1 / shi2 you3 shi2 / er2 mo2 mie4 ye3"]
+  },
+  "NS02": {
+    "text_sha256": "73e5994296f22dc9e1c1db6d05868f1df9478287c82e627a764ca79160224bdb",
+    "clauses": ["yuan2 kai3 / ming2 gong1 yu2 er4 shi2", "yi1 zhi4 / zi1 shan1 zhi1 shang4", "yi1 tou2 / han4 shui3 zhi1 yuan1", "shi4 zhi1 / ling2 gu3 / you3 bian4", "er2 bu4 zhi1 / shi2 you3 shi2 / er2 mo2 mie4 ye3"]
+  },
+  "NS03": {
+    "text_sha256": "75dc490bc8238a99d3f9cb61d88bb77ff05f9adcbcd66efcbe29cc2ce01d6d79",
+    "clauses": ["gai4 yuan2 kai3 / yi3 qi2 gong1", "er2 shu1 zi3 / yi3 qi2 ren2", "er4 zi3 suo3 wei2 / sui1 bu4 tong2", "jie1 zu2 yi3 / chui2 yu2 bu4 xiu3", "yu2 po3 yi2 / qi2 fan3 zi4 / ji2 ji2 yu2 / hou4 shi4 zhi1 ming2 zhe3 / he2 zai1"]
+  }
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "recording_id": "librivox-lan-ting-2009-05",
+    "passage_id": null,
+    "scope": "out_of_pilot_reference",
+    "audio_path": "audio/raw/human/chinese_lantingjixu_wang_sn.mp3",
+    "audio_url": "https://archive.org/download/multilingual_short_stories_0906_librivox/chinese_lantingjixu_wang_sn.mp3",
+    "source_url": "https://librivox.org/multilingual-short-story-collection-001/",
+    "archive_url": "https://archive.org/details/multilingual_short_stories_0906_librivox",
+    "license": "Public Domain in the USA",
+    "license_url": "https://creativecommons.org/publicdomain/certification/1.0/us/",
+    "license_evidence_url": "https://librivox.org/pages/public-domain/",
+    "catalog_date": "2009-06-05",
+    "section": 5,
+    "catalog_duration_seconds": 189,
+    "speaker": "Semantic Nuance",
+    "speaker_url": "https://librivox.org/reader/3887",
+    "style": "volunteer audiobook reading",
+    "language": "zh",
+    "variety": null,
+    "title": "蘭亭集序",
+    "author": "王羲之",
+    "period": "Eastern Jin",
+    "genre": "preface",
+    "catalog_text_url": "https://zh.wikisource.org/w/index.php?title=%E8%98%AD%E4%BA%AD%E9%9B%86%E5%BA%8F&variant=zh-tw",
+    "catalog_text_revision": null,
+    "reference_text_id": "pian-ti-wen-chao-lan-ting",
+    "reference_text_url": "https://zh.wikisource.org/w/index.php?oldid=2609572",
+    "reference_text_revision": 2609572,
+    "reference_text_match": "work-level match, differences and timing unreviewed",
+    "transcript_status": "pending_audio_review"
+  }
+]

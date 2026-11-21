@@ -1,0 +1,10 @@
+# PyTorch CUDA is pinned and installed from its wheel index by stage4.sbatch.
+huggingface-hub==0.34.4
+transformers==4.56.2
+numpy==2.2.6
+scipy==1.15.3
+soundfile==0.13.1
+praat-parselmouth==0.4.6
+kokoro==0.9.4
+misaki[zh]==0.9.4
+pypinyin==0.55.0

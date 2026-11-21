@@ -1,0 +1,100 @@
+[
+  {
+    "id": "wen-xuan-hen-fu",
+    "title": "恨賦", "author": "江淹", "period": "Southern Dynasties", "genre": "fu",
+    "anthologies": ["昭明文選/卷16", "六朝文絜/卷一"],
+    "source_page": "恨賦", "revision": 2645152,
+    "start": "試望平原，", "end": "莫不飲恨而吞聲。"
+  },
+  {
+    "id": "wen-xuan-bie-fu",
+    "title": "別賦", "author": "江淹", "period": "Southern Dynasties", "genre": "fu",
+    "anthologies": ["昭明文選/卷16", "六朝文絜/卷一"],
+    "source_page": "別賦", "revision": 2366252,
+    "start": "黯然銷魂者，", "end": "寫永訣之情者乎？"
+  },
+  {
+    "id": "pian-ti-wen-chao-lan-ting",
+    "title": "蘭亭集序", "author": "王羲之", "period": "Eastern Jin", "genre": "preface",
+    "anthologies": ["駢體文鈔/卷21"],
+    "source_page": "駢體文鈔/卷21", "revision": 2609572,
+    "start": "永和九年，岁在癸丑", "end": "亦将有感于斯文。"
+  },
+  {
+    "id": "pian-ti-wen-chao-bao-pu-zi",
+    "title": "抱朴子序", "author": "葛洪", "period": "Eastern Jin", "genre": "preface",
+    "anthologies": ["駢體文鈔/卷21"],
+    "source_page": "駢體文鈔/卷21", "revision": 2609572,
+    "start": "洪体乏进趣之才", "end": "自号抱朴子，因以名书。"
+  },
+  {
+    "id": "gu-wen-guan-zhi-teng-wang-ge",
+    "title": "滕王閣序", "author": "王勃", "period": "Early Tang", "genre": "parallel prose",
+    "anthologies": ["古文觀止/卷7"],
+    "source_page": "古文觀止/卷7", "revision": 5978452,
+    "start": "南昌故郡、洪都新府。", "end": "一言均賦、四韻俱成。"
+  },
+  {
+    "id": "gu-wen-guan-zhi-e-pang-gong-fu",
+    "title": "阿房宮賦", "author": "杜牧", "period": "Late Tang", "genre": "文賦 contrast",
+    "anthologies": ["古文觀止/卷7"],
+    "source_page": "古文觀止/卷7", "revision": 5978452,
+    "start": "六王畢、四海一。", "end": "亦使後人而復哀後人也。"
+  },
+  {
+    "id": "ai-jiang-nan-fu-preface",
+    "title": "哀江南賦序", "author": "庾信", "period": "Northern Zhou", "genre": "parallel prose",
+    "anthologies": [], "span_label": "序",
+    "source_page": "哀江南賦", "revision": 3656893,
+    "start": "粵以戊辰之年，", "end": "張平子見而陋之，固其宜矣。"
+  },
+  {
+    "id": "wen-yuan-ying-hua-gai-di-tu-fu",
+    "title": "蓋地圖賦", "author": "錢起", "period": "Tang", "genre": "律賦",
+    "anthologies": ["文苑英華/卷0025"], "assigned_rhymes": "聖德感通靈仙降獻",
+    "source_page": "文苑英華/卷0025", "revision": 12758598,
+    "start": "有虞氏提地釐享天命", "end": "九上弦而庶績建"
+  },
+  {
+    "id": "wen-yuan-ying-hua-li-chun-fu",
+    "title": "立春出土牛賦", "author": "常惟堅", "period": "Tang", "genre": "律賦",
+    "anthologies": ["文苑英華/卷0025"], "assigned_rhymes": "平秩東作敬授人時",
+    "source_page": "文苑英華/卷0025", "revision": 12758598,
+    "start": "月周於紀水次於行", "end": "永懷種德兾念茲而在茲"
+  },
+  {
+    "id": "yuan-zaju-dou-e-yuan-gun-xiu-qiu",
+    "title": "竇娥冤", "author": "關漢卿", "period": "Yuan", "genre": "雜劇 lyric",
+    "anthologies": [], "span_label": "第三折・滾繡球",
+    "source_page": "竇娥冤", "revision": 2571901,
+    "start": "有日月朝暮懸，", "end": "哎，只落得兩淚漣漣。"
+  },
+  {
+    "id": "yuan-sanqu-tian-jing-sha-qiu-si",
+    "title": "天淨沙·秋思", "author": "馬致遠", "period": "Yuan", "genre": "散曲",
+    "anthologies": [], "tune": "天淨沙",
+    "source_page": "天淨沙·秋思", "revision": 1491130,
+    "start": "枯藤、老樹、昏鴉。", "end": "斷腸人在天涯。"
+  },
+  {
+    "id": "modern-lyric-song-bie",
+    "title": "送別", "author": "李叔同", "period": "Early Republic", "genre": "modern lyric",
+    "anthologies": [], "span_label": "Opening two stanzas", "source_year": 1915,
+    "source_page": "送別 (李叔同)", "revision": 12977730,
+    "start": "長亭外，古道邊", "end": "今宵別夢寒"
+  },
+  {
+    "id": "modern-lyric-jiao-wo-ru-he-bu-xiang-ta",
+    "title": "教我如何不想她", "author": "劉半農", "period": "Early Republic", "genre": "modern lyric",
+    "anthologies": ["揚鞭集"], "source_year": 1920,
+    "source_page": "教我如何不想她", "revision": 2490079,
+    "start": "天上飄着些微雲，", "end": "教我如何不想她？", "end_occurrences": 4
+  },
+  {
+    "id": "modern-lyric-hai-yun",
+    "title": "海韻", "author": "徐志摩", "period": "Early Republic", "genre": "modern lyric",
+    "anthologies": [], "source_year": 1925,
+    "source_page": "海韻", "revision": 2632828,
+    "start": "「女郎，單身的女郎，", "end": "再不見女郎！"
+  }
+]

@@ -1,0 +1,5 @@
+# Use the project's CUDA-enabled PyTorch and shared Transformers environment.
+kokoro==0.9.4
+misaki[zh]==0.9.4
+pypinyin==0.55.0
+soundfile==0.13.1

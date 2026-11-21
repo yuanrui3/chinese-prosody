@@ -1,0 +1,20 @@
+[
+  {
+    "passage_id": "SD01",
+    "anchor": "壯士不還",
+    "offset": 3,
+    "tier": "mandarin",
+    "match": {"reading": "huán"},
+    "source": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=5181&q=1&word=%E9%82%84",
+    "reason": "還 is the predicate ‘return’ in 壯士不還. The Ministry of Education dictionary lists this sense under huán, sense ㈠1."
+  },
+  {
+    "passage_id": "ET01",
+    "anchor": "潦水盡",
+    "offset": 0,
+    "tier": "guangyun",
+    "match": {"position": "來開一豪上", "rhyme": "晧"},
+    "source": "https://github.com/nk2028/tshet-uinh-data/blob/21585e22c8a730ca2fd175112f4d18e16d5ce578/%E9%9F%BB%E6%9B%B8/%E5%BB%A3%E9%9F%BB.csv",
+    "reason": "潦水 refers to pooled rainwater. 廣韻 entry 1715/6 glosses 潦 as rainwater under this reading."
+  }
+]

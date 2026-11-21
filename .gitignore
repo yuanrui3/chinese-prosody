@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+
+/results/
+/logs/
+/cache/
+/env/
+/listening-rounds/
+/audio/raw/
+/audio/derived/
+/audio/manifests/
+/audio/stage6/
+/data/raw/
+/data/pilot/raw/
+/data/pilot/annotated.jsonl
+/data/pilot/passages.jsonl

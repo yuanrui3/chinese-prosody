@@ -1,0 +1,12 @@
+{
+  "title": "Chinese Prosody: Parallel Prose Rhythm and First-Read Ease",
+  "version": "v0.1.0",
+  "description": "<p>The Stage 7 pilot on first-read ease and performance rhythm in Chinese parallel prose, including scoring code, pilot manifests, figures, and reports.</p><p>Original code is MIT-licensed. Original documentation, annotations, figures and data contributions are CC BY 4.0. The Baxter transcription port and Wikisource-derived materials retain their documented MIT and CC BY-SA 4.0 terms respectively. See LICENSE.md and the data cards.</p>",
+  "creators": [
+    {
+      "name": "Chen, Yuanrui"
+    }
+  ],
+  "license": "MIT",
+  "upload_type": "software"
+}

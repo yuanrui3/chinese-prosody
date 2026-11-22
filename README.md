@@ -1,5 +1,7 @@
 # 骈文诗词音律美量化研究
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24448783.svg)](https://doi.org/10.5281/zenodo.24448783)
+
 This project studies first-read ease (顺口) and the sound of a performance (音律美) in parallel prose (骈文) and period-matched comparison prose.
 
 ## What the pilot found

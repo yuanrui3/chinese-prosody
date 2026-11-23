@@ -1,0 +1,3 @@
+# The existing Stage 4 packages are constrained by recitation-funasr.sbatch.
+# torchaudio is installed separately from the matching PyTorch CUDA wheel index.
+funasr==1.2.7

@@ -31,7 +31,7 @@ def clip_texts(root, staged, survey):
     return texts
 
 
-def listening_page(survey, staged, *, overall=False, transcripts=None):
+def listening_page(survey, staged, *, overall=False, transcripts=None, form_code=None):
     if overall:
         options = [(number, number) for number in range(1, 8)] + [('略', '略過')]
         directions = '每組先聽 A、再聽 B，可重聽一次。請考慮兩段的節奏、停頓和聲音搭配，給整組一個分數。'
@@ -43,11 +43,17 @@ def listening_page(survey, staged, *, overall=False, transcripts=None):
         reply = '把這一行回覆到對話中。A 或 B＝較好聽，＝表示差不多，略＝跳過。'
         blank = 'L01=＿ L02=＿ L03=＿ L04=＿'
     title = '音律美盲聽'
+    form_note = ''
     transcript_style = ''
     if transcripts is not None:
         title = '音律美試聽（附原文）'
         directions = '每組先聽 A、再聽 B，可對照播放器下方的原文。聽完兩段，給整組一個分數。'
         transcript_style = '\n  .transcript { margin: .35rem 0; line-height: 1.7; white-space: pre-wrap; }'
+    if form_code is not None:
+        title = '音律美試聽'
+        directions = '每組先聽 A、再聽 B，可重聽一次。請考慮兩段的節奏、停頓和聲音搭配，給整組一個分數。'
+        form_note = (f'<p>回覆時附上試測代號 <code>{escape(form_code)}</code>。'
+                     '如果以前讀過其中一段，或聽過這段錄音，請註明組別和 A 或 B。</p>\n')
     trials = []
     for trial in survey['trials']:
         code = escape(trial['trial_id'])
@@ -90,7 +96,7 @@ def listening_page(survey, staged, *, overall=False, transcripts=None):
 <main>
 <h1>{title}</h1>
 <p>{directions}</p>
-<form id="survey">
+{form_note}<form id="survey">
 {content}
 </form>
 <p>{reply}</p>

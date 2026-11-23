@@ -1,0 +1,40 @@
+{
+  "XSD03": {
+    "text_sha256": "67c6b6ab72eff74db7af8fa10b676ac6a5158ae74d07e5fca488374db09861ee",
+    "clauses": [
+      "shui3 jie1 piao3 bi4",
+      "qian1 zhang4 jian4 di3",
+      "you2 yu2 xi4 shi2",
+      "zhi2 shi4 wu2 ai4",
+      "ji2 tuan1 shen4 jian4",
+      "meng3 lang4 ruo4 ben1"
+    ]
+  },
+  "XSD04": {
+    "text_sha256": "2c760979b7d3693f5e59bda6928252d3590ecfe3a7f83f9e20637e5d8fb137be",
+    "clauses": [
+      "zhe4 jiang1 you4 dong1 jing4 / shou4 chang1 xian4 nan2",
+      "zi4 jian4 de2 zhi4 ci3 / ba1 shi2 li3",
+      "zhong1 you3 shi2 er4 lai4"
+    ]
+  },
+  "XET01": {
+    "text_sha256": "0005ec7b34bc843919f197433de59fa239ce5fe57edc20af6e9531a29de0c22f",
+    "clauses": [
+      "fang1 ji4 zi1 jing1 liu2 shi1",
+      "jiang1 ri4 yue4 er2 wu2 qiong2",
+      "si1 fu2 xia2 fu1",
+      "yu3 qian2 kun1 er2 yong3 da4"
+    ]
+  },
+  "XET02": {
+    "text_sha256": "406b2e11c970ff1f086d447eb8ab6bfb484854fb28737a20496a801e0bc8d010",
+    "clauses": [
+      "chu1",
+      "ji2 duo1 fan1 / pu3 le4 jing1 / yi1 shi2 wu3 juan4",
+      "wei4 ji2 lian4 fu4",
+      "zhi2 wei3 zheng4 lun2 fei4",
+      "bu4 xia2 chong2 xiu1"
+    ]
+  }
+}

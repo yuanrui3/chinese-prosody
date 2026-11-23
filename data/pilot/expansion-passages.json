@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "wikisource-qiu-chen-letter",
+      "work_id": "qiu-chen-letter",
+      "title": "與陳伯之書",
+      "author": "丘遲",
+      "date": "505",
+      "wiki_title": "與陳伯之書",
+      "revision_id": 2313470,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%88%87%E9%99%B3%E4%BC%AF%E4%B9%8B%E6%9B%B8&oldid=2313470",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "丘遲, 與陳伯之書. Chinese Wikisource contributors (revision 2313470)."
+    },
+    {
+      "source_id": "wikisource-wei-chen-biography",
+      "work_id": "wei-chen-biography",
+      "title": "魏書·陳伯之傳",
+      "author": "魏收",
+      "date": "Biographies submitted 554, describes a 504 campaign",
+      "wiki_title": "魏書/卷61",
+      "revision_id": 1513415,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E9%AD%8F%E6%9B%B8%2F%E5%8D%B761&oldid=1513415",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "魏收, 魏書·陳伯之傳. Chinese Wikisource contributors (revision 1513415)."
+    },
+    {
+      "source_id": "wikisource-wu-yuan-letter",
+      "work_id": "wu-yuan-letter",
+      "title": "與宋元思書（通行題《與朱元思書》）",
+      "author": "吳均",
+      "date": "Early Liang before 520, exact date uncertain",
+      "wiki_title": "與宋元思書",
+      "revision_id": 2639101,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%88%87%E5%AE%8B%E5%85%83%E6%80%9D%E6%9B%B8&oldid=2639101",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "吳均, 與宋元思書（通行題《與朱元思書》）. Chinese Wikisource contributors (revision 2639101)."
+    },
+    {
+      "source_id": "wikisource-li-shuijing",
+      "work_id": "li-shuijing",
+      "title": "水經注·漸江水",
+      "author": "酈道元",
+      "date": "By 527",
+      "wiki_title": "水經注 (四庫全書本)/卷40",
+      "revision_id": 771621,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%B0%B4%E7%B6%93%E6%B3%A8_%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B740&oldid=771621",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "酈道元, 水經注·漸江水. Chinese Wikisource contributors (revision 771621)."
+    },
+    {
+      "source_id": "wikisource-taizong-tripitaka-preface",
+      "work_id": "taizong-tripitaka-preface",
+      "title": "大唐三藏聖教序",
+      "author": "李世民",
+      "date": "648",
+      "wiki_title": "大唐三藏聖教序",
+      "revision_id": 7902383,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%A4%A7%E5%94%90%E4%B8%89%E8%97%8F%E8%81%96%E6%95%99%E5%BA%8F&oldid=7902383",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "李世民, 大唐三藏聖教序. Chinese Wikisource contributors (revision 7902383)."
+    },
+    {
+      "source_id": "wikisource-daoxuan-gaoseng",
+      "work_id": "daoxuan-gaoseng",
+      "title": "續高僧傳·達摩笈多傳",
+      "author": "道宣",
+      "date": "Initial compilation 645, with later supplements",
+      "wiki_title": "續高僧傳/卷02",
+      "revision_id": 1568554,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E7%BA%8C%E9%AB%98%E5%83%A7%E5%82%B3%2F%E5%8D%B702&oldid=1568554",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "道宣, 續高僧傳·達摩笈多傳. Chinese Wikisource contributors (revision 1568554)."
+    },
+    {
+      "source_id": "wikisource-yang-wang-preface",
+      "work_id": "yang-wang-preface",
+      "title": "王勃集序",
+      "author": "楊炯",
+      "date": "Late seventh century after 王勃’s death",
+      "wiki_title": "王勃集序",
+      "revision_id": 2642056,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E7%8E%8B%E5%8B%83%E9%9B%86%E5%BA%8F&oldid=2642056",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "楊炯, 王勃集序. Chinese Wikisource contributors (revision 2642056)."
+    },
+    {
+      "source_id": "wikisource-liyanshou-beishi",
+      "work_id": "liyanshou-beishi",
+      "title": "北史·李廣傳",
+      "author": "李延壽",
+      "date": "659",
+      "wiki_title": "北史/卷083",
+      "revision_id": 2601736,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%8C%97%E5%8F%B2%2F%E5%8D%B7083&oldid=2601736",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "李延壽, 北史·李廣傳. Chinese Wikisource contributors (revision 2601736)."
+    }
+  ],
+  "passages": [
+    {
+      "passage_id": "XSD01",
+      "source_id": "wikisource-qiu-chen-letter",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "XSR",
+      "subset": "matched",
+      "task": "read_aloud",
+      "match_topic": "Chen Bozhi and military defection",
+      "selection_note": "Rhetorical persuasion with a balanced image of flight within a letter associated with Chen Bozhi’s defection.",
+      "parallel_clause_groups": [
+        [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      ],
+      "start_anchor": "如何一旦為奔",
+      "end_anchor": "，又何劣邪？",
+      "witness_codepoints": 29,
+      "han_count": 25,
+      "text_sha256": "9bd01261ba46b561546bb57496d9be378ab97933cd33583d40926f35679a669a"
+    },
+    {
+      "passage_id": "XSD02",
+      "source_id": "wikisource-wei-chen-biography",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "XSR",
+      "subset": "matched",
+      "task": "read_aloud",
+      "match_topic": "Chen Bozhi and military defection",
+      "selection_note": "Chronological military narration about the same commander.",
+      "parallel_clause_groups": [],
+      "start_anchor": "伯之進軍討祖",
+      "end_anchor": "，賊眾大敗。",
+      "witness_codepoints": 30,
+      "han_count": 25,
+      "text_sha256": "0a9cddbc8456ad32a7ed9cfe5a9a024a554425a345ef09cac9674e839edff5fd"
+    },
+    {
+      "passage_id": "XSD03",
+      "source_id": "wikisource-wu-yuan-letter",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "XSL",
+      "subset": "matched",
+      "task": "listening",
+      "match_topic": "Fuchun River system",
+      "selection_note": "Landscape description with a balanced comparison of rapids and waves.",
+      "parallel_clause_groups": [
+        [
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "水皆縹碧，千",
+      "end_anchor": "，猛浪若奔。",
+      "witness_codepoints": 30,
+      "han_count": 24,
+      "text_sha256": "67c6b6ab72eff74db7af8fa10b676ac6a5158ae74d07e5fca488374db09861ee"
+    },
+    {
+      "passage_id": "XSD04",
+      "source_id": "wikisource-li-shuijing",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "XSL",
+      "subset": "matched",
+      "task": "listening",
+      "match_topic": "Fuchun River system",
+      "selection_note": "Geographic route description within the same river system. Project punctuation follows three syntactic units.",
+      "parallel_clause_groups": [],
+      "start_anchor": "浙江又東逕壽",
+      "end_anchor": "里中有十二瀨",
+      "witness_codepoints": 22,
+      "han_count": 22,
+      "text_sha256": "2c760979b7d3693f5e59bda6928252d3590ecfe3a7f83f9e20637e5d8fb137be",
+      "insert_punctuation_after": {
+        "9": "，",
+        "17": "，",
+        "22": "。"
+      }
+    },
+    {
+      "passage_id": "XET01",
+      "source_id": "wikisource-taizong-tripitaka-preface",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "XTL",
+      "subset": "matched",
+      "task": "listening",
+      "match_topic": "Translation and transmission of Buddhist scriptures",
+      "selection_note": "Imperial preface linking translation and legacy through balanced temporal and cosmic complements.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "start_anchor": "方冀茲經流施",
+      "end_anchor": "乾坤而永大。",
+      "witness_codepoints": 26,
+      "han_count": 22,
+      "text_sha256": "0005ec7b34bc843919f197433de59fa239ce5fe57edc20af6e9531a29de0c22f"
+    },
+    {
+      "passage_id": "XET02",
+      "source_id": "wikisource-daoxuan-gaoseng",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "XTL",
+      "subset": "matched",
+      "task": "listening",
+      "match_topic": "Translation and transmission of Buddhist scriptures",
+      "selection_note": "Third-person narration of the translation and interrupted revision of Buddhist scriptures.",
+      "parallel_clause_groups": [],
+      "start_anchor": "初，笈多翻《",
+      "end_anchor": "，不暇重修。",
+      "witness_codepoints": 31,
+      "han_count": 24,
+      "text_sha256": "406b2e11c970ff1f086d447eb8ab6bfb484854fb28737a20496a801e0bc8d010"
+    },
+    {
+      "passage_id": "XET03",
+      "source_id": "wikisource-yang-wang-preface",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "XTR",
+      "subset": "matched",
+      "task": "read_aloud",
+      "match_topic": "Posthumous collection of literary writings",
+      "selection_note": "Literary collection preface in which named works and biographical time provide a parallel frame. Wang Bo is its subject.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "start_anchor": "《三都》盛作",
+      "end_anchor": "，道或存焉。",
+      "witness_codepoints": 38,
+      "han_count": 28,
+      "text_sha256": "142ac0f0197db99d93f135fcad62cb1d143e55ccada298b81edb130b2da7bd64"
+    },
+    {
+      "passage_id": "XET04",
+      "source_id": "wikisource-liyanshou-beishi",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "XTR",
+      "subset": "matched",
+      "task": "read_aloud",
+      "match_topic": "Posthumous collection of literary writings",
+      "selection_note": "Narrative of the posthumous collection of a writer's work.",
+      "parallel_clause_groups": [],
+      "start_anchor": "竟以疾終。嘗",
+      "end_anchor": "魏收爲之序。",
+      "witness_codepoints": 34,
+      "han_count": 29,
+      "text_sha256": "527191fb007bc8b13b8881e7f0285de84300bb6db709c7e9902513ed7ca97785"
+    }
+  ]
+}

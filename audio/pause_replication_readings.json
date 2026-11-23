@@ -1,0 +1,44 @@
+{
+  "PSD1P": {
+    "text_sha256": "3b46f8c4086c630695ecd06c6e44d212e36ce4dc218eea8d33ef7badb668a5c1",
+    "clauses": [
+      "gai4 you2 yan4 xu3 suo3 fei4",
+      "ji4 po4 shu4 jia1 zhi1 chan3",
+      "ge1 yao2 zhi1 ju4",
+      "bi4 si4 qian1 jin1 zhi1 zi1",
+      "suo3 fei4 shi4 deng3 qiu1 shan1",
+      "wei2 huan1 zhi3 zai4 e2 qing3"
+    ]
+  },
+  "PSD1C": {
+    "text_sha256": "45484d13c771233ba7ea54069a9f2200960c97d0660fae658344f478aeef0d52",
+    "clauses": [
+      "ruo4 shi3 chao2 ting2 huan3 qi2 xing2",
+      "ci3 shi4 zhong1 bu4 ke3 duan4",
+      "ruo4 ji2 qi2 zhi4",
+      "ze2 qu1 wu1 mi4 fang2 zhi1 zhong1",
+      "yun2 he2 ke3 zhi1"
+    ]
+  },
+  "PET1P": {
+    "text_sha256": "ce4a4eade3414f09b7df5699fcb5c4c023a2a8a2010b74d6bd5fe738350fadc4",
+    "clauses": [
+      "qi2 you3 bu4 bei4",
+      "yi3 xiong2 shi4 bu3 yan1",
+      "bi4 qu3 wen2 zheng4 xiang2 xi1",
+      "yi4 li3 jing1 shen3",
+      "jian3 qi2 fan2 wu2",
+      "cuo1 qi2 ji1 yao4"
+    ]
+  },
+  "PET1C": {
+    "text_sha256": "251fd45fa2b807bc6bff5027672efa08ffbcf6f05d8e19526c0d30cfdf84552c",
+    "clauses": [
+      "zheng4 shi4",
+      "jin4 zhuo2 yin1 yi4 xu4 yun2 bu4 zhi1 qi2 ming2",
+      "er2 chen2 zan4 ji2 jie3 zhe2 yun2 zheng4 de2",
+      "ji4 wu2 suo3 ju4",
+      "jin1 yi1 jin4 zhuo2 dan4 cheng1 zheng4 shi4 er3"
+    ]
+  }
+}

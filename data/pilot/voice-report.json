@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "wikisource-liu-jun-guangjuejiao",
+      "work_id": "liu-jun-guangjuejiao",
+      "title": "廣絕交論",
+      "author": "劉峻",
+      "date": "Early sixth century, after the death of 任昉 in 508",
+      "wiki_title": "廣絕交論",
+      "revision_id": 2645662,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%BB%A3%E7%B5%95%E4%BA%A4%E8%AB%96&oldid=2645662",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "劉峻, 廣絕交論. Chinese Wikisource contributors (revision 2645662)."
+    },
+    {
+      "source_id": "wikisource-huang-kan-lunyu-yishu",
+      "work_id": "huang-kan-lunyu-yishu",
+      "title": "論語集解義疏·學而",
+      "author": "皇侃",
+      "date": "Southern Liang, compiled in the first half of the sixth century",
+      "wiki_title": "論語集解義疏 (四庫全書本)/卷01",
+      "revision_id": 768905,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%AB%96%E8%AA%9E%E9%9B%86%E8%A7%A3%E7%BE%A9%E7%96%8F+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B701&oldid=768905",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "皇侃, 論語集解義疏·學而. Chinese Wikisource contributors (revision 768905)."
+    },
+    {
+      "source_id": "wikisource-tao-hongjing-calligraphy-letter",
+      "work_id": "tao-hongjing-calligraphy-letter",
+      "title": "與梁武帝論書啟",
+      "author": "陶弘景",
+      "date": "Southern Liang, written to Liang Wudi between 502 and 536",
+      "wiki_title": "與梁武帝論書啟",
+      "revision_id": 313460,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%88%87%E6%A2%81%E6%AD%A6%E5%B8%9D%E8%AB%96%E6%9B%B8%E5%95%9F&oldid=313460",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "陶弘景, 與梁武帝論書啟. Chinese Wikisource contributors (revision 313460)."
+    },
+    {
+      "source_id": "wikisource-yu-jianwu-shupin",
+      "work_id": "yu-jianwu-shupin",
+      "title": "書品",
+      "author": "庾肩吾",
+      "date": "Southern Liang, sixth century",
+      "wiki_title": "書品 (庾肩吾)",
+      "revision_id": 10860567,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%9B%B8%E5%93%81+%28%E5%BA%BE%E8%82%A9%E5%90%BE%29&oldid=10860567",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "庾肩吾, 書品. Chinese Wikisource contributors (revision 10860567)."
+    },
+    {
+      "source_id": "wikisource-wei-zheng-ten-thoughts",
+      "work_id": "wei-zheng-ten-thoughts",
+      "title": "諫太宗十思疏",
+      "author": "魏徵",
+      "date": "637, Tang Taizong",
+      "wiki_title": "諫太宗十思疏",
+      "revision_id": 9884512,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%AB%AB%E5%A4%AA%E5%AE%97%E5%8D%81%E6%80%9D%E7%96%8F&oldid=9884512",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "魏徵, 諫太宗十思疏. Chinese Wikisource contributors (revision 9884512)."
+    },
+    {
+      "source_id": "wikisource-ma-zhou-taizong-memorial",
+      "work_id": "ma-zhou-taizong-memorial",
+      "title": "上太宗疏",
+      "author": "馬周",
+      "date": "Early Tang, reign of Taizong",
+      "wiki_title": "上太宗疏",
+      "revision_id": 2632518,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E4%B8%8A%E5%A4%AA%E5%AE%97%E7%96%8F&oldid=2632518",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "馬周, 上太宗疏. Chinese Wikisource contributors (revision 2632518)."
+    },
+    {
+      "source_id": "wikisource-kong-zhiyue-bencao-preface",
+      "work_id": "kong-zhiyue-bencao-preface",
+      "title": "本草序",
+      "author": "孔誌約",
+      "date": "659, compilation of 新修本草",
+      "wiki_title": "本草序",
+      "revision_id": 1971330,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%9C%AC%E8%8D%89%E5%BA%8F&oldid=1971330",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "孔誌約, 本草序. Chinese Wikisource contributors (revision 1971330)."
+    },
+    {
+      "source_id": "wikisource-sun-simiao-qianjin-preface",
+      "work_id": "sun-simiao-qianjin-preface",
+      "title": "千金要方序",
+      "author": "孫思邈",
+      "date": "Early Tang, conventionally c. 652",
+      "wiki_title": "千金要方序",
+      "revision_id": 2677027,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%8D%83%E9%87%91%E8%A6%81%E6%96%B9%E5%BA%8F&oldid=2677027",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "孫思邈, 千金要方序. Chinese Wikisource contributors (revision 2677027)."
+    }
+  ],
+  "passages": [
+    {
+      "passage_id": "VSD1P",
+      "source_id": "wikisource-liu-jun-guangjuejiao",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "VSD1",
+      "subset": "matched",
+      "match_topic": "Friendship grounded in shared ethics",
+      "selection_note": "Parallel phrases on the ethics of friendship and the persistence of true bonds. The six clauses end before the adjoining pair of weather metaphors.",
+      "parallel_clause_groups": [
+        [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        [
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        [
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "至夫組織仁",
+      "end_anchor": "跡江湖之上，",
+      "witness_codepoints": 36,
+      "han_count": 30,
+      "text_sha256": "27aadea732d394f4d396a930b44d97b4ecc472622473b8fd50cb0cc9f4189a03"
+    },
+    {
+      "passage_id": "VSD1C",
+      "source_id": "wikisource-huang-kan-lunyu-yishu",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "VSD1",
+      "subset": "matched",
+      "match_topic": "Friendship grounded in shared ethics",
+      "selection_note": "Causal explanation in 皇侃’s 疏 of what makes meeting fellow students joyful. The edition is unpunctuated here. The four added pauses mark the reason, arrival, discussion, and conclusion.",
+      "parallel_clause_groups": [],
+      "start_anchor": "今由我師徳",
+      "end_anchor": "説故可為樂也",
+      "witness_codepoints": 27,
+      "insert_punctuation_after": {
+        "6": "，",
+        "14": "，",
+        "22": "，",
+        "27": "。"
+      },
+      "han_count": 27,
+      "text_sha256": "1182a34f71edac594a3a3079675663b9c19402ec5f778e36095bf8170655893c"
+    },
+    {
+      "passage_id": "VSD2P",
+      "source_id": "wikisource-tao-hongjing-calligraphy-letter",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "VSD2",
+      "subset": "matched",
+      "match_topic": "Description and evaluation of calligraphy",
+      "selection_note": "A parallel pair with reduplication and corresponding verb-object phrases inside a calligraphy letter. The designation applies to the excerpt.",
+      "parallel_clause_groups": [
+        [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      ],
+      "start_anchor": "非但字字注",
+      "end_anchor": "歲不復相類，",
+      "witness_codepoints": 32,
+      "han_count": 27,
+      "text_sha256": "50d6ba827e808664070a821427a646c87a52a432f29015566740f93a1fe77ccb"
+    },
+    {
+      "passage_id": "VSD2C",
+      "source_id": "wikisource-yu-jianwu-shupin",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "VSD2",
+      "subset": "matched",
+      "match_topic": "Description and evaluation of calligraphy",
+      "selection_note": "Sequential and causal account of clerical script. The excerpt functions as an expository comparison within a work that also contains parallel prose.",
+      "parallel_clause_groups": [],
+      "start_anchor": "尋隸體發源",
+      "end_anchor": "，遂作此法，",
+      "witness_codepoints": 40,
+      "han_count": 34,
+      "text_sha256": "9047dee8658d743bef52aa7e28d0691bad64c334c9f202d3faa548a89c55fa2e"
+    },
+    {
+      "passage_id": "VET1P",
+      "source_id": "wikisource-wei-zheng-ten-thoughts",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "VET1",
+      "subset": "matched",
+      "match_topic": "Court advice on sustaining rule",
+      "selection_note": "Three parallel analogies at the start of the memorial. The first two analogies are annotated as one pair, with no re-used clauses.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "start_anchor": "臣聞求木之",
+      "end_anchor": "必積其德義。",
+      "witness_codepoints": 38,
+      "han_count": 32,
+      "text_sha256": "b7276e348398ce397b7016de5810b5e9e4bfaee3aa19a4eb2ef5da2398b73a37"
+    },
+    {
+      "passage_id": "VET1C",
+      "source_id": "wikisource-ma-zhou-taizong-memorial",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "VET1",
+      "subset": "matched",
+      "match_topic": "Court advice on sustaining rule",
+      "selection_note": "Explanatory reconstruction of the ruler’s motive in granting hereditary offices, with unequal clauses.",
+      "parallel_clause_groups": [],
+      "start_anchor": "臣竊惟陛下",
+      "end_anchor": "與國無疆也。",
+      "witness_codepoints": 29,
+      "han_count": 26,
+      "text_sha256": "055ed2ad2d72ed21345b5e817f49dee0e54b7d770793483295fca57e50ed2b78"
+    },
+    {
+      "passage_id": "VET2P",
+      "source_id": "wikisource-kong-zhiyue-bencao-preface",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "VET2",
+      "subset": "matched",
+      "match_topic": "Explaining the need for a medical compilation",
+      "selection_note": "Parallel causal examples and their paired restatement in a medical preface.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        [
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "離其本土，",
+      "end_anchor": "，寒溫多謬。",
+      "witness_codepoints": 34,
+      "han_count": 28,
+      "text_sha256": "70526afa3efb19827faa089d276c07ff927b225fb1d28cd158b42bfaa5fc02d2"
+    },
+    {
+      "passage_id": "VET2C",
+      "source_id": "wikisource-sun-simiao-qianjin-preface",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "VET2",
+      "subset": "matched",
+      "match_topic": "Explaining the need for a medical compilation",
+      "selection_note": "Sequential account of why searching existing formularies can delay urgent care. The short clauses also supply a comparison with regular lengths.",
+      "parallel_clause_groups": [],
+      "start_anchor": "吾見諸方，",
+      "end_anchor": "疾厄不救矣。",
+      "witness_codepoints": 31,
+      "han_count": 25,
+      "text_sha256": "3bf7c743758a4213eb27a211915063c58a5c9b24e1ba4616808ebe4103179619"
+    }
+  ]
+}

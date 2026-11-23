@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "wikisource-he-chen-shiwu-fengshi",
+      "work_id": "he-chen-shiwu-fengshi",
+      "title": "條奏時務封事",
+      "author": "賀琛",
+      "date": "Late Southern Liang, after c. 542 and before 548, before the exchange with 梁武帝",
+      "wiki_title": "梁書/卷38",
+      "revision_id": 1508285,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%A2%81%E6%9B%B8%2F%E5%8D%B738&oldid=1508285",
+      "witness_edition": "Chinese Wikisource, Liang shu, volume 38, checked against the May 1973 Zhonghua Shuju edition per the chapter's source note",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "賀琛, 條奏時務封事. Chinese Wikisource contributors (revision 1508285)."
+    },
+    {
+      "source_id": "wikisource-xiao-yan-hechen-response",
+      "work_id": "xiao-yan-hechen-response",
+      "title": "敕責賀琛",
+      "author": "蕭衍",
+      "date": "Late Southern Liang, after c. 542 and before 548, direct response to 賀琛",
+      "wiki_title": "梁書/卷38",
+      "revision_id": 1508285,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%A2%81%E6%9B%B8%2F%E5%8D%B738&oldid=1508285",
+      "witness_edition": "Chinese Wikisource, Liang shu, volume 38, checked against the May 1973 Zhonghua Shuju edition per the chapter's source note",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "蕭衍, 敕責賀琛. Chinese Wikisource contributors (revision 1508285)."
+    },
+    {
+      "source_id": "wikisource-kong-yingda-liji-zhengyi-xu",
+      "work_id": "kong-yingda-liji-zhengyi-xu",
+      "title": "禮記正義序",
+      "author": "孔穎達",
+      "date": "Early Tang, received preface records a second imperial review in 642",
+      "wiki_title": "禮記正義序",
+      "revision_id": 1971612,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E7%A6%AE%E8%A8%98%E6%AD%A3%E7%BE%A9%E5%BA%8F&oldid=1971612",
+      "witness_edition": "Chinese Wikisource transcription under Quan Tang wen, volume 146",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "孔穎達, 禮記正義序. Chinese Wikisource contributors (revision 1971612)."
+    },
+    {
+      "source_id": "wikisource-yan-shigu-hanshu-xuli",
+      "work_id": "yan-shigu-hanshu-xuli",
+      "title": "漢書敘例",
+      "author": "顏師古",
+      "date": "Early Tang, commentary commissioned by Crown Prince 李承乾 before 643",
+      "wiki_title": "漢書顏師古註/漢書敘例",
+      "revision_id": 2688522,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%BC%A2%E6%9B%B8%E9%A1%8F%E5%B8%AB%E5%8F%A4%E8%A8%BB%2F%E6%BC%A2%E6%9B%B8%E6%95%98%E4%BE%8B&oldid=2688522",
+      "witness_edition": "Chinese Wikisource transcription in Han shu Yan Shigu zhu, preface fascicle. The transcription page does not identify a print edition.",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "顏師古, 漢書敘例. Chinese Wikisource contributors (revision 2688522)."
+    }
+  ],
+  "passages": [
+    {
+      "passage_id": "PSD1P",
+      "source_id": "wikisource-he-chen-shiwu-fengshi",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "PSD1",
+      "subset": "matched",
+      "match_topic": "Court regulation of private luxury and banquets",
+      "selection_note": "Parallel claims about expense and pleasure in the second item of 賀琛’s memorial. This is a directly attributed document preserved in the punctuated 1973 Zhonghua Shuju edition of Liang shu.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        [
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "蓋由宴醑所費，",
+      "end_anchor": "山，爲歡止在俄頃。",
+      "witness_codepoints": 40,
+      "han_count": 34,
+      "text_sha256": "3b46f8c4086c630695ecd06c6e44d212e36ce4dc218eea8d33ef7badb668a5c1"
+    },
+    {
+      "passage_id": "PSD1C",
+      "source_id": "wikisource-xiao-yan-hechen-response",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "PSD1",
+      "subset": "matched",
+      "match_topic": "Court regulation of private luxury and banquets",
+      "selection_note": "The dated context is the same exchange as the memorial. The emperor asks how inspectors could enforce restrictions in private houses. This is a directly attributed document preserved in the punctuated 1973 Zhonghua Shuju edition of Liang shu.",
+      "parallel_clause_groups": [],
+      "start_anchor": "若使朝廷緩其刑",
+      "end_anchor": "房之中，云何可知？",
+      "witness_codepoints": 33,
+      "han_count": 28,
+      "text_sha256": "45484d13c771233ba7ea54069a9f2200960c97d0660fae658344f478aeef0d52"
+    },
+    {
+      "passage_id": "PET1P",
+      "source_id": "wikisource-kong-yingda-liji-zhengyi-xu",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "PET1",
+      "subset": "matched",
+      "match_topic": "Selection of earlier authorities in Tang editorial prefaces",
+      "selection_note": "The preface describes supplementing one commentator with a second and compressing the resulting text in corresponding four-character clauses. The Wikisource witness is identified as Quan Tang wen, volume 146.",
+      "parallel_clause_groups": [
+        [
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "其有不備，以熊",
+      "end_anchor": "其繁蕪，撮其機要。",
+      "witness_codepoints": 33,
+      "han_count": 27,
+      "text_sha256": "ce4a4eade3414f09b7df5699fcb5c4c023a2a8a2010b74d6bd5fe738350fadc4"
+    },
+    {
+      "passage_id": "PET1C",
+      "source_id": "wikisource-yan-shigu-hanshu-xuli",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "PET1",
+      "subset": "matched",
+      "match_topic": "Selection of earlier authorities in Tang editorial prefaces",
+      "selection_note": "A biographical identification note weighs conflicting statements in two prior commentaries and explains which name is kept. This is the main continuous text in the pinned Han shu commentary witness.",
+      "parallel_clause_groups": [],
+      "start_anchor": "鄭氏，晉灼音義",
+      "end_anchor": "依晉灼但稱鄭氏耳。",
+      "witness_codepoints": 39,
+      "han_count": 34,
+      "text_sha256": "251fd45fa2b807bc6bff5027672efa08ffbcf6f05d8e19526c0d30cfdf84552c"
+    }
+  ]
+}

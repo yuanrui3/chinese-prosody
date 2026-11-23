@@ -77,8 +77,26 @@ def production_stimuli(root):
         row['passage_id']: row
         for row in read_jsonl(root / 'data/pilot/annotated.jsonl')
     }
+    prompt_order = PROMPTS
+    expansion = {passage_id for passage_id, row in passages.items() if row.get('task') == 'read_aloud'}
+    if expansion:
+        directory = restricted_path(root)
+        path = directory / 'production-key.json'
+        if directory.is_symlink() or path.is_symlink() or path.stat().st_mode & 0o077:
+            raise ValueError('The read-aloud key must be private')
+        key = read_json(contained_file(path, directory))
+        saved_prompts = key['prompts']
+        codes = [f'R{index:02d}' for index in range(1, len(expansion) + 1)]
+        if key['version'] != VERSION or saved_prompts.keys() != set(codes):
+            raise ValueError('The read-aloud key does not match the current protocol')
+        prompt_order = [(code, saved_prompts[code]['passage_id']) for code in codes]
+        if {pid for _, pid in prompt_order} != expansion or any(
+            passages[pid]['text_sha256'] != saved_prompts[code]['text_sha256']
+            for code, pid in prompt_order
+        ):
+            raise ValueError('The read-aloud key does not match the assigned passages')
     stimuli = {}
-    for code, passage_id in PROMPTS:
+    for code, passage_id in prompt_order:
         row = passages[passage_id]
         if hashlib.sha256(row['text'].encode('utf-8')).hexdigest() != row['text_sha256']:
             raise ValueError(f'Passage text hash mismatch: {passage_id}')
@@ -86,13 +104,15 @@ def production_stimuli(root):
     return stimuli
 
 
-def read_aloud_page(prompts):
+def read_aloud_page(prompts, *, form_code=None):
     items = '\n'.join(
         '<details><summary>{}</summary><p class="passage">{}</p></details>'.format(
             escape(row['code']), escape(row['text']),
         )
         for row in prompts
     )
+    form_note = (f'<p>回覆時請附上試測代號 <code>{escape(form_code)}</code>，並填寫朗讀時用的語音，例如普通話或粵語。</p>\n'
+                 if form_code is not None else '')
     return f'''<!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -113,7 +133,7 @@ code {{ overflow-wrap: anywhere; }}
 <main>
 <h1>順口試讀</h1>
 <p>逐段打開。每次先準備好，再打開一段，用你平常讀文言的發音和速度直接出聲讀。卡住、改口或重讀時，自然繼續。每段保留第一次讀的版本。可以跳過任何一段。</p>
-<p>若自願錄音，請每段分開，以段落代號命名。先開始錄音，再打開該段。</p>
+{form_note}<p>若自願錄音，請每段分開，以段落代號命名。先開始錄音，再打開該段。</p>
 {items}
 <h2>讀完後回覆</h2>
 <p>依實際開口的感覺給每段 1–7 分。1＝很拗口，4＝普通，7＝很順口。可加上以前讀過的段落代號。</p>
@@ -126,6 +146,8 @@ code {{ overflow-wrap: anywhere; }}
 
 def prepare(root):
     stimuli = production_stimuli(root)
+    if any(row.get('task') == 'read_aloud' for row in stimuli.values()):
+        raise ValueError('Prepare the independent-works round with src.expansion_tasks')
     prompts = [{'code': code, 'text': row['text']} for code, row in stimuli.items()]
     output = stage6_path(root) / 'production'
     write_json(output / 'task.json', {'version': VERSION, 'prompts': prompts})

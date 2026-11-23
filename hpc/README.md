@@ -52,6 +52,400 @@ sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=standby \
 
 The job runs the fixtures and the live annotation check, then writes `results/stage5/validation.json`, including input hashes, control tests, matched-pair effects, and audio comparisons. The default run uses seed `20261121` and 999 draws per control and reference tier. `python -m src.pilot_validation --root "$root" --device cpu` runs the same reductions for a local or CPU-equipped execution environment with the inputs present. Use a Slurm compute job for substantive validation on Purdue systems.
 
+### Synthetic timing benchmark
+
+From a source checkout on Gilbreth, run the bounded benchmark against the existing male-voice and independent-work WAVs. It reads nine short recordings and requires no GPU. The benchmark checks exact text and audio hashes, a common synthesis condition, and disjoint works and authors. It fits on the original matched prose and saves the expansion predictions and per-work errors under `$root/results/model-development/synthetic-timing.json`. [Measured results](../reports/stage-5.md#work-held-out-synthetic-timing-benchmark)
+
+```bash
+python3 -B -m src.timing_benchmark --root "$root"
+```
+
+### Historical tone and rhyme on fresh works
+
+Upload the code archive with `data/pilot/historical-increment.json`, `audio/historical_increment_readings.json`, the Stage 3 and Stage 4 builders, the source modules, and `hpc/historical-increment.sbatch`. The isolated output directory is `$root/model-development/historical-increment`. With restricted Wikimedia access, keep the reviewed pre-edit witness spans in `data/pilot/reviewed-witnesses.json` under that directory. The builder verifies every excerpt against the manifest and reuses the pinned lexicon and audio caches.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/historical-increment-%j.log" \
+  "$code/hpc/historical-increment.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The job renders and aligns the fresh WAVs on one GPU. It writes the work-held-out duration predictions and feature-permutation controls to `results/historical-increment/duration.json`, and the Stage 5 structural control and audio checks to `results/historical-increment/stage5.json`, both under the isolated output directory. No participant input is used. [Benchmark design](../research/historical-increment.md) · [Corpus and primary witnesses](../data/pilot/DATA_CARD.md#fresh-works-for-the-historical-feature-benchmark)
+
+### Fixed-text tone and rhyme controls
+
+Use the pinned Stage 4 environment and the annotated fresh prose from the historical-feature benchmark. Upload the `audio/` Python modules, `audio/minimal_ending_sites.json`, `audio/historical_increment_readings.json`, `src/`, and `hpc/minimal-endings.sbatch` with their repository paths.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/minimal-endings-%j.log" \
+  "$code/hpc/minimal-endings.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The job renders, decodes, and measures four takes at each of eight sites, with the tones and finals varied in separate arms. The exact audio, synthetic prescriptions, draft alignments, and `results/minimal-endings/analysis.json` remain under `$root/model-development/minimal-endings`. The analysis verifies WAV hashes and matches each sham to its baseline. [Design and measurement limits](../research/minimal-endings.md)
+
+Run the two bounded direct pitch checks from the same source checkout after loading Anaconda and the pinned Stage 4 interpreter. These CPU checks reuse the baseline WAVs and draft target windows. They write the two pitch-control JSON files alongside the main analysis and keep the edited WAVs under the experiment's `audio/raw/pitch-controls/`.
+
+```bash
+experiment="$root/model-development/minimal-endings"
+module load anaconda/2024.10-py312
+"$stage4_env/bin/python" -B -m src.minimal_pitch_control --root "$experiment"
+"$stage4_env/bin/python" -B -m src.minimal_pitch_control --root "$experiment" --voiced-core
+```
+
+### Expanded pitch controls and rhyme alignment
+
+Run these bounded CPU checks from the source checkout in the same pinned environment. They read the original and edited WAVs and cached phone drafts. All new WAVs and JSON files go to the isolated extension directory.
+
+```bash
+original="$root/model-development/historical-increment"
+experiment="$root/model-development/minimal-endings"
+extension="$root/model-development/ending-control-extension"
+results="$extension/results/minimal-endings"
+"$stage4_env/bin/python" -B -m src.pitch_control_extension --source "$original" --root "$extension" \
+  --previous-sites audio/minimal_ending_sites.json
+"$stage4_env/bin/python" -B -m src.rhyme_final_recovery --root "$experiment" --output "$results/rhyme-alignment.json"
+"$stage4_env/bin/python" -B -m src.rhyme_spectral --root "$experiment" \
+  --recovery "$results/rhyme-alignment.json" --output "$results/rhyme-spectral.json"
+```
+
+The supplemental step uses one GPU to check unresolved ends with different audio context. Upload `hpc/rhyme-window-redecode.sbatch` and the source modules with the extension checkout. The bounded job keeps the initial recovery report and writes separate rhyme-window alignment and spectral reports in the extension's results directory.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/rhyme-window-%j.log" \
+  "$code/hpc/rhyme-window-redecode.sbatch" "$root" "$code" "$stage4_env"
+```
+
+### Fixed-text recitation phrasing
+
+Deploy the three `src/recitation_phrasing*.py` modules and `hpc/recitation-phrasing-audit.sbatch` with the existing Stage 5 checkout. The bounded waveform checks read the existing male Mandarin WAVs and alignments. They write derived WAVs, screening results, and the independent waveform measurements under the experiment directory. The optional phone re-decode requires one GPU and uses the pinned Stage 4 environment.
+
+```bash
+experiment="$root/model-development/recitation-phrasing"
+umask 077
+cd "$code"
+python3 -B -m src.recitation_phrasing --root "$experiment" \
+  --guide "$root/listening-rounds/mandarin-male" --fresh "$root/model-development/historical-increment"
+python3 -B -m src.recitation_phrasing_analysis --root "$experiment"
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/recitation-phrasing-%j.log" \
+  "$code/hpc/recitation-phrasing-audit.sbatch" "$root" "$code" "$stage4_env"
+```
+
+### Recitation alignment extension
+
+Deploy the updated phrasing builder, `src/recitation_phrasing_extension.py`, `src/recitation_guide_recovery.py`, `src/recitation_pcm_alignment.py`, `src/recitation_context_decode.py`, and `hpc/recitation-alignment-audit.sbatch` with the prior phrasing checkout. Use the existing waveform and decoder reports in the original experiment. The extension retains the original WAVs by hash and adds a new pair only if the guide clause passes contextual recovery and the original splice checks. Exact sample alignment and context-window phone decoding write separate results.
+
+```bash
+prior="$root/model-development/recitation-phrasing"
+experiment="$root/model-development/recitation-phrasing-alignment"
+comparison="results/recitation-phrasing"
+umask 077
+cd "$code"
+python3 -B -m src.recitation_phrasing_extension --root "$experiment" --prior "$prior" \
+  --guide "$root/listening-rounds/mandarin-male"
+python3 -B -m src.recitation_pcm_alignment --root "$experiment" \
+  --decoder "$prior/$comparison/decoder.json" --decoder-manifest "$prior/$comparison/stimuli.json"
+python3 -B -m src.recitation_phrasing_analysis --root "$experiment"
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/recitation-alignment-%j.log" \
+  "$code/hpc/recitation-alignment-audit.sbatch" "$root" "$code" "$stage4_env"
+```
+
+#### Second Mandarin aligner
+
+Deploy `src/recitation_second_aligner.py`, `src/recitation_second_aligner_analysis.py`, `hpc/recitation-funasr.sbatch`, and `hpc/requirements-funasr.txt` with the alignment extension. The runner uses the pinned Stage 4 interpreter and builds a separate FunASR 1.2.7 overlay. It pins the model revision and verifies the model weights by SHA-256. The first run needs outbound access to the PyTorch CUDA wheel index, PyPI, and Hugging Face. All caches live in the Gilbreth project directory. [Model checkpoint](https://huggingface.co/funasr/fa-zh/tree/d7701644d6e336f093501241beca010519c0986f)
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/recitation-funasr-%j.log" \
+  "$code/hpc/recitation-funasr.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The job reads the verified carrier and both variants from each pair. It writes `forced-alignment.json` and `second-aligner-comparison.json` alongside the waveform report in `model-development/recitation-phrasing-alignment/results/recitation-phrasing/`. The comparison pairs character midpoint shifts with shifts of identical waveform cores. It also reports model span gaps separately. The predictor uses the supplied character count to estimate timing, so a time span assigned to a character does not verify its pronunciation.
+
+#### Single-recording pause benchmark
+
+Deploy `src/recitation_pause_estimator.py` with the second-aligner checkout. This bounded CPU check reads the 26 existing treatment WAVs and their hash-bound alignments. Each feature computation uses one WAV and its FunASR timings. The benchmark separately compares the inferred changes to exact PCM shifts and selects a quiet threshold with each work held out. It writes `single-take-pauses.json` in the same results directory. [Measured results](../reports/stage-5.md#measuring-pauses-from-a-single-recording)
+
+```bash
+cd "$code"
+python3 -B -m src.recitation_pause_estimator --root "$root/model-development/recitation-phrasing-alignment"
+```
+
+#### Second-voice pause transfer
+
+Deploy `hpc/recitation-voice-transfer.sbatch` with both `src/recitation_voice_transfer*.py` modules, the updated synthesis and phrasing modules, and the original `audio/synthetic_readings.json` and `audio/historical_increment_readings.json` recipes. Use the checksum-bound first-voice results, Stage 4 environment and the existing FunASR overlay. The job runs offline using the project model caches. It renders the same passages in Kokoro `zf_001` at speed 0.9 using the original voice's seeds. New audio and outputs are isolated in `model-development/recitation-voice-transfer`.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/recitation-voice-transfer-%j.log" \
+  "$code/hpc/recitation-voice-transfer.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The job records how it located both splices in each original clause and checks the exact waveform change before scoring. Both versions of a given pair have the same sample count. Each voice retains its own synthesized timing. `render-screen.json` records every requested site and `voice-transfer.json` compares the two voices using the same frozen −50 dBFS threshold, FunASR model and exact PCM reference. These files, the model's draft timestamps, and the WAVs stay on Gilbreth.
+
+If synthesis and the source phone drafts finished before a later step failed, pass `resume` after `"$stage4_env"` to reuse those checksum-bound baselines. The job rechecks stimulus lineage and exact PCM before estimating the pauses.
+
+### Quantitative report on fresh works and two voices
+
+Deploy `src/quantitative_report.py`, `hpc/quantitative-report.sbatch`, `data/pilot/voice-report.json`, `audio/voice_report_readings.json` and their Stage 3 and Stage 4 dependencies. If using an offline source snapshot, stage `model-development/quantitative-report/data/pilot/reviewed-witnesses.json` inside the project directory. The builder checks its passages against the exact pinned anchors and hashes. The job checks the new works and credited authors against four existing inventories before synthesis. Both voices use speed 0.9, the same intended phonemes and the same seed per passage. [Source inventory](../data/pilot/voice-report.json)
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/quantitative-report-%j.log" \
+  "$code/hpc/quantitative-report.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The job writes `report.md`, `report.json` and `freshness.json` under `model-development/quantitative-report/results/quantitative-report`. The WAVs and phone drafts stay within the same project experiment. To rebuild the report from the completed feature tables, invoke the report module against that experiment. Use an output name distinct from the existing verified release if comparing versions.
+
+```bash
+experiment="$root/model-development/quantitative-report"
+cd "$code"
+"$stage4_env/bin/python" -B -m src.quantitative_report --root "$experiment" \
+  --output "$experiment/results/quantitative-report/recheck.json"
+```
+
+#### Second alignment on the existing recordings
+
+Deploy `hpc/quantitative-report-secondary.sbatch`, `hpc/requirements-funasr.txt`, and the current `src/` into the same source checkout with the original witness and reading files. This job requires the pinned Stage 4 environment and the cached FunASR overlay and model from the recitation experiment. It reads the 16 existing WAVs with their original checksums and runs full-passage timestamp inference on one A10.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/quantitative-second-%j.log" \
+  "$code/hpc/quantitative-report-secondary.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The job writes `secondary-alignment.json`, `report-v3.json`, and `report-v3.md` under the same private results directory. If inference succeeded and report generation failed, resubmitting reuses the saved alignment after checking its input hashes, model identity, and exact WAV and text links. Raw timestamp coverage, anchor-supported elapsed spans, and the original complete articulation remain distinct measures. The report includes separate voice counts, intersection coverage and timings, and the work-held-out count comparison.
+
+#### Waveform check of the alignment offset
+
+Deploy `hpc/quantitative-report-offset.sh` with the updated source into the same checkout. Run this bounded CPU check from a Gilbreth Gateway shell. It uses the existing 16 WAVs and saved alignments. It checks the v3 report and alignment hashes before and after the rerun and writes `report-v4.md` and `report-v4.json` in the private results directory.
+
+```bash
+bash "$code/hpc/quantitative-report-offset.sh" "$root" "$code" "$stage4_env"
+```
+
+The JSON preserves the waveform landmarks and threshold ranges, the matching rule for internal pauses, the estimates and errors by voice, and the correction fitted for each held-out work. [Method and results](../reports/stage-7.md#waveform-check-of-the-80-ms-offset)
+
+#### Independent onset transfer
+
+Stage the v4 source checkout, `hpc/quantitative-onset-transfer.sbatch`, `hpc/requirements-funasr.txt`, and the historical-increment source and reading files. This run copies the archived annotations into a private experiment and renders both voices for the complete 16-work cohort. It uses the same intended pronunciations, nominal speed, and per-passage seed in both voices. The scorer freezes the onset adjustment using v4 and verifies that the evaluation works and authors are disjoint from v4.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/onset-transfer-%j.log" \
+  "$code/hpc/quantitative-onset-transfer.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The private output is under `model-development/quantitative-onset-transfer/results/onset-transfer`. Use `resume` after the environment argument if synthesis finished and a downstream step needs a retry. The Markdown and JSON reports include the same-work comparison in both voices, abstentions, and the raw and fixed-shift baselines.
+
+#### Recording onset in a held-out voice
+
+After the two-voice transfer completes, deploy `hpc/quantitative-third-voice.sbatch` and the third-voice scorer. The job renders the same 16 evaluation works using `zf_002` and scores it with the frozen v4 correction. It reports both individual denominators and the same-work intersection across all three voices. Results live in `model-development/quantitative-onset-third-voice/results/third-voice`.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/quantitative-third-%j.log" \
+  "$code/hpc/quantitative-third-voice.sbatch" "$root" "$code" "$stage4_env"
+```
+
+#### Internal pauses with generator-assisted labels
+
+Stage `hpc/quantitative-internal-check.sbatch` and the current source with the original voice-report reading file. The job regenerates the v4 takes in a dedicated private directory to capture Kokoro's token-duration draft. It only uses the draft for punctuation correspondence when the regenerated WAV and its samples match the original exactly. The audio itself supplies the pause edges.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/quantitative-internal-%j.log" \
+  "$code/hpc/quantitative-internal-check.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The separate `internal-pause-check.json` stays alongside report v4. The original report and waveforms remain available for comparison.
+
+#### Native pauses and held-out clause assignment
+
+Deploy `src/quantitative_pause_match.py`, both pause report modules and the Slurm runner atop the controlled-join checkout. The bounded CPU check remeasures the 13 pauses from the original private WAVs and joins each proposed match to the saved phone evidence. It expects the original v4 and generator-check results.
+
+```bash
+exp="$root/model-development/quantitative-report"
+res="$exp/results/quantitative-report"
+cd "$code"
+umask 077
+flock -n "$exp/.quantitative-report.lock" timeout 90s "$stage4_env/bin/python" -B \
+  -m src.quantitative_pause_native --root "$exp" --output "$res/native-pause-boundaries.json" \
+  --markdown "$res/native-pause-boundaries.md"
+```
+
+The held-out GPU check replays the archived controlled joins in memory using the cached FunASR model. It gives the matcher all character starts and checks its chosen position against the sample-exact join. It reports the full detection pipeline and a second test that supplies a sample-defined splice and stable waveform resumption. It also runs the same matcher on the unchanged donor WAVs to record native coverage.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/quantitative-pause-%j.log" \
+  "$code/hpc/quantitative-pause-benchmark.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The benchmark reports remain under `model-development/quantitative-pause-benchmark/results-v2`. The initial detector-only report remains in the adjacent `results` directory. The WAVs remain in their original private experiments.
+
+#### Recording-relative pause detection
+
+Deploy both detectors, the control modules, and `hpc/quantitative-pause-detector.sbatch` with the expansion source and reading pins and the earlier onset-transfer modules. The job copies the expansion annotation inventory unchanged and renders only the four works with pinned synthesis recipes in three voices. It tests exact insertions within a waveform and known positions at the join between two full original recordings. The job leaves the participant materials untouched.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/pause-detector-%j.log" \
+  "$code/hpc/quantitative-pause-detector.sbatch" "$root" "$code" "$stage4_env"
+```
+
+Run the additional noise stress test against the same checksum-bound carriers with the pinned interpreter.
+
+```bash
+experiment="$root/model-development/quantitative-pause-detector"
+cd "$code"
+umask 077
+flock -n "$experiment/.detector.lock" timeout 120s "$stage4_env/bin/python" -B \
+  -m src.quantitative_pause_noise --project "$root" --root "$experiment" \
+  --output "$experiment/results/noise.json" --markdown "$experiment/results/noise.md"
+```
+
+The reports are in the experiment's private `results` directory. Variants are assembled in memory.
+
+For the second, newly sourced four-work cohort, deploy `data/pilot/pause-replication.json`, `audio/pause_replication_readings.json`, and the same detector and control modules. Place the reviewed witness snapshot under `$root/sources` when using the offline builder.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/pause-replication-%j.log" \
+  "$code/hpc/quantitative-pause-replication.sbatch" "$root" "$code" "$stage4_env" "$snapshot"
+```
+
+The replication results remain in `model-development/quantitative-pause-replication/results`. The build checks the new source inventory against all four earlier cohorts.
+
+#### Noise-aware pause detection
+
+Deploy the noise-aware detector, both assessment modules, and `hpc/quantitative-noise-aware.sbatch` atop the completed fresh-work replication checkout. The job reads the same 12 verified WAVs and replays their clean joins before testing paired background noise. It leaves the previous results and recordings in place. The exact interior-insertion test scores both timing edges without a decoder. The join test checks clause assignment and compares the estimated resumption with the independently measured clean donor onset where available.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/noise-aware-%j.log" \
+  "$code/hpc/quantitative-noise-aware.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The reports are `noise-aware-inserts.md`, `noise-aware-joins.md`, and their JSON counterparts in `model-development/quantitative-pause-replication/results`. The job stages output pairs privately and reuses a completed pair on retry. Mixed waveforms are assembled in memory. The original audio and model caches stay on Gilbreth.
+
+#### Natural Mandarin pause benchmark
+
+The November 22 run is in `$root/results/native-pause-20261122`. Use the pinned Stage 4 Python from a checkout with `src/quantitative_mandi_*.py`, `src/quantitative_native_pause_eval.py`, and the frozen detector. The import and scoring are small CPU runs. The archive manifest includes the corpus terms, file version metadata, and WAV checksums. Verify the source hashes in every evaluation against that manifest. [ManDi archive](https://osf.io/fgv4w/)
+
+```bash
+umask 077
+prior="$root/results/native-pause-20261122"
+run=$(mktemp -d "$root/results/native-pause-rerun.XXXXXX")
+py="$stage4_env/bin/python"
+cd "$code"
+timeout 140s "$py" -B -m src.quantitative_mandi_fetch --output "$run/corpus"
+"$py" -B -m src.quantitative_mandi_references --corpus "$run/corpus" \
+  --output "$run/archive-reference.json"
+"$py" -B -m src.quantitative_mandi_references --corpus "$run/corpus" \
+  --visual-annotations "$prior/mandi-visual-annotations-20261122.json" \
+  --output "$run/visual-reference.json"
+for tier in archive visual; do
+  timeout 30s "$py" -B -m src.quantitative_native_pause_eval --audio-root "$run/corpus" \
+    --references "$run/$tier-reference.json" --output "$run/$tier-evaluation.json"
+done
+```
+
+Reuse the frozen labels with the same WAV hashes and scored windows. If the release changes, use the preserved archive or create a new review. To reproduce the blind views, run `src.quantitative_mandi_waveforms` as a module with `--audio-root`, `--references` pointing to the archive reference, and `--output` pointing to a private plot directory. The render uses the pinned Stage 4 NumPy and SciPy plus Pillow 11.3.0 in a scratch-only package directory. Review the images before opening detector outputs. Full archive association and waveform-review results have separate JSON files. [Checkpoint](../reports/stage-7.md#noise-aware-pause-detection-in-natural-mandarin-readings)
+
+#### Miss audit and held-out pause transfer
+
+Use the staged archives and original developed and held-out labels on Gilbreth. The run compares whole decoded PCM files using the same two reference inventories and masks. The CPU commands use the pinned Stage 4 Python and an updated checkout with the diagnostics, transfers and opt-in bridge. [Held-out checkpoint](../reports/stage-7.md#miss-audit-and-weak-interruption-bridge-on-held-out-readings)
+
+```bash
+umask 077
+prior="$root/results/native-pause-20261122"
+saved="$root/results/native-pause-transfer-20261122"
+run=$(mktemp -d "$root/results/native-pause-bridge-rerun.XXXXXX")
+py="$stage4_env/bin/python"
+cd "$code"
+"$py" -B -m src.quantitative_native_pause_diagnose --evaluation "$prior/visual-evaluation.json" \
+  --audio-root "$prior/mandi-complete" --output "$run/mandi-miss-diagnostic.json"
+"$py" -B -m src.quantitative_pause_transfer references --audio-root "$saved" \
+  --inventory "$saved/mcga-inventory.json" "$saved/references.json" \
+  --annotations "$saved/mandarin-transfer-independent-pauses-20261122.json" \
+  --output "$run/heldout-references.json"
+"$py" -B -m src.quantitative_native_pause_eval --references "$run/heldout-references.json" \
+  --audio-root "$saved" --output "$run/heldout-frozen.json"
+"$py" -B -m src.quantitative_native_pause_eval --bridge-weak-ms 20 --references "$run/heldout-references.json" \
+  --audio-root "$saved" --output "$run/heldout-bridge.json"
+```
+
+The staged Parquet archives are pinned to the MCGA revision `75908a9464828207c37ce8bb5e2223b190134c7a` and the THCHS-30 repack revision `c8b881592bd339e9cf0483e9d686c832d4e60361`. Use `src.quantitative_pause_transfer mcga` and `src.quantitative_thchs_transfer` with PyArrow 20.0.0 to reextract untouched WAVs. Use the two inventories with the same blind renderer as above. The saved `heldout-summary.txt` and paired JSON files document counts, timing, checksums, and proposal changes. [MCGA distribution](https://huggingface.co/datasets/yxdu/MCGA/tree/main/data) · [THCHS-30 distribution](https://huggingface.co/datasets/changelinglab/thchs30-segment)
+
+## Pre-boundary syllable duration
+
+The experiment uses `$SHUNKOU_ROOT/results/preboundary-duration-20261122`. The staged MCGA archives come from the earlier transfer. Resupply the archived text-only reviews to `src.quantitative_boundary_mcga` with PyArrow 20.0.0. The separate DEBATE importer uses the pinned archive and workbook with xlrd 2.0.2. Pass `--exclude-manifest` pointing to the first prepared manifest to exclude its exact texts and all six reader IDs from a second set. Both importers preserve distributed original PCM under the project. Run the Charsiu feature extraction and the pause comparison in the pinned Stage 4 Python environment. [Model definition and results](../reports/stage-7.md#pre-boundary-syllable-duration-on-held-out-readings)
+
+```bash
+sbatch -A "$GILBRETH_ACCOUNT" hpc/quantitative-preboundary-duration.sbatch \
+    "$SHUNKOU_ROOT" "$RESEARCH_CODE" "$STAGE4_ENV" "$RECORDINGS_MANIFEST" "$RESULT_DIRECTORY"
+```
+
+Run `hpc/quantitative-qwen-character-draft.sbatch` with the same project, code, and environment, followed by the project-local Qwen wheel overlay, the pinned model snapshot, the same corpus manifest, and the Qwen draft output JSON. For the bounded rescue, append that JSON and `compatible` or `qwen_only` to the benchmark submission. The coarse version reads the same draft with `src.quantitative_preboundary_features --qwen-draft DRAFT --rescue-mode qwen_coarse` under Slurm. Combine the coarse and original candidates with `src.quantitative_preboundary_fallback`. A separate `src.quantitative_preboundary_duration --training TRAIN_CANDIDATES --input TEST_CANDIDATES --output RESULT` fits only earlier works and excludes the held-out voice or voice group. Use `src.quantitative_preboundary_rescue_eval` to check the common and newly eligible sites. Use `src.quantitative_preboundary_contrasts` and `src.quantitative_preboundary_crossover` for same-voice same-text comparisons and raw-duration crossover controls.
+
+#### Independent transcription at pause boundaries
+
+Cache the pinned Whisper checkpoint and processor files in `$root/cache/recognizers/whisper-base` or `whisper-small`. The lexical runner verifies the weight digests, uses the Stage 4 Torch and Transformers installation, and reads only the active experiment WAVs, pinned text and existing timing results. It saves access-restricted transcriptions and scored matches on Gilbreth. [Whisper-base publisher files](https://huggingface.co/openai/whisper-base/tree/e37978b90ca9030d5170a5c07aadb050351a65bb) · [Whisper-small publisher files](https://huggingface.co/openai/whisper-small/tree/973afd24965f72e36ca33b3055d56a652f456b4d)
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/pause-lexical-%j.log" \
+  "$code/hpc/quantitative-pause-lexical.sbatch" "$root" "$code" "$stage4_env" base
+```
+
+Use `small` as the final argument for the second checkpoint. Results are under `model-development/quantitative-pause-lexical/results` and `results-small`, respectively.
+
+#### Absolute timing at exact waveform joins
+
+Stage `hpc/quantitative-join-control.sbatch` with the onset-transfer source and completed artifacts. The job checks the same donor WAVs and uses both directions of each historical matched pair. Each in-memory waveform places 400 ms of zero PCM between two complete unchanged recordings in the same voice. It evaluates the first Han position of the second donor against its independently detected PCM onset at the known sample offset.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/quantitative-join-%j.log" \
+  "$code/hpc/quantitative-join-control.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The reports and sample checksums remain under `model-development/quantitative-join-control/results/join-control`. The benchmark uses controlled joins. Native internal pauses are covered by the separate generator-assisted check.
+
+Once the held-out recordings exist, the historical descriptor and clip-duration comparison uses a bounded CPU pass and verifies the original WAVs and both text inventories.
+
+```bash
+cd "$code"
+"$stage4_env/bin/python" -B -m src.quantitative_historical_transfer --project "$root" \
+  --output "$root/model-development/quantitative-onset-transfer/results/onset-transfer/historical-duration-transfer.json"
+```
+
+#### Historical duration in the third voice
+
+After the two-voice duration and third-voice onset reports exist, use the same Slurm runner in `duration` mode. This renders the eight v4 evaluation works using `zf_002` and repeats the same count baseline, historical descriptors, and seeded shuffles. The existing `zf_002` renderings of the 16 calibration works supply the training outcomes.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --chdir="$root" --output="$root/logs/historical-third-%j.log" \
+  "$code/hpc/quantitative-third-voice.sbatch" "$root" "$code" "$stage4_env" duration
+```
+
+The private output is `model-development/quantitative-historical-third-voice/results/historical-third-voice/report.json`.
+
+#### Fixed-count written clause control
+
+This CPU pass reads the two pinned Chinese annotation inventories and compares the share of four- and six-character clauses within the matched literary pairs. The control randomizes punctuation positions with each passage's Han count and clause count fixed. It also tracks the effect of removing project-added punctuation.
+
+```bash
+cd "$code"
+"$stage4_env/bin/python" -B -m src.quantitative_clause_structure --project "$root" \
+  --output "$root/model-development/quantitative-onset-transfer/results/onset-transfer/clause-structure.json"
+```
+
 ## Stage 6 pilot through the Gateway
 
 Upload `src/` and the updated `audio/align.py` to the existing Gilbreth source checkout. From the deployed source, use the annotated Stage 3 pilot and the Stage 4 recordings and features already in scratch.
@@ -117,6 +511,30 @@ python3 -B -m src.stage6_round_comparison --root "$root" \
   --followup-response "$round/results/stage6/responses/RESPONSE.json"
 ```
 
+### Independent-work pilot expansion
+
+Upload a source archive with the expansion manifest, audio recipes, `src/`, `data/phonology/`, `data/pilot/build.py`, `audio/` Python modules, and `hpc/expand-pilot.sbatch`. Extract it on Gilbreth. The job reuses the pinned historical and modern lexicon caches and the validated Stage 4 GPU environment. The expansion is isolated under `$root/pilot-expansions/independent-works`.
+
+```bash
+sbatch --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
+  --output="$root/logs/expand-%j.log" \
+  "$code/hpc/expand-pilot.sbatch" "$root" "$code" "$stage4_env"
+```
+
+The builder can use a short reviewed witness snapshot at `data/pilot/reviewed-witnesses.json` under the expansion root when Wikimedia is unavailable. Its passage IDs, anchors and hashes must match the [pinned source manifest](../data/pilot/expansion-passages.json). The snapshot contains the spans before any project punctuation. Keep the snapshot and the derived corpus under the expansion root.
+
+The listening materials are `audio/stage6/listening-web/index.html` for blind playback and `with-text.html` for Chinese text alongside the same four clips. Serve that directory inside the authenticated Gateway Jupyter session. Keep the text-supported condition with any listening responses. The separate `audio/stage6/production/read-aloud.html` prompts the first read of four other works. The consented recording intake described in the [production protocol](../audio/STAGE6_PRODUCTION.md) can use the expansion root and its private prompt key. Keep responses, keys, recordings, and rendered listening HTML on Gilbreth.
+
+For the text-supported author response, use the expansion checkout and the existing waveform features. The command verifies the exact survey page and read-aloud prompt hashes. It writes the two sets of item-level comparisons in separate fields in an owner-only file beside the response. The console summary omits individual ratings.
+
+```bash
+round="$root/pilot-expansions/independent-works"
+python3 -B -m src.expansion_response --root "$round" \
+  --response "$round/results/stage6/responses/author-expanded-pilot.json"
+```
+
+The [follow-up feasibility protocol](../research/followup-pilot.md#gilbreth-materials) gives the command to build the counterbalanced listening and read-aloud forms under the same expansion. The builder uses the four existing WAVs without a new GPU run.
+
 ## Stage 7 scoring through the Gateway
 
 Run `./shunkou score INPUT.txt` from the source checkout. UTF-8 text and blank lines define the input and its paragraphs. Markdown is the default report. Set `--format json` or use `-o REPORT.json` for exact offsets, candidate readings, support, and component values. Use `-o REPORT.html` for highlighted clauses and playback when the input includes a waveform. A text-only run needs Python 3.9 or later and the standard library. `make all` also uses Gnuplot 5.4.3 to rebuild the two report figures.
@@ -146,6 +564,168 @@ sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
   --chdir="$root" --output="$root/logs/stage7-%j.log" \
   "$code/hpc/stage7.sbatch" "$root" "$code" "$stage4_env"
 ```
+
+### Written editorial scores and the two-voice acoustic comparison
+
+The archived run is in `$root/results/editorial-context-20261122`. Its `inputs/` directory contains the 209 section-labelled reference units, two complete Tang works, frozen GPT written scores and edition records. The release snapshot in `release/code/` includes both scoring modules and the Slurm runner. For a fresh rerun from the authenticated Gateway, set `root` to the private project and `stage4_env` to its pinned Stage 4 environment. Use a new output directory so the original forecasts remain available for comparison.
+
+```bash
+archive="$root/results/editorial-context-20261122"
+code="$archive/release/code"
+run=$(mktemp -d "$root/results/editorial-rerun-XXXXXXXX")
+cd "$code"
+OPENBLAS_NUM_THREADS=1 "$stage4_env/bin/python" -B -m src.quantitative_editorial_context \
+  --root "$root" --reference "$archive/inputs/reference-context.json" \
+  --witness "$archive/inputs/fresh-witness.json" --labels "$archive/inputs/fresh-labels.json" \
+  --output "$run/text-results.json"
+sbatch --parsable --account=YOUR_SLURM_ACCOUNT --output="$run/audio-%j.log" \
+  "$code/hpc/quantitative-editorial-audio.sbatch" "$root" "$code" "$stage4_env" \
+  "$archive/inputs/fresh-witness.json" "$run/acoustic" "$run/text-results.json"
+```
+
+The text report includes four feature sets, training-only constant forecasts and 199 within-section order controls. The GPU runner stores the WAVs, pronunciation prescriptions, checksums, timing evidence and matched-line forecasts in the private run directory. It fits the acoustic increment on the other work and the other voice, with a paired shuffle control. The reference outcome throughout is a written judgment. [Stage 7 results](../reports/stage-7.md#cross-line-rhyme-and-parallelism-on-two-new-tang-works)
+
+### Grammar transfer on four fresh works
+
+The archived run is in `$root/results/grammatical-patterns-20261122`. The frozen protocol, historical note, edition manifest, original units, independent editorial labels and separate pair review are stored there. The script reports predictions and both shuffle controls in one JSON file. This is a small CPU calculation using the pinned Stage 4 Python and the historical dictionaries on Gilbreth.
+
+```bash
+grammar="$root/results/grammatical-patterns-20261122"
+training="$root/results/editorial-context-20261122/inputs/reference-context.json"
+rerun=$(mktemp -d "$root/results/grammar-rerun-XXXXXXXX")
+cd "$grammar/code"
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$stage4_env/bin/python" -B -m src.quantitative_editorial_grammar \
+  --root "$root" --reference "$training" --witness "$grammar/inputs/fresh-witness.json" \
+  --labels "$grammar/inputs/fresh-labels.json" --shuffles 199 --output "$rerun/fresh-results.json"
+```
+
+The archive also includes `development-results.json` from a separate pass over the already examined Tang works. The original 74-line prediction table is `line-scores.txt`. The independent judgment and model decision for all 62 adjacent pairs appear in `frame-audit.txt`. [Checkpoint](../reports/stage-7.md#repeated-grammatical-patterns-on-four-fresh-northern-song-works)
+
+### Expanded grammatical-pattern training
+
+The private expansion archive contains six training witnesses, two Tang test works, their edition and license manifests, the masked reading packets and their keys. The Python runner verifies the labels against the corresponding Chinese text before fitting. It writes the expanded training reference and the results for both the new Tang test and the previously examined Northern Song comparison. Both models are tested against the same written editorial judgments of 音律美. First-read ease (顺口) has its own protocol. The authors and text of the two fresh works were reserved in advance. One training interjection also occurs in the earlier Song test. Its original row and score stay in the archive, and the runner records its exclusion from fitting.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+run="$root/results/grammatical-training-expansion-20261122"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+rerun=$(mktemp -d "$root/results/grammar-expansion-rerun-XXXXXXXX")
+sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/slurm-%j.log" "$run/grammar-training-expansion.sbatch" \
+  "$root" "$run" "$python" "$rerun/results"
+```
+
+After the main job finishes, the six-work diagnostic can reuse its expanded reference. Each fold holds out one whole historical work. For each subset it compares the same rows across models, averaging over the works with eligible rows.
+
+```bash
+cd "$run/code"
+srun --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --ntasks=1 --cpus-per-task=1 --mem=2G --time=00:02:00 \
+  env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$python" -B -m src.quantitative_grammar_work_holdout \
+  --root "$root" --reference "$rerun/results/enriched-reference.json" \
+  --output "$rerun/results/within-training-work-holdout.json"
+```
+
+Gilbreth's A10 partition requires a GPU reservation. The text fits and 199 shuffles use a single CPU thread and the existing historical lexicons. [Stage 7 comparison](../reports/stage-7.md#expanding-the-grammatical-pattern-training-set)
+
+### Fresh three-line challenge
+
+The archive stores the six source witnesses and editions, independently reviewed windows, a pre-rating eligibility file, the masked reading packet, its key and frozen verdict. The runner loads the two expanded fits directly from the previous archive and verifies the model and historical-dictionary checksums. It reports all three forecasts, per-work and equal-work errors, separate results for strict parallel prose, and two 199-draw controls. To reproduce on Gilbreth:
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+run="$root/results/fresh-three-line-transfer-20261122"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+rerun=$(mktemp -d "$root/results/fresh-three-line-rerun-XXXXXXXX")
+sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/job-%j.log" "$run/code/hpc/fresh-grammar-triples.sbatch" "$root" "$run" "$python" "$rerun/results"
+```
+
+The admission check is also available separately through the runner’s `--screen` option, which writes an eligibility JSON before loading labels or making predictions. A10 requires a GPU reservation. The computations use one CPU thread. [Stage 7 results](../reports/stage-7.md#fresh-parallel-prose-with-verified-three-line-constructions)
+
+### Ending changes in parallel prose
+
+The private Gilbreth directory stores the source text, selected arms and boundary judgments, both masked reading packets, frozen verdicts and feature screen. The runner verifies the expanded model checksum, the historical dictionaries and the pre-rating endpoint manifest. Raw comparisons cover the unchanged model, two single-feature adjustments, their sum, and always-6.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+run="$root/results/pattern-ending-transfer-20261122"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+rerun=$(mktemp -d "$root/results/pattern-ending-rerun-XXXXXXXX")
+sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/job-%j.log" "$run/code/hpc/pattern-endings.sbatch" "$root" "$run" "$python" "$rerun/results"
+```
+
+The `--screen` option to `src.quantitative_pattern_endings` separately checks original quotation positions and work/line independence without loading verdicts or making predictions. The text analysis uses one CPU thread on a Slurm allocation. [Checkpoint](../reports/stage-7.md#does-a-change-at-the-end-of-a-pattern-distinguish-a-written-7-from-a-6)
+
+### Argument conclusions and list endings in parallel prose
+
+The Gilbreth archive contains the pinned Chinese witnesses, paragraph checksums, pre-scoring protocol, anonymous packets, two independent function annotations, the separate editorial ratings, and predictions for each ending. The runner checks the source quotations, screening against the previous written corpora, historical dictionary hashes and frozen model checksum before joining the three sets of judgments. The compute job uses one CPU thread within the partition's required GPU reservation.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+run="$root/results/ending-function-transfer-20261122"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+rerun=$(mktemp -d "$root/results/ending-function-rerun-XXXXXXXX")
+sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/job-%j.log" "$run/code/hpc/ending-functions.sbatch" "$root" "$run" "$python" "$rerun/results"
+```
+
+The module's `--screen` option checks eligibility without opening the judgments. The full run saves per-work results, all 999 control draws summarized against the observed improvement, the individual-annotator sensitivities, and original lines beside forecasts. [Stage 7 checkpoint](../reports/stage-7.md#argument-conclusions-and-list-endings)
+
+### Calibrating the decision to report a 7
+
+The private `top-score-calibration-20261122` archive holds the frozen protocol, six fresh witnesses, anonymous editorial packet, source and score checksums, and row-level decisions. The fit reads all complete units from the two preceding parallel-prose experiments. The test verifies the earlier fit checksum, reconstructs the base predictions from the archived model and dictionaries, and verifies that refitting on the archived earlier units reproduces the signed-off cutoff. Both phases use a single CPU thread on a Slurm allocation.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+run="$root/results/top-score-calibration-20261122"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+rerun=$(mktemp -d "$root/results/top-score-rerun-XXXXXXXX")
+job=$(sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/fit-%j.log" "$run/code/hpc/top-score-calibration.sbatch" "$root" "$run" "$python" fit "$rerun/frozen")
+sbatch --parsable --dependency="afterok:$job" --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/test-%j.log" "$run/code/hpc/top-score-calibration.sbatch" "$root" "$run" "$python" test "$rerun/results" \
+  --freeze "$rerun/frozen/freeze.json"
+```
+
+The test outputs the full benchmark JSON, a plain-text summary, and each original unit beside its editorial rating, frozen forecast and top-score calls. [Stage 7 checkpoint](../reports/stage-7.md#calibrating-the-decision-to-report-a-written-7)
+
+### Identical forecasts and development of the preceding thought
+
+The private archive stores the old tie audit, protected sources, fresh Chinese witnesses and anonymous reading packets, quoted relation judgments, separate editorial ratings, and fixed comparisons. The first phase replays the 95 previous model forecasts and traces the 11 equal scores. The second phase scores source-adjacent targets and tests the predeclared role bonus and controls. Run both against the pinned environment on Gilbreth.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+run="$root/results/adjacent-thought-transfer-20261122"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+rerun=$(mktemp -d "$root/results/adjacent-thought-rerun-XXXXXXXX")
+for phase in audit test; do
+  if [[ "$phase" == audit ]]; then output="$rerun/tie-audit.json"; else output="$rerun/results"; fi
+  sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+    --output="$rerun/$phase-%j.log" "$run/code/hpc/adjacent-thought.sbatch" "$root" "$run" "$python" "$phase" "$output"
+done
+```
+
+Each single-threaded job uses the A10 partition's required reservation. The fresh results JSON includes both coder sensitivities, same-score comparisons, within-work permutations, and matched predecessor substitutions. [Stage 7 checkpoint](../reports/stage-7.md#does-developing-the-preceding-thought-help-distinguish-a-7-from-a-6)
+
+### Targeting exact same-work forecast ties
+
+The Gilbreth archive holds the fresh pool, selection protocol, frozen model scores, separately masked reader packets, judgments and line-by-line outcomes. The screen groups eligible targets by author/work and the complete hexadecimal representation of the original binary64 forecast. It runs before the readers receive their packets. The test validates the sealed target manifest, witnesses, packet hashes and quoted judgments. Each job uses one CPU thread on a Slurm allocation.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+run="$root/results/exact-tie-targets-20261122"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+rerun=$(mktemp -d "$root/results/exact-tie-rerun-XXXXXXXX")
+job=$(sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/screen-%j.log" "$run/code/hpc/exact-tie-carry.sbatch" "$root" "$run" "$python" screen "$rerun/screen")
+sbatch --parsable --dependency="afterok:$job" --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 \
+  --output="$rerun/test-%j.log" "$run/code/hpc/exact-tie-carry.sbatch" "$root" "$run" "$python" test "$rerun/results" \
+  --seal "$rerun/screen"
+```
+
+The results distinguish correct resolutions, incorrect resolutions and unchanged ties. Both the current model and always giving 6 receive half credit for every exact 7/6 tie. [Stage 7 checkpoint](../reports/stage-7.md#can-thought-development-break-exact-76-ties)
 
 ## Re-run the GPU smoke test
 

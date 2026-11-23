@@ -1,0 +1,597 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "wikisource-xiaotong-wenxuan-preface",
+      "work_id": "xiaotong-wenxuan-preface",
+      "author": "蕭統",
+      "title": "昭明文選·序",
+      "date": "By 531",
+      "wiki_title": "昭明文選/序",
+      "revision_id": 2620451,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%98%AD%E6%98%8E%E6%96%87%E9%81%B8%2F%E5%BA%8F&oldid=2620451",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "蕭統, 昭明文選·序. Chinese Wikisource contributors (revision 2620451)."
+    },
+    {
+      "source_id": "wikisource-jiasixie-qimin-preface",
+      "work_id": "jiasixie-qimin-preface",
+      "author": "賈思勰",
+      "title": "齊民要術·自序",
+      "date": "Mid-sixth century",
+      "wiki_title": "齊民要術/自序",
+      "revision_id": 364607,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E9%BD%8A%E6%B0%91%E8%A6%81%E8%A1%93%2F%E8%87%AA%E5%BA%8F&oldid=364607",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "賈思勰, 齊民要術·自序. Chinese Wikisource contributors (revision 364607)."
+    },
+    {
+      "source_id": "wikisource-liuxie-wenxin-mingshi",
+      "work_id": "liuxie-wenxin-mingshi",
+      "author": "劉勰",
+      "title": "文心雕龍·明詩",
+      "date": "Early sixth century, conventionally c. 501–502",
+      "wiki_title": "文心雕龍/明詩",
+      "revision_id": 2096346,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%96%87%E5%BF%83%E9%9B%95%E9%BE%8D%2F%E6%98%8E%E8%A9%A9&oldid=2096346",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "劉勰, 文心雕龍·明詩. Chinese Wikisource contributors (revision 2096346)."
+    },
+    {
+      "source_id": "wikisource-zhongrong-shipin-preface",
+      "work_id": "zhongrong-shipin-preface",
+      "author": "鍾嶸",
+      "title": "詩品·序",
+      "date": "Early Liang, before the author's death c. 518",
+      "wiki_title": "詩品",
+      "revision_id": 9684735,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%A9%A9%E5%93%81&oldid=9684735",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "鍾嶸, 詩品·序. Chinese Wikisource contributors (revision 9684735)."
+    },
+    {
+      "source_id": "wikisource-xiaogang-xiangdong-letter",
+      "work_id": "xiaogang-xiangdong-letter",
+      "author": "蕭綱",
+      "title": "與湘東王書",
+      "date": "Sixth century, likely 530s, before 551",
+      "wiki_title": "全梁文/卷十一",
+      "revision_id": 2635929,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%85%A8%E6%A2%81%E6%96%87%2F%E5%8D%B7%E5%8D%81%E4%B8%80&oldid=2635929",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "蕭綱, 與湘東王書. Chinese Wikisource contributors (revision 2635929)."
+    },
+    {
+      "source_id": "wikisource-xiaoyi-jinlouzili",
+      "work_id": "xiaoyi-jinlouzili",
+      "author": "蕭繹",
+      "title": "金樓子·立言上",
+      "date": "Mid-sixth century, by 554",
+      "wiki_title": "金樓子/卷四",
+      "revision_id": 2501531,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E9%87%91%E6%A8%93%E5%AD%90%2F%E5%8D%B7%E5%9B%9B&oldid=2501531",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "蕭繹, 金樓子·立言上. Chinese Wikisource contributors (revision 2501531)."
+    },
+    {
+      "source_id": "wikisource-sengyou-chusanzang-preface",
+      "work_id": "sengyou-chusanzang-preface",
+      "author": "僧祐",
+      "title": "出三藏記集·序",
+      "date": "Early Liang, conventionally c. 515, before 518",
+      "wiki_title": "出三藏記集/卷一",
+      "revision_id": 2627304,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%87%BA%E4%B8%89%E8%97%8F%E8%A8%98%E9%9B%86%2F%E5%8D%B7%E4%B8%80&oldid=2627304",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "僧祐, 出三藏記集·序. Chinese Wikisource contributors (revision 2627304)."
+    },
+    {
+      "source_id": "wikisource-huijiao-gaoseng-letter",
+      "work_id": "huijiao-gaoseng-letter",
+      "author": "慧皎",
+      "title": "答王曼穎書",
+      "date": "After the original compilation conventionally dated 519, before 554",
+      "wiki_title": "梁高僧傳/卷十四",
+      "revision_id": 2600789,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E6%A2%81%E9%AB%98%E5%83%A7%E5%82%B3%2F%E5%8D%B7%E5%8D%81%E5%9B%9B&oldid=2600789",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "慧皎, 答王曼穎書. Chinese Wikisource contributors (revision 2600789)."
+    },
+    {
+      "source_id": "wikisource-wuzetian-huayan-preface",
+      "work_id": "wuzetian-huayan-preface",
+      "author": "武則天",
+      "title": "大周新譯大方廣佛華嚴經序",
+      "date": "699 or later, after translation completion",
+      "wiki_title": "大周新譯大方廣佛華嚴經序",
+      "revision_id": 494677,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%A4%A7%E5%91%A8%E6%96%B0%E8%AD%AF%E5%A4%A7%E6%96%B9%E5%BB%A3%E4%BD%9B%E8%8F%AF%E5%9A%B4%E7%B6%93%E5%BA%8F&oldid=494677",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "武則天, 大周新譯大方廣佛華嚴經序. Chinese Wikisource contributors (revision 494677)."
+    },
+    {
+      "source_id": "wikisource-huili-yancong-cien",
+      "work_id": "huili-yancong-cien",
+      "author": "慧立、彥悰",
+      "title": "大慈恩寺三藏法師傳·卷六",
+      "date": "Received recension dated 688",
+      "wiki_title": "大慈恩寺三藏法師傳",
+      "revision_id": 2633037,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%A4%A7%E6%85%88%E6%81%A9%E5%AF%BA%E4%B8%89%E8%97%8F%E6%B3%95%E5%B8%AB%E5%82%B3&oldid=2633037",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "慧立、彥悰, 大慈恩寺三藏法師傳·卷六. Chinese Wikisource contributors (revision 2633037)."
+    },
+    {
+      "source_id": "wikisource-zhangshuo-shangguan-preface",
+      "work_id": "zhangshuo-shangguan-preface",
+      "author": "張說",
+      "title": "唐昭容上官氏文集序",
+      "date": "c. 711–713, after Shangguan's death",
+      "wiki_title": "唐昭容上官氏文集序",
+      "revision_id": 8731188,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%94%90%E6%98%AD%E5%AE%B9%E4%B8%8A%E5%AE%98%E6%B0%8F%E6%96%87%E9%9B%86%E5%BA%8F&oldid=8731188",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "張說, 唐昭容上官氏文集序. Chinese Wikisource contributors (revision 8731188)."
+    },
+    {
+      "source_id": "wikisource-yaosilian-chen-empress",
+      "work_id": "yaosilian-chen-empress",
+      "author": "姚思廉",
+      "title": "陳書·世祖皇后沈妙容傳",
+      "date": "Compiled 636",
+      "wiki_title": "陳書/卷7",
+      "revision_id": 2015446,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E9%99%B3%E6%9B%B8%2F%E5%8D%B77&oldid=2015446",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "姚思廉, 陳書·世祖皇后沈妙容傳. Chinese Wikisource contributors (revision 2015446)."
+    },
+    {
+      "source_id": "wikisource-luzhaolin-nanyang-preface",
+      "work_id": "luzhaolin-nanyang-preface",
+      "author": "盧照鄰",
+      "title": "南陽公集序",
+      "date": "Late seventh century, exact date uncertain",
+      "wiki_title": "南陽公集序",
+      "revision_id": 8730572,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%8D%97%E9%99%BD%E5%85%AC%E9%9B%86%E5%BA%8F&oldid=8730572",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "盧照鄰, 南陽公集序. Chinese Wikisource contributors (revision 8730572)."
+    },
+    {
+      "source_id": "wikisource-libaiyao-beiqi-xun",
+      "work_id": "libaiyao-beiqi-xun",
+      "author": "李百藥",
+      "title": "北齊書·荀仲舉傳",
+      "date": "Compiled 636",
+      "wiki_title": "北齊書/卷45",
+      "revision_id": 2432486,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E5%8C%97%E9%BD%8A%E6%9B%B8%2F%E5%8D%B745&oldid=2432486",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "李百藥, 北齊書·荀仲舉傳. Chinese Wikisource contributors (revision 2432486)."
+    },
+    {
+      "source_id": "wikisource-chenziang-remonstrance",
+      "work_id": "chenziang-remonstrance",
+      "author": "陳子昂",
+      "title": "諫刑書",
+      "date": "Late seventh century",
+      "wiki_title": "諫刑書",
+      "revision_id": 8729566,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%AB%AB%E5%88%91%E6%9B%B8&oldid=8729566",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "陳子昂, 諫刑書. Chinese Wikisource contributors (revision 8729566)."
+    },
+    {
+      "source_id": "wikisource-wujing-punishment",
+      "work_id": "wujing-punishment",
+      "author": "吳兢",
+      "title": "貞觀政要·論刑法",
+      "date": "Received compilation after 720, early eighth-century boundary",
+      "wiki_title": "貞觀政要/卷08",
+      "revision_id": 1161778,
+      "source_url": "https://zh.wikisource.org/w/index.php?title=%E8%B2%9E%E8%A7%80%E6%94%BF%E8%A6%81%2F%E5%8D%B708&oldid=1161778",
+      "work_rights": "Public domain",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "吳兢, 貞觀政要·論刑法. Chinese Wikisource contributors (revision 1161778)."
+    }
+  ],
+  "passages": [
+    {
+      "passage_id": "HSD1P",
+      "source_id": "wikisource-xiaotong-wenxuan-preface",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "HSD1",
+      "subset": "matched",
+      "match_topic": "Editorial exclusion in prefaces",
+      "selection_note": "Balanced list and rationale in the anthology preface.",
+      "parallel_clause_groups": [
+        [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        [
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      ],
+      "start_anchor": "老莊之作，管",
+      "end_anchor": "，又以略諸。",
+      "witness_codepoints": 34,
+      "han_count": 28,
+      "text_sha256": "03b6868d9ac43ecce0bc78c0540d66be93c5e5597acbb7dc4ba20698fee660e6"
+    },
+    {
+      "passage_id": "HSD1C",
+      "source_id": "wikisource-jiasixie-qimin-preface",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "HSD1",
+      "subset": "matched",
+      "match_topic": "Editorial exclusion in prefaces",
+      "selection_note": "Explanatory rationale with a list of material treated only by name.",
+      "parallel_clause_groups": [],
+      "start_anchor": "其有五穀、果",
+      "end_anchor": "，蓋無聞焉。",
+      "witness_codepoints": 32,
+      "han_count": 26,
+      "text_sha256": "26ce54129ba2f8e3e6925ba4177dfaf80ef8b1cf02b3040e396989975eb2a465"
+    },
+    {
+      "passage_id": "HSD2P",
+      "source_id": "wikisource-liuxie-wenxin-mingshi",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "HSD2",
+      "subset": "matched",
+      "match_topic": "Critical assessment of verse forms",
+      "selection_note": "Balanced appraisal of four- and five-character verse, written as prose.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "start_anchor": "若夫四言正體",
+      "end_anchor": "，惟才所安。",
+      "witness_codepoints": 34,
+      "han_count": 28,
+      "text_sha256": "ffea3baeb44502da4de62966bc27a16d91f104f7ed612122ff0734c4ebb2d15d"
+    },
+    {
+      "passage_id": "HSD2C",
+      "source_id": "wikisource-zhongrong-shipin-preface",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "HSD2",
+      "subset": "matched",
+      "match_topic": "Critical assessment of verse forms",
+      "selection_note": "Explanatory discussion of poetic form and uptake.",
+      "parallel_clause_groups": [],
+      "start_anchor": "每苦文繁而意",
+      "end_anchor": "云會於流俗。",
+      "witness_codepoints": 39,
+      "han_count": 34,
+      "text_sha256": "acc95b45ce33f3ffeb81abb2b46d588e7c370ef152a6e495182e52ea4c95df34"
+    },
+    {
+      "passage_id": "HSD3P",
+      "source_id": "wikisource-xiaogang-xiangdong-letter",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "HSD3",
+      "subset": "matched",
+      "match_topic": "Judging and editing excessive literary production",
+      "selection_note": "Literary criticism framed as a parallel analogy. Source characters are retained as transcribed.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "start_anchor": "徒以烟墨不言",
+      "end_anchor": "，一至於此！",
+      "witness_codepoints": 36,
+      "han_count": 29,
+      "text_sha256": "cf800913540f4d72986fac7dedb4bba29d0554875d0df80eba45d0ebe4596bf8"
+    },
+    {
+      "passage_id": "HSD3C",
+      "source_id": "wikisource-xiaoyi-jinlouzili",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "HSD3",
+      "subset": "matched",
+      "match_topic": "Judging and editing excessive literary production",
+      "selection_note": "Conditional explanation of selection and revision, with local symmetry within the sentence. The authors of the two excerpts are brothers.",
+      "parallel_clause_groups": [],
+      "start_anchor": "嗟我後生博遠",
+      "end_anchor": "，可謂學矣。",
+      "witness_codepoints": 37,
+      "han_count": 31,
+      "text_sha256": "c82c826362c2334cc0e552e29f3f3b339a1c5092fe493f1aa221708ab698c8a1"
+    },
+    {
+      "passage_id": "HSD4P",
+      "source_id": "wikisource-sengyou-chusanzang-preface",
+      "period": "sixth-century",
+      "genre": "parallel_prose",
+      "pair_id": "HSD4",
+      "subset": "matched",
+      "match_topic": "Compiling and evaluating Buddhist textual records",
+      "selection_note": "Parallel criteria for assessing reliable transmission and historical evidence.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            7
+          ]
+        ]
+      ],
+      "start_anchor": "若人代有據，",
+      "end_anchor": "，事取實錄。",
+      "witness_codepoints": 43,
+      "han_count": 35,
+      "text_sha256": "af5b861166c620a134b077fee2b2790f9dc9a05684c2fa74159e4b002ca00a35"
+    },
+    {
+      "passage_id": "HSD4C",
+      "source_id": "wikisource-huijiao-gaoseng-letter",
+      "period": "sixth-century",
+      "genre": "comparison_prose",
+      "pair_id": "HSD4",
+      "subset": "matched",
+      "match_topic": "Compiling and evaluating Buddhist textual records",
+      "selection_note": "Explanatory account of a compiler's encounter with earlier records.",
+      "parallel_clause_groups": [],
+      "start_anchor": "故於聽覽餘閒",
+      "end_anchor": "，繁約不同。",
+      "witness_codepoints": 36,
+      "han_count": 30,
+      "text_sha256": "dfe7e59fab2519dd660e3ce6743dc6898709fc48071aa27c40a4fcb7d9beee4c"
+    },
+    {
+      "passage_id": "HET1P",
+      "source_id": "wikisource-wuzetian-huayan-preface",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "HET1",
+      "subset": "matched",
+      "match_topic": "Prefaces and transmission of Buddhist translations",
+      "selection_note": "Parallel preface describing the reach of the translation.",
+      "parallel_clause_groups": [
+        [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        [
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "添性海之波瀾",
+      "end_anchor": "遐該於有識。",
+      "witness_codepoints": 36,
+      "han_count": 30,
+      "text_sha256": "eb672193efedf38decdacb84914139f6c4f9e83853936eddc38a32e330c7eec0"
+    },
+    {
+      "passage_id": "HET1C",
+      "source_id": "wikisource-huili-yancong-cien",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "HET1",
+      "subset": "matched",
+      "match_topic": "Prefaces and transmission of Buddhist translations",
+      "selection_note": "Narration about the commissioning of a different Buddhist preface.",
+      "parallel_clause_groups": [],
+      "start_anchor": "帝先許作新經",
+      "end_anchor": "，方為染翰。",
+      "witness_codepoints": 30,
+      "han_count": 25,
+      "text_sha256": "9be45ec1fb727a1313c5d5818a2b0a5538c28ec43d88e6d9a8b0efa9cecbfdd9"
+    },
+    {
+      "passage_id": "HET2P",
+      "source_id": "wikisource-zhangshuo-shangguan-preface",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "HET2",
+      "subset": "matched",
+      "match_topic": "Women exercising agency at court",
+      "selection_note": "Paired praise and historical analogies within a collection preface.",
+      "parallel_clause_groups": [
+        [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        [
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        [
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "顧問不遺，應",
+      "end_anchor": "佐之功則異。",
+      "witness_codepoints": 35,
+      "han_count": 29,
+      "text_sha256": "d2a68cc41bb0a991ac571d65793ba956803540e37232b69b9c6bd3e4ca0cc4ac"
+    },
+    {
+      "passage_id": "HET2C",
+      "source_id": "wikisource-yaosilian-chen-empress",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "HET2",
+      "subset": "matched",
+      "match_topic": "Women exercising agency at court",
+      "selection_note": "Chronological prose about a woman's political action at a court. Composition date governs the period match.",
+      "parallel_clause_groups": [],
+      "start_anchor": "后憂悶計無所",
+      "end_anchor": "此以圖高宗。",
+      "witness_codepoints": 38,
+      "han_count": 33,
+      "text_sha256": "f46bd0d4433e5d29b9945c5fccef371052aef026664af9842740aa36cacaf559"
+    },
+    {
+      "passage_id": "HET3P",
+      "source_id": "wikisource-luzhaolin-nanyang-preface",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "HET3",
+      "subset": "matched",
+      "match_topic": "The sound and appraisal of verse",
+      "selection_note": "Balanced appraisal of poetic style in a collection preface.",
+      "parallel_clause_groups": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "start_anchor": "鄴中新體，共",
+      "end_anchor": "好瑰姿豔發。",
+      "witness_codepoints": 24,
+      "han_count": 20,
+      "text_sha256": "5b2a8bb1bcd537d8f92a2e0d4ff741ff39c64c0e196f281d52dfc35fee1a11ee"
+    },
+    {
+      "passage_id": "HET3C",
+      "source_id": "wikisource-libaiyao-beiqi-xun",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "HET3",
+      "subset": "matched",
+      "match_topic": "The sound and appraisal of verse",
+      "selection_note": "Biographical narrative on a verse composition and its tone.",
+      "parallel_clause_groups": [],
+      "start_anchor": "概死，仲舉因",
+      "end_anchor": "，詞甚悲切。",
+      "witness_codepoints": 26,
+      "han_count": 22,
+      "text_sha256": "347e2405948cc12abaeb7073a0bd11836dd87d6bf177a11a1f7cd57ddfcec75d"
+    },
+    {
+      "passage_id": "HET4P",
+      "source_id": "wikisource-chenziang-remonstrance",
+      "period": "early-tang",
+      "genre": "parallel_prose",
+      "pair_id": "HET4",
+      "subset": "matched",
+      "match_topic": "Court deliberation over executions",
+      "selection_note": "Remonstrance with parallel reasoning on Heaven and people.",
+      "parallel_clause_groups": [
+        [
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ]
+        ]
+      ],
+      "start_anchor": "刑者政之末節",
+      "end_anchor": "，人愛生育；",
+      "witness_codepoints": 35,
+      "han_count": 29,
+      "text_sha256": "2958f0709458a82129cb7c1bc710eb16a6cac2bc5279f4e9d8a49a517660e7a8"
+    },
+    {
+      "passage_id": "HET4C",
+      "source_id": "wikisource-wujing-punishment",
+      "period": "early-tang",
+      "genre": "comparison_prose",
+      "pair_id": "HET4",
+      "subset": "matched",
+      "match_topic": "Court deliberation over executions",
+      "selection_note": "Sequential narration of a court execution.",
+      "parallel_clause_groups": [],
+      "start_anchor": "蘊古密報其旨",
+      "end_anchor": "令斬於東市。",
+      "witness_codepoints": 36,
+      "han_count": 31,
+      "text_sha256": "60c8a4561149277deac7623ef94b35f7ac8e575ff989472fa9b2775e46d1f8f5"
+    }
+  ]
+}

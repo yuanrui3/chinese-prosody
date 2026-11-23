@@ -1,0 +1,84 @@
+{
+  "VSD1P": {
+    "text_sha256": "27aadea732d394f4d396a930b44d97b4ecc472622473b8fd50cb0cc9f4189a03",
+    "clauses": [
+      "zhi4 fu2 / zu3 zhi1 ren2 yi4",
+      "zhuo2 mo2 dao4 de2",
+      "huan1 qi2 yu2 le4",
+      "xu4 qi2 ling2 yi2",
+      "ji4 tong1 ling2 tai2 zhi1 xia4",
+      "yi2 ji4 jiang1 hu2 zhi1 shang4"
+    ]
+  },
+  "VSD1C": {
+    "text_sha256": "1182a34f71edac594a3a3079675663b9c19402ec5f778e36095bf8170655893c",
+    "clauses": [
+      "jin1 you2 wo3 shi1 de2 gao1",
+      "gu4 you3 peng2 cong2 yuan3 fang1 er2 lai2",
+      "yu3 wo3 tong2 men2 gong4 xiang1 jiang3 shuo1",
+      "gu4 ke3 wei2 le4 ye3"
+    ]
+  },
+  "VSD2P": {
+    "text_sha256": "50d6ba827e808664070a821427a646c87a52a432f29015566740f93a1fe77ccb",
+    "clauses": [
+      "fei1 dan4 zi4 zi4 zhu4 mu4",
+      "nai3 hua4 hua4 chou1 xin1",
+      "ri4 jue2 jing4 mei4",
+      "zhuan3 bu4 ke3 shuo1 yi3 chou2",
+      "xi1 sui4 bu4 fu4 xiang1 lei4"
+    ]
+  },
+  "VSD2C": {
+    "text_sha256": "9047dee8658d743bef52aa7e28d0691bad64c334c9f202d3faa548a89c55fa2e",
+    "clauses": [
+      "xun2 li4 ti3 fa1 yuan2",
+      "qin2 shi2 / li4 ren2 / xia4 pi1 / cheng2 miao3 suo3 zuo4",
+      "shi3 huang2 jian4 er2 zhong4 zhi1",
+      "yi3 zou4 shi4 fan2 duo1",
+      "zhuan4 zi4 nan2 zhi4",
+      "sui4 zuo4 ci3 fa3"
+    ]
+  },
+  "VET1P": {
+    "text_sha256": "b7276e348398ce397b7016de5810b5e9e4bfaee3aa19a4eb2ef5da2398b73a37",
+    "clauses": [
+      "chen2 wen2 / qiu2 mu4 zhi1 zhang3 zhe3",
+      "bi4 gu4 qi2 gen1 ben3",
+      "yu4 liu2 zhi1 yuan3 zhe3",
+      "bi4 jun4 qi2 quan2 yuan2",
+      "si1 guo2 zhi1 an1 zhe3",
+      "bi4 ji1 qi2 de2 yi4"
+    ]
+  },
+  "VET1C": {
+    "text_sha256": "055ed2ad2d72ed21345b5e817f49dee0e54b7d770793483295fca57e50ed2b78",
+    "clauses": [
+      "chen2 qie4 wei2 / bi4 xia4 feng1 zhi2 zhi1 zhe3",
+      "cheng2 ai4 zhi1 zhong4 zhi1",
+      "yu4 qi2 / ji4 si4 cheng2 shou3 / er2 yu3 guo2 wu2 jiang1 ye3"
+    ]
+  },
+  "VET2P": {
+    "text_sha256": "70526afa3efb19827faa089d276c07ff927b225fb1d28cd158b42bfaa5fc02d2",
+    "clauses": [
+      "li2 qi2 ben3 tu3",
+      "ze2 zhi4 tong2 er2 xiao4 yi4",
+      "guai1 yu2 cai3 zhai1",
+      "nai3 wu4 shi4 er2 shi2 fei1",
+      "ming2 shi2 ji4 shuang3",
+      "han2 wen1 duo1 miu4"
+    ]
+  },
+  "VET2C": {
+    "text_sha256": "3bf7c743758a4213eb27a211915063c58a5c9b24e1ba4616808ebe4103179619",
+    "clauses": [
+      "wu2 jian4 zhu1 fang1",
+      "bu4 zhi4 hao4 bo2",
+      "hu1 yu4 cang1 cu4",
+      "qiu2 jian3 zhi4 nan2",
+      "bi4 de2 fang1 qi4",
+      "ji2 e4 bu4 jiu4 yi3"
+    ]
+  }
+}

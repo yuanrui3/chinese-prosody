@@ -114,11 +114,14 @@ def match_cost(candidates, observed):
     return 1.6, 'different_segments'
 
 
-def link_slots(slots, heard):
+def link_slots(slots, heard, *, ending_pinyin=None):
     # Edit alignment preserves discrepancies instead of assigning all source syllables times.
     n, m = len(slots), len(heard)
     expected = []
     for slot in slots:
+        if ending_pinyin is not None and slot['slot_index'] == ending_pinyin[0]:
+            expected.append({lexical_key(ending_pinyin[1])})
+            continue
         lookup = slot['readings']['mandarin']
         choices = [lookup['selected']] if lookup.get('selected') else lookup['candidates']
         expected.append({lexical_key(item['reading']) for item in choices})
@@ -216,12 +219,29 @@ def write_rows(path, rows):
         temporary.replace(path)
 
 
+def experimental_ending_hint(recording, passage):
+    ending = recording['experimental_ending']
+    index = ending['target_slot_index']
+    slots = passage['slots']
+    pinyin = recording['intended_pinyin']
+    if (recording['kind'] != 'synthetic' or ending['role'] not in ('base', 'sham', 'tone', 'rhyme')
+            or len(pinyin) != len(slots) or not 0 <= index < len(slots) - 1
+            or slots[index]['slot_index'] != index or not slots[index]['boundary_after']):
+        raise ValueError('Expected a checked synthetic ending recipe at an internal boundary')
+    segments, tone = lexical_key(pinyin[index])
+    if tuple(ending['candidate_key']) != (*segments, tone):
+        raise ValueError('The prescribed ending and the experimental key disagree')
+    return index, pinyin[index]
+
+
 def run(args):
     root = args.root.resolve(strict=True)
     passages = {row['passage_id']: row for row in read_rows(root / 'data/pilot/annotated.jsonl')}
     recordings = read_rows(args.recordings or root / 'audio/manifests/synthetic.jsonl')
     if not recordings or len({row['recording_id'] for row in recordings}) != len(recordings):
         raise ValueError('A nonempty recording manifest with unique recording IDs is required')
+    if any(('experimental_ending' in row) != args.experimental_endings for row in recordings):
+        raise ValueError('Use --experimental-endings with a manifest of experimental ending takes')
     decoder = MandarinDecoder(root, args.offline)
     alignments, drafts = [], []
     for recording in recordings:
@@ -243,13 +263,14 @@ def run(args):
                 raise ValueError(f"{recording['recording_id']}: waveform hash differs from the manifest")
         phones = decoder.decode(media)
         heard = heard_syllables(phones)
+        hint = experimental_ending_hint(recording, passage) if args.experimental_endings else None
         base = {key: recording[key] for key in ('recording_id', 'passage_id', 'audio_path', 'variety')}
         base['kind'] = recording.get('kind', 'human')
         if 'audio_sha256' in recording:
             base['audio_sha256'] = checksum
         drafts.append({**base, 'frame_s': decoder.step_s, 'model_revision': MODEL_REVISION,
                        'phones': [vars(phone) for phone in phones]})
-        for index, (slot, sound, status, basis) in enumerate(link_slots(passage['slots'], heard)):
+        for index, (slot, sound, status, basis) in enumerate(link_slots(passage['slots'], heard, ending_pinyin=hint)):
             observed = None if not sound else {'onset': sound.key[0], 'final': sound.key[1], 'tone': sound.tone}
             alignments.append({**base, 'event_index': index, 'status': status, 'match_basis': basis,
                                'slot_index': slot['slot_index'] if slot else None,
@@ -258,7 +279,8 @@ def run(args):
                                'confidence': mean(phone.confidence for phone in sound.phones) if sound else None,
                                'observed_phone_draft': observed, 'realized_reading': None,
                                'reading_status': 'acoustic_draft' if sound else 'unobserved',
-                               'alignment_source': 'charsiu_waveform_only_then_lexical_link'})
+                               'alignment_source': ('charsiu_waveform_then_experimental_ending_link' if hint
+                                                    else 'charsiu_waveform_only_then_lexical_link')})
     destination = args.out_dir or root / 'audio/derived/alignment'
     write_rows(destination / 'phone-drafts.jsonl', drafts)
     write_rows(destination / 'alignments.jsonl', alignments)
@@ -273,6 +295,7 @@ def main():
     parser.add_argument('--recordings', type=Path)
     parser.add_argument('--out-dir', type=Path)
     parser.add_argument('--offline', action='store_true')
+    parser.add_argument('--experimental-endings', action='store_true')
     run(parser.parse_args())
 
 

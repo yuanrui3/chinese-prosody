@@ -91,11 +91,15 @@ def parsed_revision(source, cache_dir):
 
 def apply_edit(text, passage):
     edit = passage.get("edit")
-    if edit is None:
-        return text
-    if text.count(edit["from"]) != 1:
-        raise ValueError(f"{passage['passage_id']}: contextual replacement must match exactly once")
-    return text.replace(edit["from"], edit["to"], 1)
+    if edit is not None:
+        if text.count(edit["from"]) != 1:
+            raise ValueError(f"{passage['passage_id']}: contextual replacement must match exactly once")
+        text = text.replace(edit["from"], edit["to"], 1)
+    punctuation = passage.get("insert_punctuation_after", {})
+    for position, mark in punctuation.items():
+        if not 1 <= int(position) <= len(text) or mark not in {"，", "。", "；", "、", "？", "！"}:
+            raise ValueError(f"{passage['passage_id']}: invalid punctuation insertion")
+    return "".join(char + punctuation.get(str(index), "") for index, char in enumerate(text, 1))
 
 
 def matches_witness(text, passage):
@@ -131,9 +135,9 @@ def excerpt(page, passage):
     return verify(matches[0], passage)
 
 
-def build(root, snapshot_path):
+def build(root, snapshot_path, manifest_path=MANIFEST):
     destination = root / "data" / "pilot"
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest["schema_version"] != 1:
         raise ValueError(f"Unsupported schema version {manifest['schema_version']}")
     sources = {source["source_id"]: source for source in manifest["sources"]}
@@ -163,9 +167,10 @@ def build(root, snapshot_path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, required=True, help="Project scratch root on Gilbreth")
+    parser.add_argument("--manifest", type=Path, default=MANIFEST, help="Reviewed passage and source manifest")
     parser.add_argument("--snapshot", type=Path, help="Offline JSON witness spans checked against the pinned manifest")
     args = parser.parse_args()
-    build(args.root, args.snapshot)
+    build(args.root, args.snapshot, args.manifest)
 
 
 if __name__ == "__main__":

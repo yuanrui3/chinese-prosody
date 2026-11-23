@@ -727,6 +727,48 @@ sbatch --parsable --dependency="afterok:$job" --account=YOUR_SLURM_ACCOUNT --par
 
 The results distinguish correct resolutions, incorrect resolutions and unchanged ties. Both the current model and always giving 6 receive half credit for every exact 7/6 tie. [Stage 7 checkpoint](../reports/stage-7.md#can-thought-development-break-exact-76-ties)
 
+### Testing whether contrast answers the preceding line
+
+The [frozen design](../research/contrast-answer.md) specifies the corpus, exact-score screen, blind written-cadence rubric, two contrast prompts, predecessor substitutions and 7/6 comparison. The experiment directory is `$SHUNKOU_ROOT/results/contrast-answer-20261123`. It contains the pinned Wikisource editions, prior-study exclusion inputs, anonymous editorial packet, Qwen decisions and joined results. On the first run the screen precedes both readers. Copy the sealed screen hash to `inputs/screen.sha256` before the relation and evaluation phases. The relation model runs entirely on Gilbreth with the Qwen2.5-7B-Instruct checkpoint `a09a35458c702b33eeacc393d103063234e8bc28` in the project Hugging Face cache.
+
+To reproduce the completed comparison without changing the original, make a new directory on Gilbreth, reuse the archived source and editorial inputs, and submit these Slurm jobs. The two reports distinguish written 音律美 from the later listening and first-read measures.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+source_run="$root/results/contrast-answer-20261123"
+rerun=$(mktemp -d "$root/results/contrast-answer-rerun-XXXXXXXX")
+py="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+ln -s "$source_run/code" "$rerun/code"
+mkdir "$rerun/inputs"
+cp -a "$source_run/inputs/." "$rerun/inputs/"
+runner="$rerun/code/hpc/contrast-answer.sbatch"
+opts=(--parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 --output="$rerun/%x-%j.log")
+screen=$(sbatch "${opts[@]}" --mem=3G -c 1 -t 00:03:00 "$runner" "$root" "$rerun" "$py" screen)
+relation=$(sbatch "${opts[@]}" --dependency="afterok:$screen" "$runner" "$root" "$rerun" "$py" relation)
+sbatch "${opts[@]}" --dependency="afterok:$relation" --mem=3G -c 1 -t 00:03:00 "$runner" "$root" "$rerun" "$py" evaluate
+```
+
+### Testing cadence completion across adjacent lines
+
+Gilbreth keeps the frozen inputs, historical-scoring dependencies, source editions, two classifier prompts, length-matched earlier-line controls, masked rating packet and individual written judgments in `results/cadence-completion-20261123`. The [protocol](../research/cadence-completion.md) describes the passage screen and comparisons. To reproduce from the archived inputs, create an independent output directory before submitting the jobs.
+
+```bash
+root=/scratch/gilbreth/$USER/shunkou
+archive="$root/results/cadence-completion-20261123"
+rerun=$(mktemp -d "$root/results/cadence-completion-rerun-XXXXXXXX")
+ln -s "$archive/code" "$rerun/code"
+cp -a "$archive/inputs" "$rerun/inputs"
+py="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+opts=(--parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal --gres=gpu:1 --output="$rerun/%x-%j.log")
+runner="$rerun/code/hpc/cadence-completion.sbatch"
+screen=$(sbatch "${opts[@]}" "$runner" "$root" "$rerun" "$py" screen relation)
+evaluation=$(sbatch "${opts[@]}" --dependency="afterok:$screen" --mem=3G -t 00:03:00 "$runner" "$root" "$rerun" "$py" evaluate)
+sbatch "${opts[@]}" --dependency="afterok:$evaluation" --cpus-per-task=1 --mem=3G -t 00:03:00 \
+  --wrap="cd '$rerun/code' && '$py' -B -m src.cadence_completion_audit '$rerun'"
+```
+
+The written comparisons use the original model and equal-weight informative works. The screen and relation stages each produce a new seal. The evaluation verifies the source packet, predictions and blinded editorial-rating hash before joining them. Participant listening and read-aloud responses belong to the final validation stage.
+
 ## Re-run the GPU smoke test
 
 From the repository root, set the SSH destination and use the Slurm account shown by `slist` for the A10 partition. The job requests a single GPU for up to two minutes.

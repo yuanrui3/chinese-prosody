@@ -19,6 +19,7 @@ Passages with shorter phrases tended to feel easier to read aloud on the first t
 ## Project resources
 
 - [Final report and figures](reports/final.md)
+- [Written scores and the author’s memorization review of 《哀江南賦》](reports/stage-7.md#yu-xin-memorization-review)
 - [Text, audio, and rating methods](theory/foundations.md)
 - [Gilbreth setup, scoring, and reproduction](hpc/README.md)
 - [Pilot editions and source attribution](data/pilot/DATA_CARD.md)

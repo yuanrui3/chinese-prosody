@@ -280,6 +280,12 @@ In 上官儀, the rule correctly preferred 「乃聖乃神，遠算廟堂之下�
 
 Giving each work equal weight yielded 0.714 for cadence completion, 0.745 for phrase lengths and 0.500 for both baselines. Four works had one comparison each, all correctly resolved by the completion rule, while the largest work contributed four inversions. Of 18 pairs that matching lengths alone could not distinguish, completion got one right and three wrong. The results support describing how the written phrases fit together and retaining the current numerical scorer. Listening and first-read ease (顺口) remain independent final-stage outcomes. [Methods, controls and work-by-work results](stage-7.md#does-completing-the-preceding-cadence-distinguish-written-7s-from-6s)
 
+### Which lines of Yu Xin did the author mark for memorization?
+
+The AI close reading recommended **42 of 291 sentences** from 庾信’s 《哀江南賦並序》. The frozen prototype scored every sentence between **4.72 and 6.30**, below its existing 6.50 cutoff for a 7. The author reviewed the workbook and entered only differences. They promoted 11 sentences from 6 to 7, lowered six from 7 to 6, and raised five from 5 to 6. Applying those changes gives **47 memorization recommendations**. Eleven have an explicit author rating of 7. The other 36 retain the AI reader’s recommendation.
+
+Among the 22 edited sentences, the prototype averaged **5.73 on the eleven author 7s** and **5.79 on the eleven author 6s**. It missed every explicit 7 at its cutoff. The other 269 rows have no author score, so accuracy across the work is unknown. The evidence concerns written 音律美. Listening and first-read ease (顺口) have separate protocols. [Stage 7 results and restart point](stage-7.md#yu-xin-memorization-review)
+
 ## Final human validation
 
 The prepared forms remain on Gilbreth for this final stage. The listening comparison holds WAVs fixed while varying Chinese text visibility and balancing pair and clip order. The separate first-read task records ease, familiarity, and pronunciation variety, with consented first takes available for checking pauses, hesitations, and repairs. Use fresh works and independently assigned readers and listeners once computational development is complete. [Human validation protocol](../research/followup-pilot.md) · [First-read measures and consent](../audio/STAGE6_PRODUCTION.md)

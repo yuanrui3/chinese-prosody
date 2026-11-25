@@ -769,6 +769,85 @@ sbatch "${opts[@]}" --dependency="afterok:$evaluation" --cpus-per-task=1 --mem=3
 
 The written comparisons use the original model and equal-weight informative works. The screen and relation stages each produce a new seal. The evaluation verifies the source packet, predictions and blinded editorial-rating hash before joining them. Participant listening and read-aloud responses belong to the final validation stage.
 
+### Replaying the Yu Xin 6-versus-7 transfer test
+
+The private run `results/yu-review-transfer-20261124-HK72rUtZ` contains the pinned editions, anonymous 64-sentence reading packet, editorial grades, feature flags, predictions and the final comparison. The separate Yu Xin checkpoint holds the author's explicit corrections. The [protocol](../research/yu-review-transfer.md) specifies the feature and decision rule. To reproduce the comparison from its sealed inputs on Gilbreth, use a fresh directory.
+
+```bash
+set -eu
+umask 077
+root=/scratch/gilbreth/$USER/shunkou
+orig="$root/results/yu-review-transfer-20261124-HK72rUtZ"
+yu="$root/results/ai-jiangnan-complete-20261123-N0QpQKI1"
+run=$(mktemp -d "$root/results/yu-review-transfer-replay-XXXXXXXX")
+mkdir -p "$run"/{private,seals,results}
+cp -a "$orig/code" "$orig/inputs" "$run/"
+cp "$orig/private/editorial.json" "$run/private/"
+cp "$orig"/seals/{hypothesis,rule,editorial}.sha256 "$run/seals/"
+cp "$orig/baseline-code/src/yu_review_baseline.py" "$run/code/src/"
+py="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+export PYTHONPATH="$root/results/cadence-completion-20261123/code" OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+opts=(--parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --gres=gpu:1 --cpus-per-task=1 --mem=3G -t 00:04:00 --chdir="$run" --output="$run/private/slurm-%j.log")
+runner="$run/code/hpc/yu-review-transfer.sbatch"
+corpus_sha=16ebc4a558f17304537f98e357e5593bfb38abce24e319acfb553ab397ccfc23
+base=$(sbatch "${opts[@]}" --wrap="set -eu; cd '$run/code'; '$py' -B -m src.yu_review_baseline '$root' '$run' '$yu' '$corpus_sha'; cd '$run'; sha256sum results/baseline.json > seals/baseline.sha256")
+flags=$(sbatch "${opts[@]}" "$runner" "$run" prepare)
+sbatch "${opts[@]}" --dependency="afterok:$base:$flags" "$runner" "$run" evaluate
+```
+
+The baseline replays the 291 earlier sentence scores exactly before scoring the new work. The partition requires a GPU reservation; the text calculations use a CPU. For the discovery counts alone, run `python3 -B -m src.yu_review_transfer discovery "$run" --checkpoint "$yu"` from `"$run/code"`. Only aggregate findings go in the public reports.
+
+### Equal-length phrase pairs and a turn in meaning
+
+The Gilbreth directory `results/equal-phrase-turn-20261124-HddBzV5s` holds this study's source revisions, author/title exclusion records, two anonymous reading packets, frozen classifier prompts, private annotations and numerical outputs. The [protocol](../research/equal-phrase-turn.md) defines the primary classifier, secondary semantic reading, lexical control and endpoints. To replay the evaluation, use a fresh output directory and the sealed inputs from the run. The original author corrections and participant records are unnecessary.
+
+```bash
+set -eu
+umask 077
+root=/scratch/gilbreth/$USER/shunkou
+original="$root/results/equal-phrase-turn-20261124-HddBzV5s"
+run=$(mktemp -d "$root/results/equal-phrase-turn-replay-XXXXXXXX")
+mkdir -p "$run"/{logs,private,results}
+cp -a "$original"/{code,inputs,seals} "$run/"
+cp "$original"/private/{editorial.json,audit-key.json,audit-grades.json,semantic-relation.json} "$run/private/"
+runner="$run/code/hpc/semantic-turn.sbatch"
+opts=(--parsable --account=YOUR_SLURM_ACCOUNT -p a10 --gres=gpu:1 --chdir="$run" --output="$run/logs/%j.log")
+baseline=$(sbatch "${opts[@]}" "$runner" "$root" "$run" baseline)
+sbatch "${opts[@]}" --dependency="afterok:$baseline" "$runner" "$root" "$run" evaluate
+```
+
+To regenerate the semantic classifications, start from fresh output paths, verify the sealed pair packet, and run `python -B -m src.semantic_turn_relation classify "$run"` from the archived code directory with the Stage 4 Python, `HF_HOME="$root/cache/hf"` and `HF_HUB_OFFLINE=1`. Use one A10 GPU, two CPU cores and 32 GiB of RAM via Slurm. The classifier verifies the pinned model bytes and refuses to replace a different sealed result. Reproducing the editorial and secondary judgments uses their archived annotations. A new reading would constitute a separate replication.
+
+### Matched semicolon endings
+
+The author-corrected archive is `results/semicolon-author-heldout-20261124-I6yWRfnE`. It contains the ten frozen 《全唐文》 witnesses, full paragraph contexts, written ratings and reasons, and the original and altered phrase packets. The author audit includes the [Stage 2 source key](../theory/foundations.md#source-key-for-after-rating) and the pinned Unihan dictionary. The protocol, including the original selection order, is in [the study design](../research/semicolon-meaning-turn.md).
+
+To rerun the primary comparison from the archived editorial grades on Gilbreth, submit the following from a Gateway shell with the project root set. A new output directory preserves the original seals.
+
+```bash
+set -eu
+umask 077
+root=${SHUNKOU_ROOT:?}
+archive="$root/results/semicolon-author-heldout-20261124-I6yWRfnE"
+run=$(mktemp -d "$root/results/semicolon-score-replay-XXXXXXXX")
+mkdir -p "$run"/{inputs,seals,results,private,logs}
+cp -a "$archive/code" "$run/"
+cp "$archive"/inputs/{sources,corpus,reading,pair-packet,source-seal}.json "$run/inputs/"
+cp "$archive"/seals/{protocol,analysis,pair-packet,editorial,shape-protocol}.sha256 "$run/seals/"
+cp "$archive/seals/relation-card.json" "$run/seals/"
+cp "$archive/private/editorial.json" "$run/private/"
+opts=(--parsable --account=YOUR_SLURM_ACCOUNT -p a10 --gres=gpu:1 --chdir="$run" --output="$run/logs/%j.log")
+runner="$run/code/hpc/semicolon-turn.sbatch"
+forecast=$(sbatch "${opts[@]}" "$runner" "$root" "$run" forecast)
+sbatch "${opts[@]}" --mem=3G --time=00:05:00 --dependency="afterok:$forecast" "$runner" "$root" "$run" evaluate
+```
+
+After evaluation, verify `seals/results.sha256` and `seals/shape-protocol.sha256` from the run directory. From its `code` directory, use the pinned Stage 4 Python and `PYTHONPATH="$root/results/cadence-completion-20261123/code"` to run `-B -m src.semicolon_turn_sensitivity "$run"` for the punctuation and form checks. The original study also preserved an author-replacement audit. `src.semicolon_turn_ratings` checks the earlier grade hash and copies a judgment only when the revision, complete paragraph and target position match.
+
+For the supplementary classifier diagnostic, run `-B -m src.semicolon_turn_controls prepare "$run"`, then `-B -m src.semantic_turn_relation classify "$run/diagnostic"` on one Slurm A10 with `HF_HOME="$root/cache/hf"` and `HF_HUB_OFFLINE=1`, then `-B -m src.semicolon_turn_controls report "$run"`. This uses the same model and two prompts. The output records both decisions for each constructed pair and the paired decisions for replacing a semicolon by a comma in each authentic sentence.
+
+From the same code directory and pinned environment, `-B -m src.semicolon_turn_descriptive "$run"` reproduces the standalone binary-flag ranking and the coverage and rankings for intact four-character endings and full four-by-four sentences.
+
 ## Re-run the GPU smoke test
 
 From the repository root, set the SSH destination and use the Slurm account shown by `slist` for the A10 partition. The job requests a single GPU for up to two minutes.
@@ -786,3 +865,21 @@ ssh "$shunkou_ssh_host" 'set -eu
 ```
 
 On Gilbreth, check `squeue -j JOB_ID` while it runs, then `sacct -X -j JOB_ID --format=JobID,State,ExitCode,Elapsed,AllocTRES`. For a successful job, the scratch log names the compute node and GPU. `findscratch` supplies the scratch path for SSH command sessions where `RCAC_SCRATCH` is unset.
+
+### Reversal detector with a prose paraphrase
+
+The fitted detector and held-out comparison live in `results/reversal-author-transfer-G7Kk5gpk`. The [design](../research/reversal-transfer.md) distinguishes the constructed reversal challenge from the written musicality test. The detector takes one whole parallel sentence at a time. Its margin is a classification statistic. The returned paraphrase is model generated.
+
+From a Slurm A10 allocation on Gilbreth, supply one sentence per line using the private study directory and the pinned runtime.
+
+```bash
+root=${SHUNKOU_ROOT:?}
+run="$root/results/reversal-author-transfer-G7Kk5gpk"
+cd "$run/code"
+export PYTHONPATH="$root/results/cadence-completion-20261123/code"
+export HF_HOME="$root/cache/hf" HF_HUB_OFFLINE=1
+py="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+"$py" -B -m src.reversal_predict "$run/seals/detector.json" < "$root/my-paired-sentences.txt"
+```
+
+The archive retains both detectors' predictions, the relation key, editorial grades, their evidence and the source checksums. To reproduce the aggregate comparison in place, verify the input hashes recorded in `seals`, then run `"$py" -B -m src.reversal_evaluate "$run"` from the study's code directory. Identical results may be replayed. The writer rejects any change to a sealed result. The Slurm runner supplies the development and inference commands for a fresh output directory.

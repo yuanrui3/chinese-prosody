@@ -746,3 +746,168 @@ The close reading initially recommended 42 sentences, nine in the preface and 33
 **Prototype comparison.** Gilbreth scored all 291 sentences, with a range of 4.718 to 6.302. None reached the fixed 6.50 threshold. Among the 22 edited sentences, the mean prediction was 5.73 on the eleven author 7s and 5.79 on the eleven author 6s. This describes the selected disagreements of one reader. The sampling design leaves whole-work agreement, recall and accuracy against that reader unmeasured.
 
 **Restart point.** The scoring run completed as Gilbreth Slurm job `12510636`. Its private archive is under `$SHUNKOU_ROOT/results/ai-jiangnan-complete-20261123-N0QpQKI1`. The archive holds the edition units, frozen predictions and model provenance. The access-restricted `author-review.json` records the close-reading grades, the explicit author edits and hashes for both workbook files. Blank author scores are stored as null. The review belongs to written 音律美. On resumption, use the disagreements to formulate a testable distinction between 6 and 7, then evaluate it on fresh works before considering a change to the scorer. Listening and first-read ease (顺口) retain their separate final-stage protocols.
+
+## Transfer from the Yu Xin review
+
+**Hypothesis and discovery sample.** In the author's review, several 7s had two internally divided halves that both shortened, or both lengthened, at a corresponding point. We measured this using four punctuation-separated phrases or an identical grammatical hinge at the same position in a pair of phrases. Each segment had to contain at least two Han characters. The first segments could differ by at most two characters and the closing segments by at most one. The candidate model added 0.75 to a matching sentence's frozen prediction, capped at 7. The score threshold for a predicted 7 remained 6.50. The author gave no reasons for the individual corrections. The feature, weight, endpoints and shuffle control were fixed before the editorial reading. [Frozen specification](../research/yu-review-transfer.md)
+
+Only the 22 explicit author ratings informed the hypothesis. Six of eleven 7s and four of eleven 6s matched. The section breakdown suggests a possible confound. In the preface, five of eight 7s and zero of one 6 matched. In the main rhapsody, one of three 7s and four of ten 6s matched. The feature describes the lengths of written phrases. A corresponding change of pace in actual recitation remains a hypothesis.
+
+**Transfer corpus.** Four public memorials (表) and four formal letters (啟) from pinned 《全唐文》 witnesses supplied 208 complete sentences and eight credited authors. Each work had at least three sentences with balanced adjacent phrases. Before scoring, we selected eight eligible sentences per work by taking the midpoint of each of eight equal intervals in source order. Each target had at least six Han characters. Surrounding material, internal semicolons and connective prose remained intact. The source screen examined 46 earlier witness, pilot, training and reservation files. No selected sentence overlapped as a normalized substring of the 6,078 spans used for the additional cross-boundary check. The eight works represent Tang formal correspondence. Generalization to other periods and genres needs another sample.
+
+| Source witness | Complete sentences | Editorial 7s / 6s among eight sampled | 7–6 comparisons |
+|---|---:|---:|---:|
+| [權德輿《中書門下賀雲南軍破吐蕃劍山保定城表》](https://zh.wikisource.org/w/index.php?oldid=485359) | 11 | 1 / 2 | 2 |
+| [獨孤及《請降誕日置天興節表》](https://zh.wikisource.org/w/index.php?oldid=484956) | 13 | 0 / 1 | 0 |
+| [錢珝《宰相諫罷討伐請不幸奉天表》](https://zh.wikisource.org/w/index.php?oldid=2632493) | 69 | 0 / 3 | 0 |
+| [裴度《代李大夫請朝覲表》](https://zh.wikisource.org/w/index.php?oldid=497521) | 19 | 1 / 2 | 2 |
+| [顧雲《代青州掌記謝本府辟啟》](https://zh.wikisource.org/w/index.php?oldid=2632220) | 16 | 0 / 3 | 0 |
+| [羅隱《投前夏口韋尚書啟》](https://zh.wikisource.org/w/index.php?oldid=1974657) | 28 | 0 / 2 | 0 |
+| [黃滔《薛推先輩啟》](https://zh.wikisource.org/w/index.php?oldid=1979602) | 29 | 1 / 2 | 2 |
+| [薛逢《上翰林韋學士啟》](https://zh.wikisource.org/w/index.php?oldid=1975882) | 23 | 0 / 4 | 0 |
+
+**Written reference.** A separate AI close reader scored all 64 marked targets from 1 to 7 with a reason for each. The packet contained anonymous paragraph text in edition order. It hid the hypothesis, prototype scores, source cards and author review. Recognition from original wording remains possible. The grades were two 2s, five 3s, eighteen 4s, seventeen 5s, nineteen 6s and three 7s. The numerical baseline reproduced all 291 Yu Xin checkpoint predictions exactly before scoring the full fresh corpus in paragraph context. Its predictions on the 64 targets ranged from 4.831 to 6.229.
+
+| Forecast | 7 above 6 / inverted / tied | Equal-work ordering | All-grade MAE | Editorial 7s caught / 3 | False 7s among 6s / 19 | False 7s among all lower grades / 61 |
+|---|---:|---:|---:|---:|---:|---:|
+| Always 6 | 0 / 0 / 6 | 0.500 | 1.234 | 0 | 0 | 0 |
+| Current prototype | 4 / 2 / 0 | 0.667 | 1.123 | 0 | 0 | 0 |
+| Current + repeated change of pace | 3 / 3 / 0 | 0.500 | 1.152 | 0 | 2 | 2 |
+| Current + balanced half lengths alone | 4 / 2 / 0 | 0.667 | 1.576 | 2 | 12 | 31 |
+
+Ordering gives half credit for an exact tie and weights the three informative works equally. Absolute error uses unrounded 1–7 predictions on all eight works, weighted equally. Each informative work supplied two pairs sharing its one 7. Omitting each informative work in turn gave 0.50–1.00 for the current model and 0.25–0.75 for the candidate. No single passage supplies independent replication across its two pairs.
+
+**Where the rule succeeded or failed.** It detected two four-phrase constructions and one shared-hinge pair. Their editorial grades were 4, 6 and 6. In 權德輿, the reader heard a decisive progression in the four equal-length phrases 「斬將搴旗，出於料外；堅城便地，盡落彀中」 and gave the sentence 7. The shorter endings in 「奉威懷之命，以律而臧；兼夷夏之師，在和而克」 earned a structural match, but the editor gave it 6. The 0.75 bonus moved its forecast from 5.841 to 6.591, above the first sentence's 6.229. That one inversion accounts for the entire decline in the primary result. In 裴度, the 7 in 「上下交感，然後萬物生焉，庶政成焉」 rests on a pattern of three phrases and the answering 生焉／成焉. The candidate has no route for that construction. These literary explanations concern particular readings of the original text. [權德輿](https://zh.wikisource.org/w/index.php?oldid=485359) · [裴度](https://zh.wikisource.org/w/index.php?oldid=497521)
+
+**Controls and decision.** The simpler half-length control matched 48 targets. It reported 33 predicted 7s, of which 31 were false positives against the editorial reference. All 999 shuffles of the candidate's three match flags within work and phrase-count category equaled or exceeded its observed ordering (inclusive one-sided estimate 1.000). The candidate failed the frozen criteria. Keep the current scorer and retain the distinction between a pleasing rhythmic device and a dependable numerical bonus. This study measures written 音律美. Author ratings on a fresh sample, listening judgments and first-read ease (顺口) remain separate final-stage outcomes.
+
+**Gilbreth record.** Slurm jobs `12528196` (baseline), `12528197` (feature extraction) and `12528205` (sealed evaluation) all completed with exit code zero. `$SHUNKOU_ROOT/results/yu-review-transfer-20261124-HK72rUtZ` holds the frozen source, anonymous reading packet, author-derived discovery evidence, all predictions and per-work results. The hypothesis SHA-256 begins `7ccae75e8a26`, the fresh corpus `16ebc4a558f1`, the frozen baseline `b226fc273d5f` and the independent editorial grades `ebe678f99c0a`. [Reproduction instructions](../hpc/README.md#replaying-the-yu-xin-6-versus-7-transfer-test)
+
+## Semantic turns across equal-length phrases
+
+**Question and design.** In 權德輿’s earlier memorial, 出於料外 presents an outcome beyond expectation and 盡落彀中 brings it within the victor’s grasp. We tested a specific hypothesis about written 音律美. Given two phrases of equal length, does the second earn a higher score for the whole sentence when it redirects how the first is understood? The second must change an expectation, status, direction or perspective on an identifiable shared matter. The earlier example was a design and classifier check. Its work and credited author were excluded from the fresh test. [Motivating source](https://zh.wikisource.org/w/index.php?oldid=485359) · [Frozen protocol](../research/equal-phrase-turn.md)
+
+**Fresh sources.** Sixty catalogue volumes of 《全唐文》 were inspected in a predetermined sequence. The first sampling pass yielded seven memorials and one imperial reply to a memorial. The eight credited authors each supplied eight target sentences. The complete witnesses contain 179 sentences in ten paragraphs. The screen checked 48 earlier project files, prior candidate authors and titles, and 6,427 normalized text spans. The eight evenly spaced targets per work were selected on phrase structure and source order before the relation classification or editorial scores. This sampling design concentrates on Tang official prose containing balanced phrases.
+
+| Credited author | Pinned text | Complete / eligible / sampled sentences |
+|---|---|---:|
+| 嚴善思 | [論則天不宜合葬乾陵表](https://zh.wikisource.org/w/index.php?oldid=8729558) | 20 / 15 / 8 |
+| 賈曾 | [論郊祭合設皇地祇表](https://zh.wikisource.org/w/index.php?oldid=1974753) | 31 / 17 / 8 |
+| 郭子儀 | [請宣示儉德表](https://zh.wikisource.org/w/index.php?oldid=1978560) | 11 / 9 / 8 |
+| 韋皋 | [謝政刑箴表](https://zh.wikisource.org/w/index.php?oldid=1978403) | 12 / 8 / 8 |
+| 陸行儉 | [代淄青諫伐淮西表](https://zh.wikisource.org/w/index.php?oldid=1980191) | 35 / 30 / 8 |
+| 張述 | [為鄭滑李僕射辭官表](https://zh.wikisource.org/w/index.php?oldid=8735915) | 40 / 28 / 8 |
+| 封敖 | [批宰臣賀下誅回鶻德音表](https://zh.wikisource.org/w/index.php?oldid=1975051) | 11 / 9 / 8 |
+| 穆員 | [為汝州刺史謝上表](https://zh.wikisource.org/w/index.php?oldid=1975861) | 19 / 8 / 8 |
+
+**What was measured.** Each target had one designated pair of different phrases of identical Han-character count. Four pairs were the two closing phrases on either side of a semicolon, the route used in the motivating example. The other 60 were adjacent. Their widths ranged from four to nine characters. The primary Qwen classifier processed the entire sentence, with the relevant two phrases marked, in two prompt wordings with opposite answer order. Only a double positive activated the +0.75 bonus. A second AI reader judged the marked phrases independently. It received randomized opaque IDs and a mixture of 64 authentic sentences and 20 same-width substitutions. For the primary classifier every target had a matched substitution. A third, isolated AI reader saw the authentic paragraphs without pair markings and supplied the written 1–7 reference, including an exact quote and explanation for each grade.
+
+**Fresh grades and comparisons.** The 64 scores were one 2, five 3s, eleven 4s, twenty-one 5s, twenty 6s and six 7s. Four works contained both a 7 and a 6 and supplied 11 within-work comparisons. The score in the ordering column first averages pairs within each informative work, then gives the four works equal weight. Exact ties earn half credit. All-grade error uses unrounded scores and equal work weights. The prototype replayed all 291 scores in the earlier Yu Xin workbook exactly before predicting the 179 fresh sentences.
+
+| Forecast | Correct / inverted / tied pairs | Equal-work ordering | All-grade absolute error | Actual 7s caught / 6 | False 7s among 6s / 20 | False 7s among all lower scores / 58 |
+|---|---:|---:|---:|---:|---:|---:|
+| Always 6 | 0 / 0 / 11 | 0.500 | 1.063 | 0 | 0 | 0 |
+| Frozen current model | 6 / 5 / 0 | 0.438 | 1.023 | 0 | 0 | 0 |
+| Current + primary semantic turn | 6 / 5 / 0 | 0.438 | 1.141 | 3 | 7 | 12 |
+| Current + lexical cue | 6 / 5 / 0 | 0.438 | 1.023 | 0 | 0 | 0 |
+| Current + independent semantic reading | 7 / 4 / 0 | 0.563 | 1.093 | 3 | 5 | 9 |
+
+The primary rule changed **none of the 11 pair orders**. Its predicted-7 list grew from zero to 15, of which three were editorial 7s. The secondary measurement corrected two pair orders and inverted a third. Its gain was one net comparison, and its all-grade error exceeded both baselines. For the current and primary models, the number correct by informative work was 3/3 (嚴善思), 0/2 (賈曾), 3/4 (陸行儉) and 0/2 (張述). This explains why the pooled fraction of 6/11 and the equal-work ordering of 0.438 fall on different sides of one half. Omitting one informative work at a time gave 0.250–0.583 for the primary model and 0.417–0.750 for the secondary. Several comparisons share the same sentence.
+
+**Which turns were detected?** The primary classifier found turns in four of six editorial 7s (67%) and eight of twenty 6s (40%). The independent annotator found three of six (50%) and six of twenty (30%), respectively. The spelling control matched zero targets. Overall, Qwen marked 20 authentic sentences, the independent annotator marked 13, and both marked the same three. Their agreement on all 64 was 37/64, including 34 joint negatives. The two Qwen prompts themselves marked 20 versus 54 originals, agreeing on 30. Their consensus passed all eight prespecified probes, including the motivating 料外／彀中 pair. Passing the examples did not resolve the large difference between readers on fresh evidence.
+
+The primary classifier recognized the authentic wording alone in 17 matched comparisons, the replacement alone in two, both in three and neither in 42. This gives 20/64 positives with original wording and 5/64 with same-width replacements. A substitution can itself form a genuine new turn, so this control measures sensitivity to the particular pairing. For the independent annotator's 20 masked replacement comparisons, three were positive on the original alone and three on the replacement alone. Among 999 shuffles of Qwen's flags within work and pair route, 888 equaled or exceeded its observed ordering (inclusive one-sided estimate 0.889).
+
+**Reading the disagreements.** In 張述, 「輝光既極，盈滿是憂」 (editorial 7) makes the height of glory itself a reason for anxiety. The independent semantic annotator recognized the reversal, raising the prediction from 5.853 to 6.603. Qwen left it at 5.853. In the same work Qwen did flag 「入居宗廟之司，出典股肱之郡」 within a 6-rated sentence. The independent reader read these as two offices bestowed, a continuation of the same career. Its annotation ranked the first sentence above the second. The primary bonus reinforced the opposite ranking. In 嚴善思, both semantic measurements recognized the paired outcomes 「則神安後昌」「則神危後損」, which the editorial reader also rated 7. [張述](https://zh.wikisource.org/w/index.php?oldid=8735915) · [嚴善思](https://zh.wikisource.org/w/index.php?oldid=8729558)
+
+**Source sensitivity and decision.** Inspecting the original texts revealed three targets in 賈曾 containing explicitly marked quotations, including the 7 citing 《虞書》. A supplemental check excluded every target containing Han characters inside the edition's speech quotation marks, tracking them across sentence boundaries. This detects marked borrowing only. Among 61 remaining targets, three works had nine 7–6 comparisons. The current and primary rules both ranked six correctly, with equal-work ordering 0.583. Always giving 6 scored 0.500, and the secondary rule scored 0.750 (seven correct). The current model still had the lowest all-grade error (0.998 versus 1.151 primary, 1.067 secondary and 1.031 always-6). Only four of the original 64 targets used corresponding semicolon closings, and just two of those had grades of 6 or 7, both 7. The specific construction of 料外／彀中 therefore has very limited coverage.
+
+The meaning turn offers a plausible reading of individual sentences. The primary bonus failed the prespecified criteria, and the scorer retains its existing weights. Interpret the fresh grades as one independent AI editorial reading. Listening judgments for 音律美 and read-aloud ease (顺口) await separate final-stage participant work.
+
+**Archive.** Gilbreth retained all source text, anonymous packets, model inputs, annotations, comparisons and the quotation sensitivity under `$SHUNKOU_ROOT/results/equal-phrase-turn-20261124-HddBzV5s`. Slurm jobs `12528220` (frozen scores), `12528221` (Qwen on one A10) and `12528236` (evaluation) completed with exit code zero. The protocol SHA-256 begins `a29bf3717216`, corpus `88091f4b743a`, authentic and substituted pair packet `ae1ddddbbaf4`, editorial ratings `121645809817`, Qwen decisions `d0906485f7ee` and second annotation `412fa9c6b4be`. [Gilbreth replay instructions](../hpc/README.md#equal-length-phrase-pairs-and-a-turn-in-meaning)
+
+## Equal-length endings on each side of a semicolon
+
+**Project hypothesis.** A reversal such as 出於料外／盡落彀中 might distinguish an exceptional sentence from a strong one when the phrases occupy corresponding final positions. The preceding study had four examples of that layout. This follow-up screened 531 attributed formal-prose titles in 《全唐文》 and found **59 qualifying sentences in ten other works**. Each side had a lead-in, one internal semicolon separated the halves, and the two different endings contained the same number of Han characters. The endings ranged from three to nine characters. All ten works supplied at least four targets. The source punctuation is editorial. Individual works also contain discursive prose. [Protocol and selection frame](../research/semicolon-meaning-turn.md)
+
+| Credited author and pinned work | Sentences tested | Editorial 7s | Editorial 6s |
+| --- | ---: | ---: | ---: |
+| 于志寧 [諫太子承乾啟](https://zh.wikisource.org/w/index.php?oldid=1971279) | 7 | 1 | 3 |
+| 武三思 [賀老人星見表](https://zh.wikisource.org/w/index.php?oldid=8735602) | 6 | 1 | 2 |
+| 劉孝孫 [沙門慧淨詩英華序](https://zh.wikisource.org/w/index.php?oldid=1971283) | 7 | 2 | 3 |
+| 劉彤 [論鹽鐵表](https://zh.wikisource.org/w/index.php?oldid=1975147) | 4 | 1 | 2 |
+| 劉洎 [論太子初立請尊賢講學表](https://zh.wikisource.org/w/index.php?oldid=1971724) | 8 | 1 | 3 |
+| 賈敦頤 [謝參法師戒法書](https://zh.wikisource.org/w/index.php?oldid=1762469) | 7 | 2 | 3 |
+| 韋處厚 [上宰相薦皇甫湜書](https://zh.wikisource.org/w/index.php?oldid=1980766) | 6 | 0 | 3 |
+| 于公異 [賀聖躬痊復表](https://zh.wikisource.org/w/index.php?oldid=8735168) | 4 | 0 | 3 |
+| 陳元光 [漳州刺史謝表](https://zh.wikisource.org/w/index.php?oldid=1971269) | 6 | 1 | 1 |
+| 楊於陵 [為判官郭彥郎中謝手詔表](https://zh.wikisource.org/w/index.php?oldid=1978671) | 4 | 0 | 2 |
+
+**Reference and freshness.** The coordinating AI read the complete unmarked sentences in paragraph context and assigned written 音律美 grades with short reasons. The reader knew the hypothesis. The grading packet withheld author and title metadata, highlighted endings, model forecasts and semantic votes. The two remaining grade counts were 23 fives and two fours. The model replayed all 291 scores from the frozen Yu Xin checkpoint exactly, then predicted all 244 sentences in the ten works with their original paragraph context. The first screen had admitted 韓愈, who appeared as 韩愈 in a different Stage 2 example. Before viewing any predictions we extended the author audit to the six Stage 2 examples and to Unihan variant families, repeated the original selection order, and replaced his four sentences with four from 楊於陵. Exactly 55 judgments carried over by matching edition revision, full paragraph, sentence position and text. Edition attribution describes authorship as recorded, including memorials written for other speakers. Whole works and identifiable authors were held out from the project's reference material. Language-model pretraining exposure is unknown. [Stage 2 source key](../theory/foundations.md#source-key-for-after-rating)
+
+| Scoring rule | Right / tied / reversed within work | Work-averaged ordering | Correct 7 calls out of 9 | 6s called 7 out of 25 | Work-averaged absolute error |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Always 6 | 0 / 23 / 0 | 0.500 | 0 | 0 | 0.592 |
+| Current prototype | 8 / 0 / 15 | 0.333 | 0 | 0 | 0.601 |
+| Current plus meaning-turn bonus | 10 / 0 / 13 | 0.429 | 4 | 17 | 0.889 |
+| Current plus literal opposition bonus | 8 / 0 / 15 | 0.333 | 0 | 1 | 0.607 |
+
+**Measured result.** Seven works contributed all 23 within-work comparisons. A tied 7 and 6 earned half credit. The two corrected orderings both came from 于志寧. Omitting that author erased the gain over the current model. No correct pair was reversed by the bonus. Shuffling the flags within work produced at least the observed ordering in 313 of 999 draws (one-sided corrected probability 0.314). The scorer promoted 25 lower-rated lines past 6.50, including the 17 sixes. Of the 29 predicted 7s, four were editorial 7s.
+
+Using only the binary flag as a descriptive ranking put the 7 above the 6 in two comparisons, tied 21 and inverted none. Its equal-work ordering was 0.548. All its advantage over a constant tie came from the same 于志寧 sentence compared twice. The predeclared adoption test applies to the numerical scoring bonus.
+
+**What the classifier recognized.** Its two prompts agreed on a turn for 51 of 59 authentic sentences, including all nine 7s, 22 of 25 sixes, 18 of 23 fives and both fours. The eight fixed positive and negative probes all matched their expected labels. Fifty-eight originals had a same-width replacement available from a different sentence in the same work. The classifier flagged 50 of these originals and 12 replacements. Forty pairs were flagged only in the original direction, two only after replacement, ten both ways and six neither way. Replacing a phrase can disturb grammar or sense as well as the particular semantic relation.
+
+In 于志寧's rebuke, 「靡掛於刑書」 and 「已勒於鍾鼎」 turn on who deserves to be recorded. The 7 rose from 5.733 to 6.483 and cleared two other sentences in rank, just below the 6.50 classification cutoff. 「變起齊邦」 and 「亂生漢室」 both recount the same kind of disaster. That editorial 6 rose from 5.973 to 6.723 and still outranked the 7. In 劉孝孫, the doubled 寥寥 and 落落 and the answering discoveries of light helped earn a 7 for 「寥寥淨域，披雲而見光景；落落閑居，入室而生虛白」. The classifier flagged every tested sentence in that preface, so its bonus left all six comparisons involving its two 7s inverted. [于志寧](https://zh.wikisource.org/wiki/諫太子承乾啟) · [劉孝孫](https://zh.wikisource.org/wiki/沙門慧淨詩英華序)
+
+**Punctuation and form checks.** An enumeration in 武三思 left two partial phrases marked, 漢之日／湯之代. Requiring both marked endings to extend back to the last full comma preserved 58 targets and 22 comparisons. Requiring exactly two comma-delimited phrases on each side preserved 53 targets and 20 comparisons. In both sets equal-work ordering remained 0.333 for the current model and 0.429 with the bonus, against 0.500 for always giving 6. Within the 38 intact targets from the seven works titled 表 or 啟, the three figures were 0.300, 0.433 and 0.500 respectively. The augmented model had the highest all-grade error in each check. These subsets were specified during masked reading. [Scope and punctuation rules](../research/semicolon-ending-sensitivity.md)
+
+A descriptive check isolated the closest literal forms after the primary comparison. Sixteen sentences across six works had two intact four-character endings. Only one work supplied both grades, and both models already ordered its two pairs correctly. Five sentences reproduced the full 4–4；4–4 pattern, one per work. They supplied no within-work comparison between a 7 and a 6. This finer-grained result limits what we can say about the exact cadence of 料外／彀中.
+
+**Constructed controls after the primary comparison.** The high positive rate prompted eight new paired controls, composed for this diagnostic. Each keeps the first three four-character phrases fixed. The fourth either overturns or confirms the same expectation. The frozen classifier gave **identical labels to the two versions in all eight pairs**, flagging both versions in seven pairs and neither in one. For example, 「城頭夜望，疑為援騎；營外晨看」 can end in 「乃是胡兵」 or 「果是王師」. The classifier called both a turn. Changing only the semicolon glyph to a comma in the 59 authentic sentences changed four labels. Fifty stayed positive, five stayed negative, one lost the flag, and three gained it. The automatic flag fails this diagnostic of genuine reversal in fluent parallel sentences. The literary hypothesis requires a more discriminating measurement. [Exact diagnostic stimuli and procedure](../src/semicolon_turn_controls.py)
+
+**Decision.** The bonus failed the predeclared adoption test. Keep it available as a close-reading observation and retain the current score. The empirical endpoint is agreement with one AI editorial reading of written musicality. Heard 音律美 and first-read ease (顺口) remain separate final-stage participant outcomes.
+
+**Archive.** The corrected sample, private ratings, controls, per-sentence forecasts and comparisons are under `$SHUNKOU_ROOT/results/semicolon-author-heldout-20261124-I6yWRfnE`. Slurm jobs `12528568` (forecasts), `12528585` (comparison) and `12528636` (additional controls) ran on Gilbreth. SHA-256 prefixes are `7c272862c957` for the protocol, `cf5c8d4f6b02` for the corpus, `3324ed1162e9` for the pair packet, `3e70cb7f690f` for the grades, `d4dc0f514a70` for the model's votes and `08e959b8fafb` for the comparison. The superseded screen remains in `results/semicolon-turn-20261124-iIHxS6g6`. [Gilbreth replay](../hpc/README.md#matched-semicolon-endings)
+
+## A paraphrase-based detector for reversal and continuation
+
+**Project hypothesis.** A genuine change in the listener's interpretation of the same event might distinguish an exceptional paired sentence from a strong one. The experiment tested whether an automatic detector recognizes that change in written text. It also tested whether adding the flag to the numerical score improves agreement with editorial 音律美 grades. [Design](../research/reversal-transfer.md)
+
+**Revision and masking.** The previous detector asked two direct questions about marked endings. The revised Qwen2.5-7B-Instruct detector reads the whole sentence, paraphrases each half into modern Chinese, then judges whether the second defeats the first on the same issue. It averages the signed logit margins from two prompts that swap the answer letters. A margin above −3.8125 is positive. The threshold maximized correctly classified *pairs* on eight old development pairs, with individual accuracy and proximity to zero as tie breakers. It separated six of those eight pairs, compared with zero for the old rule. The threshold and code were frozen before test inference. Both options from a pair were evaluated individually, with opaque IDs and no access to each other's texts or labels. The transfer model adds the existing 0.75-point bonus on a positive flag, capped at 7. Predictions at or above 6.50 count as 7 calls.
+
+| Detector | New 4–4；4–4 pairs with both labels correct | Correct reversal labels | Continuations incorrectly called reversals |
+| --- | ---: | ---: | ---: |
+| Previous direct questions | 2/16 | 15/16 | 14/16 |
+| Revised paraphrase and judgment | 12/16 | 13/16 | 1/16 |
+
+**Measured result on constructed text.** Each new pair used the same first twelve characters and substituted one four-character ending. The revised detector got both members right in eleven pairs the old detector missed and lost one pair the old detector got right. For example, after a merchant asserts that the gold weighs enough, 銖兩猶虧 overturns that claim and 銖兩無虧 confirms it. The revised detector separated both. Its remaining errors include the timekeeping pair: it recognized the afternoon shadow that contradicted a noon reading, yet also flagged the noon shadow that confirmed it. The contrasts were designed and labeled for this study. [All 16 control pairs](../src/reversal_challenge.py)
+
+**Transfer to original texts.** The corrected screen examined 278 formal Tang prose titles. Seven works contributed 36 sentences in parallel prose (骈文) with lead-ins and intact equal-length endings. Nine sentences had precisely four groups of four characters. The current model reproduced all 291 predictions from its earlier checkpoint before scoring the 301 sentences in the full witnesses. The original editions and paragraph neighbors supplied the context. The coordinating AI knew the research hypothesis. It recorded a written aesthetic grade and supporting span before recording a separate semantic judgment, with all test predictions hidden. These two editorial judgments share a reader. The original screen included 劉子元, whose work under the name 劉知幾 appeared in the Stage 3 pilot. We excluded his work before inspecting the predictions, repeated selection in catalogue order and carried forward 32 grades with matching edition, entire paragraph and sentence position. 褚亮 supplied the four replacement sentences. [Earlier pilot sources](../data/pilot/DATA_CARD.md)
+
+| Pinned 《全唐文》 witness | Tested sentences | Literal 4–4；4–4 |
+| --- | ---: | ---: |
+| 元稹 [批宰臣請上尊號第三表](https://zh.wikisource.org/w/index.php?oldid=1978628) | 3 | 1 |
+| 高郢 [謝再除太常卿充禮儀使表](https://zh.wikisource.org/w/index.php?oldid=1979099) | 5 | 2 |
+| 鄭亞 [太尉衛公會昌一品制集序](https://zh.wikisource.org/w/index.php?oldid=8728963) | 6 | 1 |
+| 賈耽 [進海內華夷圖及古今郡國縣道四夷述表](https://zh.wikisource.org/w/index.php?oldid=1973547) | 6 | 1 |
+| 呂才 [因明注解立破義圖序](https://zh.wikisource.org/w/index.php?oldid=2677036) | 6 | 1 |
+| 陳子良 [辯正論注序](https://zh.wikisource.org/w/index.php?oldid=1971141) | 6 | 1 |
+| 褚亮 [金剛般若經注序](https://zh.wikisource.org/w/index.php?oldid=12723627) | 4 | 2 |
+
+The editorial semantic reference identified three reversals and 33 continuations or parallels. Two of the three reversals were editorial 7s in the same preface by 呂才. The third was a 6 in 賈耽. The revised detector missed all three reversals and flagged seven of the 33 other lines. The previous detector found all three and flagged 24 of the 33 other lines. Within the nine literal four-by-four originals, the revision missed both editorial reversals and flagged four of the other seven. Equal-width phrases drawn from another sentence of the same work served as controls for all 36 originals. The revised detector flagged seven originals and eleven replacements, with four flags common to both. The old detector flagged 27 originals and five replacements.
+
+The errors identify two distinct problems. In 呂才's 「觀其應跡，若有去來；察此真常，本無生住」, appearances suggest coming and going, then the second half changes the plane of judgment. Even its paraphrase retained the apparent/actual distinction, yet its margin of −5.75 fell below threshold. In 賈耽's geographical corrections, the detector flagged a reversal. Its paraphrase explicitly contrasted the old and corrected location *inside each half*. Across the semicolon, the second correction repeats the first procedure on a different place. [呂才’s preface](https://zh.wikisource.org/wiki/因明注解立破義圖序) · [賈耽’s memorial](https://zh.wikisource.org/w/index.php?oldid=1973547)
+
+| Written 音律美 rule | Correct / tied / reversed among 16 comparisons | Equal-work ordering | Average absolute error | 7s found out of 7 | 6s called 7 out of 18 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Always 6 | 0 / 16 / 0 | 0.500 | 0.529 | 0 | 0 |
+| Current model | 9 / 0 / 7 | 0.683 | 0.591 | 0 | 0 |
+| Current plus previous detector | 10 / 0 / 6 | 0.750 | 0.673 | 5 | 8 |
+| Current plus revised detector | 9 / 0 / 7 | 0.683 | 0.724 | 0 | 4 |
+
+Five works contained both an editorial 7 and a 6. A tie earned half credit and informative works counted equally. Error counted all grades, weighted equally by work. No individual pair order changed between the current and revised scores. The revised bonus flagged four sixes, two fives and one four. All seven crossed the prediction cutoff. The within-work shuffled-flag check reached or exceeded the revised ordering in 477 of 999 draws (corrected one-sided probability 0.478). The nine exact-template originals supplied no within-work 7-versus-6 comparison. The remaining written grades were ten fives and one four.
+
+**Decision.** Keep the current musicality score. The detector is available as an experimental command for inspecting a single sentence and its paraphrase. The controlled improvement is specific to distinguishing constructed alternatives. Recovery of implicit reversals in authentic prose remains unresolved, as does the value of such reversals for human listening judgments. Participant listening for 音律美 and cold reading for 顺口 remain separate final-stage tests.
+
+**Archive.** The authoritative run is `$SHUNKOU_ROOT/results/reversal-author-transfer-G7Kk5gpk`. The development threshold came from job `12528852` in `results/reversal-transfer-H2AaJENP`. Corrected held-out inference and checkpoint replay used Slurm job `12528925`. The command-line check in job `12528972` returned the expected opposite decisions for the two gold-weighing cases. All three jobs completed with exit code zero. All sources, model outputs, raw paraphrases, private references and comparisons reside on Gilbreth. [Command and reproduction instructions](../hpc/README.md#reversal-detector-with-a-prose-paraphrase)

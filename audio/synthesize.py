@@ -220,6 +220,15 @@ def run(args):
                 raise ValueError(f'{identifier}: Kokoro does not support {sorted(unknown)}')
     voice_tensors = {voice: torch.load(download(f'voices/{voice}.pt'), map_location='cpu', weights_only=True)
                      for voice in voices}
+    families = {}
+    family_indices = {}
+    if args.family_controls:
+        families = json.loads(args.family_controls.read_text(encoding='utf-8'))
+        if plans or set(families) != set(selected) or not all(isinstance(v, str) and v for v in families.values()):
+            raise ValueError('Family controls must assign every selected, unedited passage to a named family')
+        for identifier, group in prepared.items():
+            family = families[identifier]
+            family_indices[family] = max(family_indices.get(family, 0), len(group[0][0][1]) - 1)
     raw = root / 'audio' / 'raw' / 'synthetic'
     manifest = root / 'audio' / 'manifests' / 'synthetic.jsonl'
     raw.mkdir(parents=True, exist_ok=True)
@@ -227,11 +236,12 @@ def run(args):
     rows, duration_rows = [], []
     for identifier, passage in selected.items():
         group = prepared[identifier]
-        embedding_index = len(group[0][0][1]) - 1
+        family = families.get(identifier)
+        embedding_index = family_indices[family] if family else len(group[0][0][1]) - 1
         for (pinyin, sequence, conflicts), ending in group:
             for voice, speed in product(voice_tensors, speeds):
                 clip_id = f'kokoro-{identifier}-{voice}-{speed.replace(".", "p")}'
-                seed_id = f'kokoro-{identifier}-{args.seed_reference_voice or voice}-{speed.replace(".", "p")}'
+                seed_id = f'kokoro-{family or identifier}-{args.seed_reference_voice or voice}-{speed.replace(".", "p")}'
                 seed = int(hashlib.sha256(seed_id.encode()).hexdigest()[:8], 16)
                 if ending:
                     clip_id = f"{clip_id}-{ending['role']}"
@@ -265,6 +275,8 @@ def run(args):
                 }
                 if ending:
                     row['experimental_ending'] = {**ending, 'voice_embedding_index': embedding_index}
+                if family:
+                    row.update(control_family=family, voice_embedding_index=embedding_index)
                 if args.duration_draft:
                     duration_rows.append(duration_draft(row, symbol_spans[identifier], output.pred_dur.tolist(),
                                                         waveform.numel()))
@@ -285,6 +297,8 @@ def main():
     parser.add_argument('--speed', action='append', choices=SPEEDS)
     parser.add_argument('--seed-reference-voice', choices=(*VOICES, MALE_VOICE),
                         help='Reuse seeds from a matched condition rendered with this voice')
+    parser.add_argument('--family-controls', type=Path,
+                        help='Map passage IDs to families sharing a seed key and voice embedding index')
     parser.add_argument('--duration-draft', type=Path, help='Save generator token durations for these baseline WAVs')
     parser.add_argument('--validate-only', action='store_true')
     parser.add_argument('--offline', action='store_true')

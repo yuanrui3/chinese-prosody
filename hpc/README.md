@@ -883,3 +883,17 @@ py="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
 ```
 
 The archive retains both detectors' predictions, the relation key, editorial grades, their evidence and the source checksums. To reproduce the aggregate comparison in place, verify the input hashes recorded in `seals`, then run `"$py" -B -m src.reversal_evaluate "$run"` from the study's code directory. Identical results may be replayed. The writer rejects any change to a sealed result. The Slurm runner supplies the development and inference commands for a fresh output directory.
+
+## Historical critics and alternative wordings
+
+The checkpoint is `$SHUNKOU_ROOT/results/critical-preferences-5JRVYyHR`. Its private `editions/` folder holds the historical witnesses, `exposure/` the overlap audit, and `inputs/critic-seal.json` the scoring protocol and corpus hashes. `results/critic-scores.json` contains all 24 written scores, the historical readings at clause endings, and the current model and both baselines. `results/work-held-out-literary.json` contains the comparison after the prior-exposure exclusions. `reading-probe/result.json` holds the separate fixed-spelling test. The GPU directory `audio-24/` contains the WAV and alignment manifests and the pairwise timing deltas. [Study report](../reports/critic-preferences.md) · [Audio recipe](../reports/critic-variant-audio.md)
+
+To reproduce the written results, point `run` to a new project directory with the exact code from the archive under `code/`. The runner seals the source manifest before scoring and checks the frozen comparison packet on subsequent calls. The project root must contain the Yu Xin checkpoint, the grammatical training expansion and the pinned historical dictionaries. Submit from the Gateway shell with your project account. The A10 partition requires requesting a GPU for the allocation, including for this CPU-based text calculation.
+
+```bash
+mkdir -p "$run"/{inputs,results,logs}
+sbatch -A "$account" -p a10 --gres=gpu:1 --output="$run/logs/text-%j.log" \
+  "$run/code/hpc/critical-preferences.sbatch" "$SHUNKOU_ROOT" "$run"
+```
+
+For the 24-version audio reproduction use `acoustic-code/research/critic-variants-24.json` from the archived run with the Stage 4 environment. It has the same text, reading prompts and pair memberships as the scoring packet. The latter incorporates final bibliography updates. Keep family seed and embedding controls enabled. Sources, raw audio, event-level timings and GPU output stay on Gilbreth. [Audio submission script](critical-variant-audio.sbatch)

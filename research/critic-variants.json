@@ -1,0 +1,389 @@
+{
+  "families": {
+    "xia": {
+      "period": "Song",
+      "genre": "letter and memorial",
+      "authors": [
+        "夏竦"
+      ],
+      "title": "免奉使啓"
+    },
+    "liu": {
+      "period": "Song",
+      "genre": "letter",
+      "authors": [
+        "劉跂"
+      ],
+      "title": "昭雪先公謝執政啓"
+    },
+    "yang": {
+      "period": "Song",
+      "genre": "epitaph",
+      "authors": [
+        "楊億"
+      ],
+      "title": "潘慎修墓誌"
+    },
+    "ding": {
+      "period": "Song",
+      "genre": "memorial or ritual address in different accounts",
+      "authors": [
+        "丁謂"
+      ],
+      "title": "丁謂謝表／齋僧疏"
+    },
+    "su": {
+      "period": "Song",
+      "genre": "memorial",
+      "authors": [
+        "蘇軾"
+      ],
+      "title": "提舉玉局觀謝表"
+    },
+    "wang": {
+      "period": "Song",
+      "genre": "memorial",
+      "authors": [
+        "王安石"
+      ],
+      "title": "甘師顏傳宣撫問並賜藥謝表"
+    },
+    "li": {
+      "period": "Tang",
+      "genre": "regulated examination fu",
+      "authors": [
+        "李程",
+        "浩虛舟"
+      ],
+      "title": "日五色賦"
+    },
+    "zheng": {
+      "period": "Song",
+      "genre": "regulated examination fu",
+      "authors": [
+        "滕甫",
+        "鄭獬"
+      ],
+      "title": "圜丘象天賦"
+    },
+    "xianshan": {
+      "period": "Song",
+      "genre": "commemorative prose",
+      "authors": [
+        "歐陽修"
+      ],
+      "title": "峴山亭記"
+    },
+    "proclamation": {
+      "period": "Song",
+      "genre": "proclamation",
+      "authors": [
+        "鄭獬"
+      ],
+      "title": "觀文殿大學士富弼除依前尚書左僕射門下侍郎同中書門下平章事昭文館大學士兼譯經潤文使鄭國公制"
+    }
+  },
+  "versions": [
+    {
+      "id": "Xia-A",
+      "family": "xia",
+      "text": "義不戴天，難下單于之拜；哀深陟屺，忍聞禁佅之音。",
+      "pinyin": "yi4 bu4 dai4 tian1 nan2 xia4 chan2 yu2 zhi1 bai4 ai1 shen1 zhi4 qi3 ren3 wen2 jin4 mai4 zhi1 yin1",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=699715"
+    },
+    {
+      "id": "Xia-B",
+      "family": "xia",
+      "text": "義不戴天，難下穹廬之拜；禮當枕塊，忍聞夷樂之聲。",
+      "pinyin": "yi4 bu4 dai4 tian1 nan2 xia4 qiong2 lu2 zhi1 bai4 li3 dang1 zhen3 kuai4 ren3 wen2 yi2 yue4 zhi1 sheng1",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=2599511"
+    },
+    {
+      "id": "Liu-A",
+      "family": "liu",
+      "text": "晚歳離騷，難招魂於鬼域；平生精爽，或見夢於故人。",
+      "pinyin": "wan3 sui4 li2 sao1 nan2 zhao1 hun2 yu2 gui3 yu4 ping2 sheng1 jing1 shuang3 huo4 xian4 meng4 yu2 gu4 ren2",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Liu-B",
+      "family": "liu",
+      "text": "晚歳離騷，魂竟招于異域；平生精爽，夢猶託于故人。",
+      "pinyin": "wan3 sui4 li2 sao1 hun2 jing4 zhao1 yu2 yi4 yu4 ping2 sheng1 jing1 shuang3 meng4 you2 tuo1 yu2 gu4 ren2",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=770542"
+    },
+    {
+      "id": "Yang-A",
+      "family": "yang",
+      "text": "喬木不勝，空悲故國；曳裾王府，猶見故君。",
+      "pinyin": "qiao2 mu4 bu4 sheng4 kong1 bei1 gu4 guo2 ye4 ju1 wang2 fu3 you2 jian4 gu4 jun1",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Yang-B",
+      "family": "yang",
+      "text": "思喬木於故國，尚見世臣；曵長裾于王門，兼掌記室。",
+      "pinyin": "si1 qiao2 mu4 yu2 gu4 guo2 shang4 jian4 shi4 chen2 ye4 chang2 ju1 yu2 wang2 men2 jian1 zhang3 ji4 shi4",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=709753"
+    },
+    {
+      "id": "Ding-short",
+      "family": "ding",
+      "text": "補仲山之袞，雖罄一心；調傅說之羹，難諧眾口。",
+      "pinyin": "bu3 zhong4 shan1 zhi1 gun3 sui1 qing4 yi1 xin1 tiao2 fu4 yue4 zhi1 geng1 nan2 xie2 zhong4 kou3",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Ding-qiao",
+      "family": "ding",
+      "text": "補仲山之袞，雖曲盡於巧心；和傅說之羹，實難調於眾口。",
+      "pinyin": "bu3 zhong4 shan1 zhi1 gun3 sui1 qu1 jin4 yu2 qiao3 xin1 he2 fu4 yue4 zhi1 geng1 shi2 nan2 tiao2 yu2 zhong4 kou3",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=787704"
+    },
+    {
+      "id": "Ding-cun",
+      "family": "ding",
+      "text": "補仲山之袞，雖曲盡於寸心；和傅說之羹，實難調於眾口。",
+      "pinyin": "bu3 zhong4 shan1 zhi1 gun3 sui1 qu1 jin4 yu2 cun4 xin1 he2 fu4 yue4 zhi1 geng1 shi2 nan2 tiao2 yu2 zhong4 kou3",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=752813"
+    },
+    {
+      "id": "Su-A",
+      "family": "su",
+      "text": "七年遠謫，不意自全；萬里生還，適有天幸。",
+      "pinyin": "qi1 nian2 yuan3 zhe2 bu4 yi4 zi4 quan2 wan4 li3 sheng1 huan2 shi4 you3 tian1 xing4",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=781274"
+    },
+    {
+      "id": "Su-B",
+      "family": "su",
+      "text": "七年遠謫，不自意全；萬里生還，適有天幸。",
+      "pinyin": "qi1 nian2 yuan3 zhe2 bu4 zi4 yi4 quan2 wan4 li3 sheng1 huan2 shi4 you3 tian1 xing4",
+      "source": "https://www.shidianguji.com/book/HY0641/chapter/1mb8i6weau6uj"
+    },
+    {
+      "id": "Wang-A",
+      "family": "wang",
+      "text": "信使恩言，有華原隰；寶奩珍劑，增賁丘園。",
+      "pinyin": "xin4 shi3 en1 yan2 you3 hua2 yuan2 xi2 bao3 lian2 zhen1 ji4 zeng1 bi4 qiu1 yuan2",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Wang-B",
+      "family": "wang",
+      "text": "膚使寵辭，載華原隰；寶奩珍劑，加賁丘園。",
+      "pinyin": "fu1 shi3 chong3 ci2 zai4 hua2 yuan2 xi2 bao3 lian2 zhen1 ji4 jia1 bi4 qiu1 yuan2",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=856848"
+    },
+    {
+      "id": "Li",
+      "family": "li",
+      "text": "德動天鑒，祥開日華。",
+      "pinyin": "de2 dong4 tian1 jian4 xiang2 kai1 ri4 hua2",
+      "source": "https://www.shidianguji.com/book/CADAL02110211/chapter/1lcn2qekr9lib"
+    },
+    {
+      "id": "Hao",
+      "family": "li",
+      "text": "麗日焜煌，中含瑞光。",
+      "pinyin": "li4 ri4 kun1 huang2 zhong1 han2 rui4 guang1",
+      "source": "https://www.shidianguji.com/book/CADAL02110211/chapter/1lcn2qekr9lib"
+    },
+    {
+      "id": "Teng",
+      "family": "zheng",
+      "text": "大禮必簡，圜丘自然。",
+      "pinyin": "da4 li3 bi4 jian3 yuan2 qiu1 zi4 ran2",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=2359094"
+    },
+    {
+      "id": "Zheng",
+      "family": "zheng",
+      "text": "禮大必簡，丘圜自然。",
+      "pinyin": "li3 da4 bi4 jian3 qiu1 yuan2 zi4 ran2",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=2359094"
+    },
+    {
+      "id": "NS01",
+      "family": "xianshan",
+      "text": "元凱銘功於二石，一置茲山，一投漢水，是知陵谷有變，而不知石有時而磨滅也。",
+      "pinyin": "yuan2 kai3 ming2 gong1 yu2 er4 shi2 yi1 zhi4 zi1 shan1 yi1 tou2 han4 shui3 shi4 zhi1 ling2 gu3 you3 bian4 er2 bu4 zhi1 shi2 you3 shi2 er2 mo2 mie4 ye3",
+      "source": "https://www.shidianguji.com/zh/book/CZBZZ051/chapter/1kxs7vmwg6230"
+    },
+    {
+      "id": "NS02",
+      "family": "xianshan",
+      "text": "元凱銘功於二石，一置茲山之上，一投漢水之淵，是知陵谷有變，而不知石有時而磨滅也。",
+      "pinyin": "yuan2 kai3 ming2 gong1 yu2 er4 shi2 yi1 zhi4 zi1 shan1 zhi1 shang4 yi1 tou2 han4 shui3 zhi1 yuan1 shi4 zhi1 ling2 gu3 you3 bian4 er2 bu4 zhi1 shi2 you3 shi2 er2 mo2 mie4 ye3",
+      "source": "https://zh.wikisource.org/wiki/峴山亭記"
+    },
+    {
+      "id": "Ding-tails-A",
+      "family": "ding",
+      "text": "雖罄一心，難諧眾口。",
+      "pinyin": "sui1 qing4 yi1 xin1 nan2 xie2 zhong4 kou3",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Ding-tails-B",
+      "family": "ding",
+      "text": "雖曲盡於巧心，終難諧於眾口。",
+      "pinyin": "sui1 qu1 jin4 yu2 qiao3 xin1 zhong1 nan2 xie2 yu2 zhong4 kou3",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Zhao-A",
+      "family": "proclamation",
+      "text": "近則，諸夏仰德以承流；逺則，四夷傾心而待命。",
+      "pinyin": "jin4 ze2 zhu1 xia4 yang3 de2 yi3 cheng2 liu2 yuan3 ze2 si4 yi2 qing1 xin1 er2 dai4 ming4",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Zhao-B",
+      "family": "proclamation",
+      "text": "近則，諸夏仰德以承流；逺則，四夷聞風而待命。",
+      "pinyin": "jin4 ze2 zhu1 xia4 yang3 de2 yi3 cheng2 liu2 yuan3 ze2 si4 yi2 wen2 feng1 er2 dai4 ming4",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Zhao-C",
+      "family": "proclamation",
+      "text": "近則，諸夏仰徳以承流；逺則，四夷傾風以待命。",
+      "pinyin": "jin4 ze2 zhu1 xia4 yang3 de2 yi3 cheng2 liu2 yuan3 ze2 si4 yi2 qing1 feng1 yi3 dai4 ming4",
+      "source": "https://zh.wikisource.org/w/index.php?oldid=677490"
+    }
+  ],
+  "pairs": [
+    {
+      "id": "Xia",
+      "family": "xia",
+      "a": "Xia-A",
+      "b": "Xia-B",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Two accounts of the same event, possibly different documents.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Liu",
+      "family": "liu",
+      "a": "Liu-A",
+      "b": "Liu-B",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Wang discusses a dream allusion, supplies two versions and gives no sound preference.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Yang",
+      "family": "yang",
+      "a": "Yang-A",
+      "b": "Yang-B",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Documentary correction from recollection to the epitaph.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Ding-witnesses",
+      "family": "ding",
+      "a": "Ding-short",
+      "b": "Ding-qiao",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Sources assign different forms and genres. No direct sound comparison.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Ding-word",
+      "family": "ding",
+      "a": "Ding-qiao",
+      "b": "Ding-cun",
+      "endpoint": "literary",
+      "preferred": "Ding-cun",
+      "rationale": "Gong explicitly prefers 寸 for correspondence to 眾.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=752813"
+    },
+    {
+      "id": "Su",
+      "family": "su",
+      "a": "Su-A",
+      "b": "Su-B",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Witnesses reverse 意 and 自. Xie discusses diction.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Wang",
+      "family": "wang",
+      "a": "Wang-A",
+      "b": "Wang-B",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Economy praised over unquoted drafts; the two extant versions both represent Wang's solution.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Exam-Tang",
+      "family": "li",
+      "a": "Li",
+      "b": "Hao",
+      "endpoint": "literary",
+      "preferred": "Li",
+      "rationale": "Li as reported by Sun favours his own opening on the same set topic. Another account discusses the auspicious sun shining by night. Neither specifies a sound preference. Hao's first two graphs follow Sun.",
+      "authority": "https://www.shidianguji.com/book/CADAL02110211/chapter/1lcn2qekr9lib"
+    },
+    {
+      "id": "Exam-Song",
+      "family": "zheng",
+      "a": "Teng",
+      "b": "Zheng",
+      "endpoint": "literary",
+      "preferred": "Zheng",
+      "rationale": "Chen reports Teng conceding precedence. Both examples in this witness use 圜, where Sun prints 圓. No explicit sound rationale.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=2359094"
+    },
+    {
+      "id": "Calibration",
+      "family": "xianshan",
+      "a": "NS01",
+      "b": "NS02",
+      "endpoint": "calibration",
+      "preferred": "NS02",
+      "rationale": "Zhang Dun as reported by Wang favours the longer ending for cadence. Known since Stage 1. The shorter tails are inserted into the same received context.",
+      "authority": "https://www.shidianguji.com/zh/book/CZBZZ051/chapter/1kxs7vmwg6230"
+    },
+    {
+      "id": "Ding-revision",
+      "family": "ding",
+      "a": "Ding-tails-A",
+      "b": "Ding-tails-B",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Xie explicitly records a rewrite of these two tails. Only the attested tails are juxtaposed for measurement. He gives no reason or preference.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=682652"
+    },
+    {
+      "id": "Proclamation-alternative",
+      "family": "proclamation",
+      "a": "Zhao-A",
+      "b": "Zhao-B",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Wang supplies a two-character alternative in a parenthesis. Praise concerns the document as a whole.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=2098020"
+    },
+    {
+      "id": "Proclamation-collected",
+      "family": "proclamation",
+      "a": "Zhao-A",
+      "b": "Zhao-C",
+      "endpoint": "unranked",
+      "preferred": null,
+      "rationale": "Collected text supplies a third attested wording and connective. No directional judgment.",
+      "authority": "https://zh.wikisource.org/w/index.php?oldid=677490"
+    }
+  ],
+  "reading_notes": "Controlled Standard Mandarin citation targets. 見夢 uses xian4 ‘appear in a dream’; jian4 remains possible as a reading of 見. 不勝 uses contemporary sheng4; literary sheng1 also occurs. 傅說 fu4 yue4, 單于 chan2 yu2, 賁 bi4 (adorn), and musical 樂 yue4 are context selections. Preserve source graphs including 歳 and 曵. Punctuation is editorial and standardized within pairs. Source tables distinguish diplomatic readings from performance text. Familiar equivalents such as 袞/衮, 羹/羮 and 眾/衆 are normalized for some versions. No spelling difference is counted as a reported aesthetic preference."
+}

@@ -63,7 +63,7 @@ Su Shi’s two versions illustrate why a complete-clip duration can hide a local
 
 A sung-lyric (詞) example in Sun’s collection verifies that the search could retrieve a critic who actually discussed two different wordings and their sound. Zhou Mi defended **寄與** against **寄取** in Ye Mengde’s 《賀新郎》. He explained the different pronunciation of the second 與 in 容與 and also objected to the emendation on grounds of meaning. This is a separate Song lyric case. The prose results above use their own genre and comparison criteria. [Zhou Mi’s account](https://zh.wikisource.org/w/index.php?oldid=787891) · [Source collation](../research/critics-sun.md)
 
-**Decision.** Retain the current written scorer. The next specific improvement to test is an optional, source-cited historical reading at a particular character. The Shen example gives an independent check on what such a feature should expose. Establishing its value for scoring requires further cases where a critic actually ranks the readings. 
+**Decision.** Retain the current written scorer. The subsequent Stage 7 check implemented a source-cited reading for a particular character and tested its effect under the frozen scoring weights. Establishing its value for predicting aesthetic preference requires further cases where a critic actually ranks the readings. [Documented-reading results](stage-7.md#scoring-a-documented-historical-reading)
 
 ## Gilbreth archive
 

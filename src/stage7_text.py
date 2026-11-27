@@ -6,6 +6,7 @@ import re
 
 from data.phonology.annotate import annotate_passage, syllable_slots
 from data.phonology.historical import GUANGYUN_REVISION, GUANGYUN_URL, PINGSHUI_REVISION, PINGSHUI_URL
+from src.historical_readings import apply_historical_readings, tone_profile
 from src.text_metrics import clauses, slot_label, text_metric_support
 
 
@@ -23,7 +24,7 @@ PARAGRAPH_BREAK = re.compile(r'\r?\n[^\S\r\n]*\r?\n(?:[^\S\r\n]*\r?\n)*')
 
 
 def annotate_text(text, *, guangyun=None, pingshui=None, mandarin=None, variants=None,
-                  pinned_passage=None, passage_id=None):
+                  pinned_passage=None, passage_id=None, historical_readings=None):
     """Return Stage 3-compatible slots, preserving the exact supplied string."""
     checksum = hashlib.sha256(text.encode('utf-8')).hexdigest()
     if pinned_passage is not None:
@@ -39,7 +40,7 @@ def annotate_text(text, *, guangyun=None, pingshui=None, mandarin=None, variants
             for actual, slot in zip(slots, expected)
         ):
             raise ValueError(f'Pinned syllable offsets or boundaries are stale for {pinned_id}')
-        return {**pinned_passage, 'annotation_source': 'pinned_pilot'}
+        return apply_historical_readings({**pinned_passage, 'annotation_source': 'pinned_pilot'}, historical_readings)
 
     lexicons = {'guangyun': guangyun, 'pingshui': pingshui, 'mandarin': mandarin, 'cantonese': None}
     record = {
@@ -49,7 +50,8 @@ def annotate_text(text, *, guangyun=None, pingshui=None, mandarin=None, variants
         'annotation_source': 'candidate_lookup',
         'loaded_tiers': [tier for tier, index in lexicons.items() if index is not None],
     }
-    return annotate_passage(record, {tier: index or {} for tier, index in lexicons.items()}, variants or {}, ())
+    passage = annotate_passage(record, {tier: index or {} for tier, index in lexicons.items()}, variants or {}, ())
+    return apply_historical_readings(passage, historical_readings)
 
 
 def paragraph_spans(text):
@@ -159,6 +161,7 @@ def score_passage(passage):
             'document_scope': 'Stage 5 metrics applied to the entire text. Document adjacency can cross paragraphs.',
         },
         'metrics': score_components(passage['slots'], all_pairs),
+        'historical_reading_notes': passage.get('historical_reading_notes', []),
         'paragraphs': [],
         'observations': [],
     }
@@ -188,6 +191,7 @@ def score_passage(passage):
                 'end': clause_end,
                 'text': text[clause_start:clause_end],
                 'slots': slots,
+                'historical_tones': {tier: tone_profile(slots, tier) for tier in HISTORICAL_REFERENCES},
                 'metrics': score_components(slots),
             })
         report['paragraphs'].append(paragraph)

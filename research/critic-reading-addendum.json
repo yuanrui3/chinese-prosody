@@ -1,0 +1,27 @@
+[
+  {
+    "id": "wu",
+    "work": "儒有澡身而浴徳賦",
+    "author": "劉允成",
+    "char": "汙",
+    "text": "能澡身而浴徳，不同流而合汙。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=756733",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=756733",
+    "evidence": "The rhyme guide explicitly endorses 音烏 here and records 烏故反. Preserve 汙; its level 虞 candidate differs from the explicitly named 烏, level 模. The exact graph’s native departing reading is available.",
+    "readings": [
+      {
+        "tone": "平",
+        "rhyme": "模",
+        "donor": "烏"
+      },
+      {
+        "tone": "去",
+        "rhyme": "暮"
+      }
+    ],
+    "directions": {
+      "歐陽德隆、郭正己本": 1
+    },
+    "kind": "independent addendum, regulated fu, donor sensitivity"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "anchor": "駕雌霓之連蜷",
+    "offset": 2,
+    "char": "霓",
+    "tier": "guangyun",
+    "match": {"tone": "入"},
+    "source": "https://zh.wikisource.org/w/index.php?oldid=639591",
+    "cited_reading": "雌霓讀作雌鶂",
+    "reason": "Wang Mao quotes this wording of Shen Yue’s 郊居賦 and reports that Shen approved the checked reading and feared a level reading. The later 廣韻 has one checked candidate for 霓."
+  },
+  {
+    "anchor": "雌霓連踡",
+    "offset": 1,
+    "char": "霓",
+    "tier": "guangyun",
+    "match": {"tone": "入"},
+    "source": "https://zh.wikisource.org/w/index.php?oldid=762672",
+    "cited_reading": "五激反",
+    "reason": "The 梁書 biography of Wang Yun reports his approved reading 五激反 and Shen Yue’s feared alternative 五雞反. The selected later 廣韻 candidate agrees in historical tone category."
+  },
+  {
+    "anchor": "駕雌蜺之連卷",
+    "offset": 2,
+    "char": "蜺",
+    "tier": "guangyun",
+    "match": {"tone": "入"},
+    "source": "https://zh.wikisource.org/w/index.php?oldid=762672",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=1494993",
+    "cited_reading": "五激反（傳中作霓）",
+    "reason": "This 梁書 recension of the same fu writes 蜺. Wang Yun’s biography records the reading at this occurrence using 霓. The checked candidate is looked up under the actual graph 蜺."
+  },
+  {
+    "anchor": "靈輿安步，周流容與",
+    "offset": 8,
+    "char": "與",
+    "tier": "guangyun",
+    "match": {"tone": "去"},
+    "source": "https://zh.wikisource.org/w/index.php?oldid=787891",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=5978122",
+    "cited_reading": "與讀為豫",
+    "reason": "Zhou Mi cites the gloss reading 與 as 豫 in 容與 in Yang Xiong’s 河東賦 and identifies the departing tone. The wording follows the 漢書 witness. This is a pronunciation gloss."
+  },
+  {
+    "anchor": "潦水盡而寒潭清",
+    "offset": 0,
+    "char": "潦",
+    "tier": "guangyun",
+    "match": {"position": "來開一豪上", "rhyme": "晧"},
+    "source": "https://github.com/nk2028/tshet-uinh-data/blob/21585e22c8a730ca2fd175112f4d18e16d5ce578/%E9%9F%BB%E6%9B%B8/%E5%BB%A3%E9%9F%BB.csv",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=12697774",
+    "reason": "The Stage 3 lexical review takes 潦水 in Wang Bo’s 滕王閣序 as pooled rainwater. 廣韻 entry 1715/6 gives the rainwater sense under this rising-tone reading. This is a sense-based interpretation."
+  }
+]

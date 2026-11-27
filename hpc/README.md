@@ -39,7 +39,7 @@ The batch job also runs these two checks. Run them separately to rebuild the lis
 
 ## Stage 5 validation through the Gateway
 
-Upload `src/`, `tests/`, `data/phonology/*.py`, `data/pilot/context-reviews.json`, and `hpc/stage5.sbatch` together with their repository paths. The job reads the existing pilot annotations and Stage 4 derived tables in scratch. It reuses the completed Stage 4 Python environment and batches the control-statistic reductions on one GPU.
+Upload `src/`, `tests/`, `data/phonology/`, `data/pilot/context-reviews.json`, and `hpc/stage5.sbatch` together with their repository paths. The job reads the existing pilot annotations and Stage 4 derived tables in scratch. It reuses the completed Stage 4 Python environment and batches the control-statistic reductions on one GPU.
 
 ```bash
 root="${RCAC_SCRATCH:-$(findscratch)}/shunkou"
@@ -557,13 +557,46 @@ For a new decoded WAV, load `anaconda/2024.10-py312` inside an allocated Gilbret
   --audio "$root/audio/raw/reading.wav" -o "$root/results/stage7/reading.html"
 ```
 
-For the full verification, upload `shunkou`, `src/`, `tests/`, `audio/*.py`, `data/phonology/*.py`, `data/pilot/context-reviews.json`, and `hpc/stage7.sbatch` with their source paths. Submit with the available account and partition. It scores all 12 matched texts and decodes one matched pair on a GPU. The job writes JSON, HTML and a short verification summary under `results/stage7/job-JOB_ID`. From that checkout, `python -m src.stage7_pilot --root "$root" --output "$root/results/stage7/verification" --reuse-drafts` verifies the same reports using exact cached drafts.
+For the full verification, upload `shunkou`, `src/`, `tests/`, `audio/*.py`, `data/phonology/`, `data/pilot/context-reviews.json`, `research/critic-variants.json`, and `hpc/stage7.sbatch` with their source paths. Submit with the available account and partition. It scores all 12 matched texts and decodes one matched pair on a GPU. The job writes JSON, HTML and a short verification summary under `results/stage7/job-JOB_ID`. From that checkout, `python -m src.stage7_pilot --root "$root" --output "$root/results/stage7/verification" --reuse-drafts` verifies the same reports using exact cached drafts.
 
 ```bash
 sbatch --parsable --account=YOUR_SLURM_ACCOUNT --partition=a10 --qos=normal \
   --chdir="$root" --output="$root/logs/stage7-%j.log" \
   "$code/hpc/stage7.sbatch" "$root" "$code" "$stage4_env"
 ```
+
+### Scoring documented historical readings
+
+Use the updated checkout in the documented-reading run for the built-in quotations and the optional sentence estimate. In a Gilbreth allocation, the following command scores the five example quotations, with a separate paragraph for each. Replace the input path to score another passage.
+
+```bash
+root="${RCAC_SCRATCH:-$(findscratch)}/shunkou"
+run="$root/results/documented-readings-5QJhKL2r"
+python="$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python"
+"$python" "$run/code/shunkou" score "$run/inputs/example.txt" --root "$root" --prototype
+```
+
+The default report shows each reviewed character, its offset, dictionary alternatives, and the historical source. The optional prototype uses the frozen model and its dictionary checksums. Stops (。！？ and their ASCII equivalents) separate sentences, and blank lines delimit their neighboring context. A lacuna marked □ leaves the sentence estimate empty. JSON reports retain the exact text, offsets and full dictionary records.
+
+For another passage, pass `--historical-readings FILE.json`. The file is an array of decisions. Each decision needs a unique literal `anchor`, its zero-based character `offset` within that quote (count punctuation), a `tier` of `guangyun` or `pingshui`, and a `match` object identifying one dictionary candidate. Include a `source` and `reason`. Optional `char`, `text_sha256` and `passage_id` check the witness. Optional `cited_reading` and `witness` preserve the gloss and a separate text edition. Custom decisions supplement the catalogue and must agree with any existing pinned selection. A conflict with an automatic quotation is reported. For a comparison that omits the built-in quotations, add `--no-reading-catalog`. Earlier pilot reviews remain part of their pinned records. [Actual input examples](../data/phonology/documented-readings.json) · [Evidence and scope](../data/phonology/HISTORICAL.md#documented-readings-in-a-passage)
+
+The run contains `results/example.md`, `results/example.html`, `results/example.json` and `results/verification.json`. Its `code/run_checks.py` replays the same-text controls, all six-character shuffles, and earlier forecasts with the archived model. [Stage 7 results](../reports/stage-7.md#scoring-a-documented-historical-reading)
+
+### Fixed-text tests against historical critics
+
+The finished run is `$SHUNKOU_ROOT/results/critic-readings-l4vkD3ke`. The main and `addendum/` directories each contain the sealed `inputs/packet.json`, `results/exposure.json` and `results/scores.json`. The archive's `results/checked-comparisons.tsv` gives both readings and unrounded estimates for each presentation; `results/primary-label-swaps.json` records the control. The witnesses are in `editions/han`, `editions/song`, `editions/tang` and `editions/wenxuan`. The original submission used its archived `code/audit.py`. The repository runner calls the corresponding exposure script in `hpc/`.
+
+To reproduce, place this checkout under the new run's `code/` directory on Gilbreth. Set `root` to the project data root and `run` to that new run. Keep the existing dictionaries, frozen model and previous exposure inventory in place. Use a separate output directory for each packet.
+
+```bash
+mkdir -p "$run"/{inputs,results,logs}
+cd "$run/code"
+cp research/critic-reading-cases.json "$run/inputs/packet.json"
+sbatch -A "$account" -p a10 --gres=gpu:1 --output="$run/logs/study-%j.log" \
+  hpc/critic-reading-transfer.sbatch "$root" "$run" e7a6559da57ded78954291f4bec8eba2110791fb78b2902b12a1785464579b60
+```
+
+For the addendum use `research/critic-reading-addendum.json` and checksum `782f84487e6d6d42dd004878d4f3bfc200d58911a039f477cda07457495769f4`. The job uses one CPU thread in the partition's required GPU reservation. [Source evidence and results](../reports/critic-reading-transfer.md)
 
 ### Written editorial scores and the two-voice acoustic comparison
 
@@ -897,3 +930,97 @@ sbatch -A "$account" -p a10 --gres=gpu:1 --output="$run/logs/text-%j.log" \
 ```
 
 For the 24-version audio reproduction use `acoustic-code/research/critic-variants-24.json` from the archived run with the Stage 4 environment. It has the same text, reading prompts and pair memberships as the scoring packet. The latter incorporates final bibliography updates. Keep family seed and embedding controls enabled. Sources, raw audio, event-level timings and GPU output stay on Gilbreth. [Audio submission script](critical-variant-audio.sbatch)
+
+## Masked historical rhyme recovery
+
+The historical-rhyme benchmark lives in `$SHUNKOU_ROOT/results/masked-rhyme-f8xpyOCv`. The source job `12589507` pinned Wikisource revisions and split whole authors. Job `12589593` compared the two rhyme measures, ran the shuffle controls and verified the primary interval on an A10 GPU. The frozen endings and alternatives are in `inputs/rows.json` and `results/seal.json`. The job retains all four method outcomes for every masked ending in `results/items.json`. [Stage 7 findings and sources](../reports/masked-rhyme-recovery.md)
+
+To replay the same packet in a fresh output directory on Gilbreth, use the original code, including its source hashes, and link the sealed input directory read-only by convention.
+
+```bash
+root=${SHUNKOU_ROOT:?}
+archive="$root/results/masked-rhyme-f8xpyOCv"
+run=$(mktemp -d "$root/results/masked-rhyme-replay-XXXXXXXX")
+mkdir -p "$run"/{results,logs}
+ln -s "$archive/code" "$run/code"
+ln -s "$archive/inputs" "$run/inputs"
+cp "$archive/release.sha256" "$run/"
+sbatch --parsable -A "$account" -p a10 --gres=gpu:1 -t 00:05:00 \
+  --chdir="$run" --output="$run/logs/score-%j.log" \
+  "$run/code/hpc/masked-rhyme.sbatch" "$root" "$run" score
+```
+
+The runner checks the release and source-packet hashes before scoring. The result folder contains the development shuffle threshold, work-level and item-level results, a separate whole-work shuffle and the CUDA verification. The latter reconstructs paired differences from the item outcomes and checks the 10,000-draw confidence interval. Use a fresh writable inputs directory and the `all` phase for a new source collection. That samples the available edition revisions and earlier project inventory at the time of collection.
+
+## Written score with and without neighboring rhyme
+
+The archive is `$SHUNKOU_ROOT/results/written-rhyme-DvfWnBBA`. It holds the edition snapshots, all sentence contexts, the anonymous reading packet, two sets of AI editorial judgments, fitted models and per-work absolute errors. The original scoring code is in `code/`. The corrected source and forecast job was `12590214`, the primary and secondary evaluation job was `12590297`, and the retrospective job was `12590024`. The superseded source packet and unopened first forecasts have their own `screening-original/` directory. [Study results](../reports/written-rhyme-ablation.md) · [Prospective design and decision rule](../research/written-rhyme-ablation.md)
+
+To replay the comparison, create a fresh scratch directory and reuse the archived input packet and independent reader submissions. The job checks the code, source and model checksums. Each forecast uses complete paragraphs, including unsampled sentences. The two readers' evidence and numerical results stay on Gilbreth.
+
+```bash
+root=${SHUNKOU_ROOT:?}
+archive="$root/results/written-rhyme-DvfWnBBA"
+run=$(mktemp -d "$root/results/written-rhyme-replay-XXXXXXXX")
+mkdir -p "$run"/{inputs,results,logs,seals}
+ln -s "$archive/code" "$run/code"
+ln -s "$archive/readers" "$run/readers"
+cp "$archive/seals/analysis.sha256" "$run/seals/"
+cp "$archive"/inputs/{corpus,reading,reader-key,sources,fetched-revisions,source-seal}.json "$run/inputs/"
+opts=(--parsable -A "$account" -p a10 --gres=gpu:1 -t 00:05:00 --chdir="$run" --output="$run/logs/%j.log")
+pred=$(sbatch "${opts[@]}" "$run/code/hpc/written-rhyme.sbatch" "$root" "$run" predict)
+sbatch "${opts[@]}" --dependency="afterok:$pred" "$run/code/hpc/written-rhyme.sbatch" "$root" "$run" evaluate
+sbatch "${opts[@]}" "$run/code/hpc/written-rhyme.sbatch" "$root" "$run" retrospective
+```
+
+The A10 verifies forecasts, mean absolute errors and work-resampled confidence bounds in double precision. The source selection can be rerun in a separate new directory with the `sources` phase. Its earlier-study inventory reflects the time of collection. The `retrospective` phase replays an earlier, separately sealed set of judgments. Its results have no vote in the prospective decision.
+
+### Giving each training work equal weight
+
+The corrected study archive is `$SHUNKOU_ROOT/results/equal-work-FvEkoQYG`. Its `inputs` folder contains the pinned editions, author dating evidence, anonymous reader packet and submission key. The two independent submissions are under `readers`. The first source screen, retained in `screening-original`, contained a witness with explicitly missing characters. [Study design](../research/work-weighted-training.md) · [Findings](../reports/work-weighted-training.md)
+
+To reproduce both comparisons on Gilbreth, use the existing sealed sources and submissions. Set `account` to the Slurm allocation. Run in Bash.
+
+```bash
+root=${SHUNKOU_ROOT:?}
+archive="$root/results/equal-work-FvEkoQYG"
+run=$(mktemp -d "$root/results/equal-work-replay-XXXXXXXX")
+mkdir -p "$run"/{inputs,results,logs,seals}
+ln -s "$archive/code" "$run/code"
+ln -s "$archive/readers" "$run/readers"
+cp "$archive/seals/analysis.sha256" "$run/seals/"
+cp "$archive"/inputs/{corpus,reading,reader-key,sources,fetched-revisions,source-seal}.json "$run/inputs/"
+opts=(--parsable -A "$account" -p a10 --gres=gpu:1 -t 00:08:00 --chdir="$run" --output="$run/logs/%j.log")
+pred=$(sbatch "${opts[@]}" "$run/code/hpc/work-weighted.sbatch" "$root" "$run" predict)
+eval_job=$(sbatch "${opts[@]}" --dependency="afterok:$pred" "$run/code/hpc/work-weighted.sbatch" "$root" "$run" evaluate)
+retro=$(sbatch "${opts[@]}" "$run/code/hpc/work-weighted.sbatch" "$root" "$run" retrospective)
+sbatch --dependency="afterok:$eval_job:$retro" -A "$account" -p a10 --gres=gpu:1 --time=00:03:00 --mem=1G \
+  --output="$run/logs/verify-%j.log" \
+  --wrap="'$root/env/stage4-py312-torch-2.7.1+cu126-13cbdafce108/bin/python' '$archive/audit/hpc/work-weighted-summary.py' '$root' '$run' > '$run/results/summary.json'"
+```
+
+The verifier independently recomputes the metrics, matches the previous 80 frozen forecasts exactly, and resamples the eight intact period pairs for a second uncertainty estimate. The original source search can be inspected in `inputs/sources.json`. Its reservations reflect the works the project had seen at the time.
+
+### Ranking exceptional lines within a work
+
+The study archive is `$SHUNKOU_ROOT/results/within-work-rank-hifqn0Ob`. It contains the frozen source screen, the seven-work fit, independent editorial submissions and a separate verification of the pair orderings. The ranking values are relative utilities. They have no conversion to 1–7 grades. [Prospective design](../research/within-work-rank.md) · [Held-out results](../reports/within-work-rank.md)
+
+To reproduce the rankings and their evaluation, use the original sources and submissions in a fresh directory. Set `account` to the Slurm allocation and run in Bash on Gilbreth.
+
+```bash
+root=${SHUNKOU_ROOT:?}
+archive="$root/results/within-work-rank-hifqn0Ob"
+run=$(mktemp -d "$root/results/within-work-replay-XXXXXXXX")
+mkdir -p "$run"/{inputs,results,logs,seals}
+for name in code readers audit; do ln -s "$archive/$name" "$run/$name"; done
+for name in editions catalog; do ln -s "$archive/inputs/$name" "$run/inputs/$name"; done
+cp "$archive/seals/analysis.sha256" "$run/seals/"
+cp "$archive"/inputs/{corpus,reading,reader-key,sources,fetched-revisions,source-seal}.json "$run/inputs/"
+job="$run/code/hpc/within-work-rank.sbatch"
+opts=(--parsable -A "$account" -p a10 --gres=gpu:1 -t 00:08:00 --chdir="$run" --output="$run/logs/%j.log")
+pred=$(sbatch "${opts[@]}" "$job" "$root" "$run" predict)
+rated=$(sbatch "${opts[@]}" --dependency="afterok:$pred" "$job" "$root" "$run" evaluate)
+sbatch "${opts[@]}" --dependency="afterok:$rated" "$job" "$root" "$run" verify
+```
+
+Read `results/summary.json` for work-averaged accuracy, the number of informative works and pairs under each reading, and the check resampling intact period pairs. `results/evaluation.json` and `results/evaluation-second.json` contain the 999 within-work label shuffles and 10,000 work-level bootstrap draws summarized by endpoint. The frozen `inputs/sources.json` records the editions, author notices and prior exposure at collection.

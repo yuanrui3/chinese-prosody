@@ -44,7 +44,7 @@ def describe(rows, lexicons):
     for row in rows:
         if any(not isinstance(row.get(k), str) or not row[k].strip() for k in ('id', 'work_id', 'section')):
             raise ValueError('Every line needs a work_id, section, and id.')
-        detail = base.measure(row['text'], lexicons, detail=True)
+        detail = base.measure(row['text'], lexicons, detail=True, historical_readings=row.get('historical_readings'))
         ends = detail['historical_endings']
         groups = tuple(''.join(filter(base.han, ending['group_text'])) for ending in ends)
         rhymes = {tier: base.reading_values(ends[-1], tier, 'rhyme') for tier in base.HISTORICAL_REFERENCES}

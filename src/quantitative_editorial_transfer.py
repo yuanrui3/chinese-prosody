@@ -56,9 +56,9 @@ def lexicon_data(root):
     return options, {path.name: sha256(path.read_bytes()).hexdigest() for path in files}
 
 
-def annotate_groups(text, lexicons):
+def annotate_groups(text, lexicons, *, historical_readings=None):
     """Preserve reading candidates and regroup punctuation as in the original scoring sheet."""
-    original = annotate_text(text, **lexicons)
+    original = annotate_text(text, historical_readings=historical_readings, **lexicons)
     group_index = 0
     slots = []
     for slot in original['slots']:
@@ -83,13 +83,18 @@ def group_endings(text, groups):
                 'candidates': [{key: candidate[key] for key in fields if key in candidate}
                                for candidate in entry['candidates']],
             }
+            if entry.get('selected') is not None:
+                readings[tier]['selected'] = {k: entry['selected'][k] for k in fields if k in entry['selected']}
+                readings[tier]['evidence'] = entry['evidence']
+                if 'additional_evidence' in entry:
+                    readings[tier]['additional_evidence'] = entry['additional_evidence']
         endings.append({'char': final['char'], 'offset': offset, 'group_start_offset': first['offset'],
                         'group_text': text[first['offset']:offset + 1], 'readings': readings})
     return endings
 
 
-def measure(text, lexicons, *, detail=False):
-    passage, groups = annotate_groups(text, lexicons)
+def measure(text, lexicons, *, detail=False, historical_readings=None):
+    passage, groups = annotate_groups(text, lexicons, historical_readings=historical_readings)
     lengths = [len(group) for group in groups]
     guangyun = metric_results(passage, 'guangyun')
     pingshui = metric_results(passage, 'pingshui')
@@ -139,7 +144,7 @@ def fit(reference, lexicons):
         if type(score) is not int or not 1 <= score <= 7 or '□' in row['text']:
             raise ValueError(f'Reference row {index}: expected a complete line and integer editorial score 1–7')
         labels.append(score)
-        values.append(measure(row['text'], lexicons))
+        values.append(measure(row['text'], lexicons, historical_readings=row.get('historical_readings')))
     if len(set(labels)) < 2:
         raise ValueError('Reference needs at least two distinct editorial scores')
     raw = matrix(values)
@@ -199,7 +204,7 @@ def evaluate(reference, witness, lexicons):
     (means, scales, intercept, weights), fit_details, labels = fit(reference, lexicons)
     rows = []
     for row in witness:
-        detail = measure(row['text'], lexicons, detail=True)
+        detail = measure(row['text'], lexicons, detail=True, historical_readings=row.get('historical_readings'))
         # Preserve the exact source row and its candidate diagnostics even when no score is assigned.
         if '□' in row['text']:
             raw = score = None

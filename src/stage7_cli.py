@@ -61,18 +61,33 @@ def available_lexicons(root):
 
 
 def score(args, output_format):
+    from src.historical_readings import apply_historical_readings
     from src.stage7_text import annotate_text, score_passage
 
     root = project_root(args.root)
     if args.audio and root is None:
         raise ValueError('Audio scoring requires --root or SHUNKOU_ROOT for the Gilbreth project')
+    if args.prototype and root is None:
+        raise ValueError('--prototype needs the archived model under --root or SHUNKOU_ROOT on Gilbreth')
     if args.audio and output_format == 'html':
         if args.output is None or not args.output.resolve().is_relative_to(root):
             raise ValueError('Save audio HTML with --output inside the Gilbreth project')
     text = args.file.read_bytes().decode('utf-8')
     pinned = pinned_passage(root, text, args.passage_id)
-    passage = annotate_text(text, pinned_passage=pinned, **({} if pinned else available_lexicons(root)))
+    decisions = [] if args.no_reading_catalog else None
+    if args.historical_readings is not None:
+        decisions = json.loads(args.historical_readings.read_text(encoding='utf-8'))
+        if not isinstance(decisions, list):
+            raise ValueError('--historical-readings needs a JSON array of cited decisions')
+    passage = annotate_text(text, pinned_passage=pinned, historical_readings=decisions,
+                            **({} if pinned else available_lexicons(root)))
+    if args.historical_readings is not None and not args.no_reading_catalog:
+        passage = apply_historical_readings(passage)
     report = {'schema_version': 1, 'text': score_passage(passage), 'audio': None}
+    if args.prototype:
+        from src.stage7_prototype import score_prototype
+
+        report['prototype'] = score_prototype(root, report['text'])
     if args.audio:
         from src.stage7_audio import score_audio
 
@@ -103,6 +118,9 @@ def main(argv=None):
     command.add_argument('file', type=Path, help='UTF-8 input text. Blank lines separate paragraphs')
     command.add_argument('--root', type=Path, help='Gilbreth project data root')
     command.add_argument('--passage-id', help='Require an exact Stage 3 text witness')
+    command.add_argument('--historical-readings', type=Path, help='Add a JSON array of cited reviews for this text')
+    command.add_argument('--no-reading-catalog', action='store_true', help='Skip the built-in quotation catalogue')
+    command.add_argument('--prototype', action='store_true', help='Include the frozen written 音律美 estimate for each sentence (Gilbreth)')
     command.add_argument('--audio', type=Path, help='WAV in the Gilbreth project')
     command.add_argument('--audio-manifest', type=Path, help='Optional exact recording manifest JSONL')
     alignment = command.add_mutually_exclusive_group()
@@ -119,9 +137,9 @@ def main(argv=None):
                                    args.style, args.variety, args.rights)):
         parser.error('Recording options require --audio')
     if args.output is not None and args.output.resolve() in {
-        path.resolve() for path in (args.file, args.audio) if path is not None
+        path.resolve() for path in (args.file, args.audio, args.historical_readings) if path is not None
     }:
-        parser.error('Choose an output distinct from the input text and recording')
+        parser.error('Choose an output distinct from the input text, recording and historical reviews')
     suffix = args.output.suffix.lower() if args.output else ''
     output_format = args.format or {'.json': 'json', '.html': 'html'}.get(suffix, 'markdown')
     try:
@@ -137,7 +155,7 @@ def main(argv=None):
             write_output(args.output, content)
         else:
             print(content, end='')
-    except (OSError, RuntimeError, ValueError) as exc:
+    except (ImportError, OSError, RuntimeError, ValueError) as exc:
         parser.error(str(exc))
 
 

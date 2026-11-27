@@ -66,6 +66,47 @@ def findings(text, audio):
             *([('Audio observations', audio['observations'])] if audio else [])]
 
 
+def reading_label(candidate):
+    tone = candidate['tone'] + '聲' if candidate.get('tone') else ''
+    label = ' · '.join(filter(None, (tone, candidate.get('rhyme')))) or candidate['id']
+    cuts = dict.fromkeys(e['fanqie'] for e in candidate.get('entries', []) if e.get('fanqie'))
+    return f"{label}（反切 {' / '.join(cuts)}）" if cuts else label
+
+
+def reviewed_reading_rows(text):
+    for paragraph in text['paragraphs']:
+        for clause in paragraph['clauses']:
+            for slot in clause['slots']:
+                for tier, book in text['reference']['historical'].items():
+                    reading = slot['readings'].get(tier, {})
+                    if reading.get('selected') is None:
+                        continue
+                    alternatives = [reading_label(c) for c in reading['candidates'] if c != reading['selected']]
+                    profile = clause['historical_tones'][tier]
+                    bounds = profile['longest_level_run']
+                    longest = '–'.join(map(str, dict.fromkeys(bounds))) if bounds is not None else 'unknown'
+                    for evidence in (reading['evidence'], *reading.get('additional_evidence', [])):
+                        sources = ' · '.join(dict.fromkeys(filter(None, (evidence['source'], evidence.get('witness')))))
+                        reason = ' · '.join(filter(None, (evidence.get('cited_reading'), evidence['reason'])))
+                        yield (f"C{clause['clause_index'] + 1} · {slot['char']} @ {slot['offset']}",
+                               book['title'], reading_label(reading['selected']), ' / '.join(alternatives) or '—',
+                               f"{profile['pattern']} ({longest})", reason, sources)
+
+
+def reading_tables(report):
+    text = report['text']
+    rows = list(reviewed_reading_rows(text))
+    if rows:
+        yield ('Documented historical readings',
+               ('Occurrence (offset)', 'Reference', 'Selected', 'Other candidates',
+                'Clause 平仄 (longest 平 run)', 'Evidence', 'Source'), rows)
+    if text.get('historical_reading_notes'):
+        yield ('Unresolved historical reviews', ('Reason',), [(n,) for n in text['historical_reading_notes']])
+    if 'prototype' in report:
+        yield ('Written 音律美 prototype', ('Sentence', 'Text', 'Estimate (1–7)'), [
+            (r['id'], r['text'], number(r['score'])) for r in report['prototype']['sentences']])
+
+
 def clause_rows(paragraph, acoustic, show_audio):
     if not paragraph['clauses']:
         yield paragraph['text'], '', '', '', ''
@@ -112,6 +153,8 @@ def render_markdown(report):
     out = ['# Prosody report', '', *(md_cell(line) + '  ' for line in source_lines(text, audio)),
            '', SUPPORT, '', '## Document components', '',
            *md_table(('Component', '廣韻', '平水韻'), metric_rows(text['metrics']))]
+    for title, header, rows in reading_tables(report):
+        out.extend(['', f'## {title}', '', *md_table(header, rows)])
     if audio:
         out.extend(['', AUDIO_SCOPE])
         gaps = list(quiet_gap_rows(audio))
@@ -181,6 +224,8 @@ def render_html(report, wav=None):
             *(f'<li>{escape(line)}</li>' for line in source_lines(text, audio)), '</ul>',
             f'<p>{escape(SUPPORT)}</p>', '<h2>Document components</h2>',
             html_table(('Component', '廣韻', '平水韻'), metric_rows(text['metrics']))]
+    for title, header, rows in reading_tables(report):
+        body.extend([f'<h2>{escape(title)}</h2>', html_table(header, rows)])
     if audio:
         body.append(f'<p>{escape(AUDIO_SCOPE)}</p>')
         gaps = list(quiet_gap_rows(audio))

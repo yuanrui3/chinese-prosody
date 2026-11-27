@@ -1,0 +1,418 @@
+[
+  {
+    "id": "xiong",
+    "work": "車攻宣王復古賦",
+    "author": "熊淳",
+    "char": "復",
+    "text": "茍根本之謀，在我素講；則統緒之托，指期可復。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "evidence": "Sun approves the checked reading for restoration. Lin, quoted by Sun, calls departing 扶又反 original and cites the ending in the 舊 rhyme.",
+    "readings": [
+      {
+        "tone": "入",
+        "rhyme": "屋"
+      },
+      {
+        "tone": "去",
+        "rhyme": "宥"
+      }
+    ],
+    "directions": {
+      "林德頌": -1,
+      "孫奕": 1
+    },
+    "kind": "regulated fu, disputed"
+  },
+  {
+    "id": "shen",
+    "work": "車攻宣王復古賦",
+    "author": "沈之萬",
+    "char": "復",
+    "text": "所嗟古制之久泯，豈謂此詩之能復。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "evidence": "Sun explicitly approves the checked rhyme. Lin calls it customary and advocates departing 扶又反 under his interpretation of the source.",
+    "readings": [
+      {
+        "tone": "入",
+        "rhyme": "屋"
+      },
+      {
+        "tone": "去",
+        "rhyme": "宥"
+      }
+    ],
+    "directions": {
+      "林德頌": -1,
+      "孫奕": 1
+    },
+    "kind": "regulated fu, disputed"
+  },
+  {
+    "id": "ye",
+    "work": "天行健賦",
+    "author": "葉重開",
+    "char": "渾",
+    "text": "爰有稚圭，擬形容於轉轂；故令平子，妙制作於渾儀。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "evidence": "Lin rejects the level reading and prescribes 胡本反. Sun allows both readings.",
+    "readings": [
+      {
+        "tone": "上",
+        "rhyme": "混"
+      },
+      {
+        "tone": "平",
+        "rhyme": "魂"
+      }
+    ],
+    "directions": {
+      "林德頌": 1
+    },
+    "kind": "regulated fu, disputed",
+    "neutral": [
+      "孫奕"
+    ],
+    "aliases": [
+      "天行徤賦"
+    ]
+  },
+  {
+    "id": "yao",
+    "work": "渾天羲和之舊器賦",
+    "author": "姚鳳",
+    "char": "渾",
+    "text": "妙契洪造，器名渾天。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=749881",
+    "evidence": "Lin approves this example of the rising reading in the same discussion. Sun allows both readings.",
+    "readings": [
+      {
+        "tone": "上",
+        "rhyme": "混"
+      },
+      {
+        "tone": "平",
+        "rhyme": "魂"
+      }
+    ],
+    "directions": {
+      "林德頌": 1
+    },
+    "kind": "regulated fu, disputed",
+    "neutral": [
+      "孫奕"
+    ]
+  },
+  {
+    "id": "she",
+    "work": "大暮賦",
+    "author": "陸機",
+    "char": "貰",
+    "text": "年彌去而漸遒，知兹辟之無貰。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=525586",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=525586",
+    "evidence": "Yan argues from the series 逝、貰、勵 for 勢音; he rejects the scholarly 時夜反 and separately the colloquial 賒.",
+    "readings": [
+      {
+        "tone": "去",
+        "rhyme": "祭"
+      },
+      {
+        "tone": "去",
+        "rhyme": "禡"
+      }
+    ],
+    "directions": {
+      "顏師古": 1
+    },
+    "kind": "lexical correction argued from rhyme",
+    "context": [
+      "撫崇塗而難停，視危軌而將逝。",
+      "年彌去而漸遒，知兹辟之無貰。",
+      "競貞暉以鼓缶，愍他人而自勵。"
+    ],
+    "target_index": 1
+  },
+  {
+    "id": "huan",
+    "work": "魏都賦",
+    "author": "左思",
+    "char": "寰",
+    "text": "殷殷寰內，繩繩八區。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=754111",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=2608414",
+    "evidence": "Yan interprets the graph as the historical writing of administrative 縣 and rejects reading it as 環. The selected reading is mapped by sense.",
+    "readings": [
+      {
+        "tone": "去",
+        "rhyme": "霰"
+      },
+      {
+        "tone": "平",
+        "rhyme": "刪"
+      }
+    ],
+    "directions": {
+      "顏師古": 1
+    },
+    "kind": "lexical correction",
+    "context": [
+      "翼翼京室，眈眈帝宇，巢焚原燎，變為煨燼，故荊棘旅庭也。",
+      "殷殷寰內，繩繩八區，鋒鏑縱橫，化為戰場，故麋鹿寓城也。",
+      "伊洛榛曠，崤函荒蕪。"
+    ],
+    "target_index": 1
+  },
+  {
+    "id": "cuo",
+    "work": "西征賦",
+    "author": "潘岳",
+    "char": "錯",
+    "text": "成七國之稱亂，飜助逆以誅錯。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=2013069",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=2013069",
+    "evidence": "Li gives 七故切, then specifies 今協韻七各切.",
+    "readings": [
+      {
+        "tone": "入",
+        "rhyme": "鐸"
+      },
+      {
+        "tone": "去",
+        "rhyme": "暮"
+      }
+    ],
+    "directions": {
+      "李善": 1
+    },
+    "kind": "rhyme instruction",
+    "context": [
+      "訊景皇於陽丘，奚信譖而矜謔？",
+      "隕吳嗣於局下，蓋發怒於一博。",
+      "成七國之稱亂，飜助逆以誅錯。",
+      "恨過聽而無討，茲沮善而勸惡。"
+    ],
+    "target_index": 2
+  },
+  {
+    "id": "qiao",
+    "work": "江賦",
+    "author": "郭璞",
+    "char": "嶠",
+    "text": "衡霍磊落以連鎮，巫廬嵬崫而比嶠。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=2009083",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=2009083",
+    "evidence": "Li gives 其廟切 and specifically prescribes 音橋 to rhyme.",
+    "readings": [
+      {
+        "tone": "平",
+        "rhyme": "宵"
+      },
+      {
+        "tone": "去",
+        "rhyme": "笑"
+      }
+    ],
+    "directions": {
+      "李善": 1
+    },
+    "kind": "rhyme instruction",
+    "context": [
+      "激逸勢以前驅，乃鼓怒而作濤。",
+      "峨嵋為泉陽之揭，玉壘作東別之標。",
+      "衡霍磊落以連鎮，巫廬嵬崫而比嶠。",
+      "協靈通氣，濆薄相陶。",
+      "流風蒸雷，騰虹揚霄。"
+    ],
+    "target_index": 2
+  },
+  {
+    "id": "nian",
+    "work": "稽聖賦",
+    "author": "顏之推",
+    "char": "廿",
+    "text": "魏嫗何多，一孕四十？中山何夥，有子百廿？",
+    "critic_source": "https://www.shidianguji.com/zh/book/CADAL02056691/chapter/1lavl5n1igzzi",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=364576",
+    "evidence": "Jiao cites the two lines and approves 音入、而集反, rejecting colloquial 音念. The 念 sound needs a donor.",
+    "readings": [
+      {
+        "tone": "入",
+        "rhyme": "緝"
+      },
+      {
+        "tone": "去",
+        "rhyme": "㮇",
+        "donor": "念"
+      }
+    ],
+    "directions": {
+      "焦竑": 1
+    },
+    "kind": "sound correction, donor sensitivity",
+    "context": [
+      "魏嫗何多，一孕四十？",
+      "中山何夥，有子百廿？"
+    ],
+    "target_index": 1
+  },
+  {
+    "id": "wo",
+    "work": "愍思賦",
+    "author": "陸機",
+    "char": "斡",
+    "text": "悲夫天地之驟邁，運二儀以相斡。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=525586",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=525586",
+    "evidence": "Yan adduces 坂 and 晚 and says 斡 and 管 have the same sound. The alternative 烏活反 is associated with confusion with 捾. This is a spelling-related sensitivity.",
+    "readings": [
+      {
+        "tone": "上",
+        "rhyme": "緩",
+        "donor": "管"
+      },
+      {
+        "tone": "入",
+        "rhyme": "末"
+      }
+    ],
+    "directions": {
+      "顏師古": 1
+    },
+    "kind": "rhyme and graphic confusion, donor sensitivity",
+    "context": [
+      "悲夫天地之驟邁，運二儀以相斡。",
+      "遺朱光於濬谷，靡傾葢於歧坂。",
+      "時方至其倐忽，歲既去而晼晚。"
+    ],
+    "target_index": 0
+  },
+  {
+    "id": "ke",
+    "work": "七命",
+    "author": "張協",
+    "char": "殼",
+    "text": "析龍眼之房，剖椰子之殼。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=2004211",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=2004211",
+    "evidence": "Li says 苦角切，協韻苦豆切. The lower spellers supply only the tone and rhyme for this sensitivity.",
+    "readings": [
+      {
+        "tone": "去",
+        "rhyme": "候",
+        "lower": "豆",
+        "cut": "苦豆"
+      },
+      {
+        "tone": "入",
+        "rhyme": "覺",
+        "lower": "角",
+        "cut": "苦角"
+      }
+    ],
+    "directions": {
+      "李善": 1
+    },
+    "kind": "rhyme instruction, fanqie sensitivity",
+    "context": [
+      "繁肴既闋，亦有寒羞。",
+      "商山之果，漢皋之楱。",
+      "析龍眼之房，剖椰子之殼。",
+      "芳旨萬選，承意代奏。",
+      "乃有荊南烏程，豫北竹葉。"
+    ],
+    "target_index": 2
+  },
+  {
+    "id": "ti",
+    "work": "文賦",
+    "author": "陸機",
+    "char": "揥",
+    "text": "心牢落而無偶，意徘徊而不能揥。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=2082935",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=2082935",
+    "evidence": "Li gives 他狄切 and specifies 協韻他帝切. Native 去祭 differs from the specified 去霽.",
+    "readings": [
+      {
+        "tone": "去",
+        "rhyme": "霽",
+        "lower": "帝",
+        "cut": "他帝"
+      },
+      {
+        "tone": "入",
+        "rhyme": "錫",
+        "lower": "狄",
+        "cut": "他狄"
+      }
+    ],
+    "directions": {
+      "李善": 1
+    },
+    "kind": "rhyme instruction, fanqie sensitivity",
+    "context": [
+      "形不可逐，響難為係。",
+      "塊孤立而特峙，非常音之所緯。",
+      "心牢落而無偶，意徘徊而不能揥。",
+      "石韞玉而山輝，水懷珠而川媚。",
+      "彼榛楛之勿翦，亦蒙榮於集翠。"
+    ],
+    "target_index": 2
+  },
+  {
+    "id": "hua",
+    "work": "殿中少監馬君墓誌",
+    "author": "韓愈",
+    "char": "畫",
+    "text": "眉眼如畫，髮漆黒，肌肉玉雪。",
+    "critic_source": "https://zh.wikisource.org/w/index.php?oldid=717995",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=717995",
+    "evidence": "The 今按 editor prefers 胡卦切. Fang explicitly follows the verse analogy 胡麥切. This is a descriptive list within a 古文 epitaph.",
+    "readings": [
+      {
+        "tone": "去",
+        "rhyme": "卦"
+      },
+      {
+        "tone": "入",
+        "rhyme": "麥"
+      }
+    ],
+    "directions": {
+      "朱熹": 1,
+      "方崧卿": -1
+    },
+    "kind": "adjacent genre"
+  },
+  {
+    "id": "geng",
+    "work": "前赤壁賦",
+    "author": "蘇軾",
+    "char": "更",
+    "text": "客喜而笑，洗盞更酌。",
+    "critic_source": "https://cn.acad-pub.com/index.php/sdjyqy/article/viewFile/13218/10552",
+    "witness": "https://zh.wikisource.org/w/index.php?oldid=10247882",
+    "evidence": "The autograph marks 平. Qin Xue explicitly argues for change (平) against again (去); direction is the modern critic’s, independently supported by the author’s mark.",
+    "readings": [
+      {
+        "tone": "平",
+        "rhyme": "庚"
+      },
+      {
+        "tone": "去",
+        "rhyme": "映"
+      }
+    ],
+    "directions": {
+      "秦学": 1
+    },
+    "kind": "adjacent genre",
+    "autograph": "https://digitalarchive.npm.gov.tw/Collection/Detail/882?dep=P",
+    "aliases": [
+      "赤壁賦"
+    ]
+  }
+]

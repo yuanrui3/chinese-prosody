@@ -61,15 +61,25 @@ def passage_decisions(record, decisions):
     locations = {}
     for decision in decisions:
         text = record['text']
-        anchor = decision['anchor']
-        offset = decision['offset']
-        tier = decision['tier']
+        if not isinstance(decision, dict):
+            raise ValueError('Each reading review must be a JSON object')
+        anchor, offset, tier = (decision.get(k) for k in ('anchor', 'offset', 'tier'))
+        if not isinstance(anchor, str) or not anchor:
+            raise ValueError('A reading review needs a nonempty text anchor')
+        if ('passage_id' in decision and decision['passage_id'] != record['passage_id']
+                or 'text_sha256' in decision and decision['text_sha256'] != record.get('text_sha256')):
+            raise ValueError(f"{record['passage_id']}: review is for a different witness")
         start = text.find(anchor)
-        if not anchor or start < 0 or text.find(anchor, start + 1) >= 0:
+        if start < 0 or text.find(anchor, start + 1) >= 0:
             raise ValueError(f"{record['passage_id']}: a review anchor must appear exactly once: {anchor!r}")
-        if not 0 <= offset < len(anchor) or not han(anchor[offset]) or tier not in TIERS:
+        if (type(offset) is not int or not 0 <= offset < len(anchor) or not han(anchor[offset])
+                or decision.get('char', anchor[offset]) != anchor[offset] or tier not in TIERS):
             raise ValueError(f"{record['passage_id']}: invalid reviewed character offset or tier")
-        if not decision.get('source') or not decision.get('reason') or not decision.get('match'):
+        if (not all(isinstance(decision.get(k), str) and decision[k].strip() for k in ('source', 'reason'))
+                or any(not isinstance(decision[k], str) or not decision[k].strip()
+                       for k in ('witness', 'cited_reading') if k in decision)
+                or not isinstance(decision.get('match'), dict) or not decision['match']
+                or any(v is None or isinstance(v, str) and not v.strip() for v in decision['match'].values())):
             raise ValueError(f"{record['passage_id']}: reviews require source, reason, and candidate selector")
         key = (start + offset, tier)
         if key in locations:
